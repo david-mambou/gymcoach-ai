@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_22_085213) do
+ActiveRecord::Schema.define(version: 2021_11_22_234728) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -55,6 +55,7 @@ ActiveRecord::Schema.define(version: 2021_11_22_085213) do
     t.integer "difficulty"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "time"
     t.index ["exercise_id"], name: "index_workout_sets_on_exercise_id"
     t.index ["workout_id"], name: "index_workout_sets_on_workout_id"
   end
@@ -64,7 +65,7 @@ ActiveRecord::Schema.define(version: 2021_11_22_085213) do
     t.boolean "template"
     t.date "day"
     t.text "pro_and_cons"
-    t.integer "mental_state"
+    t.string "mental_state"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "name"
