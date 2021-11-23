@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   resources :workout_sets, only: [:update]
   resources :exercises, only: [:show]
 
-  get '/users/:id/goals', to: 'users#goals', as: :user_goal
+  get '/users/:id/goals', to: 'users#goals', as: :user_goals
   get '/dashboard', to: 'users#dashboard', as: :dashboard
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
