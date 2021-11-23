@@ -1,7 +1,6 @@
 // _________________________________card_one____________________________________
 
 .item-drawer {
-  /*fixed*/
   display: flex;
   align-items: center;
   /*customizable*/
@@ -20,7 +19,6 @@
 }
 
 .item-drawer-content {
-  /*fixed*/
   flex-grow: 1;
   overflow: hidden;
   white-space: nowrap;
@@ -29,7 +27,6 @@
 }
 
 .item-drawer-settings {
-  /*fixed*/
   display: flex;
   align-items: center;
   justify-content: space-evenly;
@@ -45,7 +42,6 @@
 }
 
 .item-drawer-button {
-  /*fixed*/
   display: flex;
   align-items: center;
   justify-content: center;
@@ -69,8 +65,20 @@
 }
 
 .item-drawer.active .item-drawer-button {
-  /*fixed*/
   border-radius: 0;
+}
+
+.sets-dot {
+  height: 40px;
+  width: 40px;
+  background-color: #bbb;
+  border-radius: 50%;
+  display: inline-block;
+  p {
+    margin-top: 7.5px;
+    margin-bottom: 1rem;
+    justify-content: center;
+  }
 }
 
 

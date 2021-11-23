@@ -1,11 +1,20 @@
 <%# card_one %>
-
 <div class="container">
   <div class="row justify-content-center">
-    <div class="col-6 flex-column">
+    <div class="col-6 flex-column m-3">
       <div class="item-drawer">
         <div class="item-drawer-content">
-          <h2>The drawer item</h2>
+          <div class="row">
+            <h2>Workout Title</h2>
+            <h6>Workout Details</h6>
+          </div>
+          <div class="row">
+            <%= render "shared/set_details" %>
+            <%= render "shared/set_details" %>
+            <%= render "shared/set_details" %>
+            <%= render "shared/set_details" %>
+            <%= render "shared/set_details" %>
+          </div>
         </div>
         <div class="item-drawer-button">
           <i class="fas fa-ellipsis-v"></i>
@@ -18,5 +27,4 @@
     </div>
   </div>
 </div>
-
 <%# card_two %>
