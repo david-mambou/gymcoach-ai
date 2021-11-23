@@ -5,3 +5,20 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+# create stations
+
+# create exercises
+
+4.times do
+  # create user
+  User.create(email: Faker::Email,
+              password: 'password',
+              age: rand(18..30))
+end
+
+User.all.each do |user|
+  rand(2..10).times do
+    # create past workout
+  end
+end
