@@ -1,21 +1,50 @@
+// ______________________First Button_____________________________//
+
 .button_one {
   border: 5em;
   cursor: pointer;
   outline: none;
   font-size: 16px;
-  -webkit-transform: translate(0);
   transform: translate(0);
-  background-image: linear-gradient(45deg, #4568dc, #b06ab3);
+  background-color: #03aae7;
   padding: 0.7em 2em;
-  border-radius: 65px;
-  box-shadow: 1px 1px 10px rgba(255, 255, 255, 0.438);
-  -webkit-transition: box-shadow 0.25s;
-  transition: box-shadow 0.25s;
+  border-radius: 1rem;
+  box-shadow: 1px 1px 10px rgba(18, 18, 18, 0.438);
   color: white;
 }
+// ______________________Second Button_____________________________//
 
-.button_one .text {
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-image: linear-gradient(45deg, #4568dc, #b06ab3);
+  .button_two {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.7rem 2rem;
+  font-family: "Poppins", sans-serif;
+  font-weight: 700;
+  font-size: 18px;
+  text-align: center;
+  color: #fff;
+  background-color: #ff00a6;
+  border-radius: 1rem;
+  border: 1px solid #fff;
+  text-decoration: none;
 }
+
+// ______________________Third Button_____________________________//
+
+.button_three {
+  font-family: lato,sans-serif;
+  font-weight: bold;
+  font-size: 1em;
+  letter-spacing: 0.1em;
+  text-decoration: none;
+  background-color: #ff6200;
+  display: inline-block;
+  padding: 10px 30px 10px 30px;
+  position: relative;
+  border: 3px solid #ffffff;
+  border-radius: 1rem;
+}
+
+// ______________________Forth Button_____________________________//
+
