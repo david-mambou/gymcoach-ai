@@ -8,4 +8,5 @@ export default class extends Controller {
     console.log(this.setTarget);
     console.log(this.exerciseTarget);
   }
+
 }

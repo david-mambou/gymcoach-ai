@@ -1,14 +1,35 @@
-<div data-controller="search-exercises">
+Show the chat window here! and the current workout
+<%# <div data-controller="search-exercises">
   <%= form_with url: exercises_path, method: :get, html: { class:
     'mb-4', data: { search_exercises_target: 'form' } } do |f| %>
-    <%= f.text_field :query,
+    <%# f.text_field :query,
                      class: "form-control",
                      placeholder: 'Search Exercise',
                      value: params[:query],
-                     data: { search_exercises_target: 'input'
+                     data: { search_exercises_target: 'input',
                              action: 'keyup->search-exercises#update'} %>
 
 
 <%# TODO, create a list.html.erb to store exercises# %>
 <%# add this code to the list file \/ # %>
 <%# <div data-search-exercises-target="list"> # %>
+
+
+<% @workout.workout_sets.each do |workout_set| %>
+<br>
+  reps: <%= workout_set.nb_of_reps %>
+
+  <br>
+
+
+   <%# simple_form_for workout_set do |f| %>
+    <%# f.input :nb_of_reps %>
+    <%# f.input :weight %>
+    <%# f.input :difficulty %>
+    <%# f.input :completed %>
+
+  <%#end %>
+
+<% end %>
+
+<%= link_to 'finish workout', workout_path(@workout), method: "patch"  %>

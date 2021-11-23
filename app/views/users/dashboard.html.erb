@@ -1,0 +1,8 @@
+
+<% if current_user.workouts.present? %>
+  <% current_user.workouts.each do |workout| %>
+    workout is here<br>
+  <% end %>
+<% else %>
+  user has not done any workouts yet
+<% end %>

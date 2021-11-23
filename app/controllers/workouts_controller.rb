@@ -25,6 +25,12 @@ class WorkoutsController < ApplicationController
     #todo
   end
 
+  def update
+    @workout = Workout.find(params[:id])
+    authorize @workout
+    redirect_to dashboard_path
+  end
+
   private
 
   def sanitized_params
