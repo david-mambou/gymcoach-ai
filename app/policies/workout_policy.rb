@@ -4,4 +4,12 @@ class WorkoutPolicy < ApplicationPolicy
       record.user == user
     end
   end
+
+  def create?
+    true
+  end
+
+  def new?
+    create?
+  end
 end
