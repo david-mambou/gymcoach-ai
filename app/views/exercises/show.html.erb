@@ -20,7 +20,7 @@
         <div class="card-body">
           <canvas
             data-controller="chart"
-            data-chart-data-value="<%= @chart_data.to_json %>"
+            data-chart-data-value="<%= @chart_data_weekly.to_json %>"
             data-chart-options-value="<%= @chart_options.to_json %>"
             ></canvas>
         </div>
@@ -32,6 +32,11 @@
           Last Month
         </div>
         <div class="card-body">
+          <canvas
+            data-controller="chart"
+            data-chart-data-value="<%= @chart_data_monthly.to_json %>"
+            data-chart-options-value="<%= @chart_options.to_json %>"
+            ></canvas>
         </div>
       </div>
     </div>
