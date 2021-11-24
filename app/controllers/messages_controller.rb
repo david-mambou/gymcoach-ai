@@ -4,8 +4,13 @@ class MessagesController < ApplicationController
     # by default, category will be a message to the AI
     message = Message.new(message_params)
     authorize message
-    message.save!
-    redirect_to new_workout_path
+    if message.save! && message.content != ""
+
+      # todo: change this to a chat view.rb?
+      # helpers.ai_generic_reply(message.content)
+      helpers.ai_generic_reply(message.content)
+      redirect_to new_workout_path
+    end
   end
 
   private
@@ -13,4 +18,6 @@ class MessagesController < ApplicationController
   def message_params
     params.require(:message).permit(:category, :content, :workout_id, :workout_set_id, :message)
   end
+
+
 end
