@@ -1,9 +1,11 @@
-<ul>
-  <li> reps: <%= workout_set.nb_of_reps %> </li>
-  <li> difficulty: <%= workout_set.difficulty %> </li>
-  <%= simple_form_for [@workout, workout_set] do |f| %>
-    <li> <%= f.input :nb_of_reps, placeholder: workout_set.nb_of_reps, input_html: { min:"0", max:"30"}  %> </li>
-    <li> <%= f.input :weight, placeholder: workout_set.weight, input_html: { min:"0", max:"200", step: "#{workout_set.exercise.station.base_incremental_weight}" } %> </li>
-    <li> <%= f.input :completed %> </li>
+<%# placeholder for workout_set.photos.attached? %>
+<%#<li> <%= workout_set.order_index % </li> %>
+<div data-controller="edit_set">
+  <p> Set <%= index + 1 %> </p>
+  <%= simple_form_for [@workout, workout_set], wrapper: :inline_form, namespace: "set-#{workout_set.id}", html: { class: 'form-inline', id: "form_id_#{index+1}", } do |f| %>
+    <%= f.input :nb_of_reps, placeholder: workout_set.nb_of_reps, input_html: { min:"0", max:"30"}  %>
+    <%= f.input :weight, placeholder: workout_set.weight, input_html: { min:"0", max:"200", step: "#{workout_set.exercise.station.base_incremental_weight}" } %>
+    <%= f.input :completed, input_html: {onchange: 'this.form.submit()'} %>
   <% end %>
-</ul>
+  <%#= link_to 'update set', workout_workout_set_path(@workout, workout_set), method: "patch", onclick: "$('#form_id_#{index+1})'.submit()" %>
+</div>

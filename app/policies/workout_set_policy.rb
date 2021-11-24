@@ -4,4 +4,9 @@ class WorkoutSetPolicy < ApplicationPolicy
       record.user == user
     end
   end
+
+  def update?
+    true
+  end
+
 end

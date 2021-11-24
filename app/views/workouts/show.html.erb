@@ -2,13 +2,19 @@
   <div class="row justify-content-center">
     <div class="col-6">
     <h2> Show the chat window here! and the current workout </h2>
-    <% @workout.workout_sets.each do |workout_set| %>
-      <%= render "workout_set", workout_set: workout_set %>
+    <% @workout.exercises.order(:id).uniq.each do |exercise| %>
+      <p> <%= exercise.name.capitalize %> </p>
+      <p> Difficulty: <%= @workout.workout_sets.find_by(exercise: exercise.id).difficulty %> </p>
+      <% @workout.workout_sets.where(exercise: exercise.id).order(:id).each_with_index do |workout_set, index| %>
+        <%= render "workout_set", workout_set: workout_set, index: index %>
+      <% end %>
     <% end %>
-      <%= link_to 'finish workout', workout_path(@workout), method: "patch"  %>
+    <%= link_to 'finish workout', workout_path(@workout), method: "patch"  %>
     </div>
   </div>
 </div>
+
+
 
 
 

@@ -6,4 +6,5 @@ export default class extends Controller {
   connect() { //template for future targets
     console.log(this.setTarget);
   }
+
 }
