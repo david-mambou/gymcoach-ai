@@ -5,3 +5,9 @@ rails db:migrate
 rails db:seed
 bundle install
 yarn
+
+in .env file, add your openai key.
+OPENAI_ACCESS_TOKEN=access_token_goes_here
+
+library documentation for this api connection is here: https://github.com/alexrudall/ruby-openai
+
