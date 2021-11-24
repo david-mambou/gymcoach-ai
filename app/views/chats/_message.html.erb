@@ -1,23 +1,22 @@
+<%# "LOCALS" will accept following arguments: %>
+  <%# type (string) - type of message, correct partial chosen from below %>
+  <%# content (string) - text content for messages (receive/send) %>
+  <%# workout (instance) - for workout suggestion card to populate %>
 
-<%# ACCEPTS FOLLOWING ARGUMENTS FROM "LOCALS" %>
-<%# type (string) - user 'send' or 'receive' a message %>
-<%# message (string) - content of the message from the AI %>
-
-<%# TODO: type 'card-workout' will render a card for workout info %>
-<%# TODO: type 'card-set' will render a card for a single set %>
-<%# TODO: type 'card-chart' will render a card with chart data on request %>
-<%# TODO: type 'card-chart' will render a card with chart data on request %>
-
+<%# Choose correct message type %>
 <% if locals[:type] == 'receive' %>
   <%= render 'chats/message_receive', locals: locals %>
+
 <% elsif locals[:type] == 'send' %>
   <%= render 'chats/message_send', locals: locals %>
+
 <% elsif locals[:type] == 'card_workout' %>
   <%= render 'chats/message_card_workout', locals: locals %>
+
+<% elsif locals[:type] == 'card_workout_set' %>
+<%# TODO: type 'card-workout-set' will render a card for a single set %>
+
+<% elsif locals[:type] == 'card_chart' %>
+<%# TODO: type 'card-chart' will render a card with chart data on request %>
+
 <% end %>
-
-
-
-
-
-
