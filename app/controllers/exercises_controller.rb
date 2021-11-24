@@ -31,9 +31,10 @@ class ExercisesController < ApplicationController
       labels: [29.days.ago.strftime("%b, %d"), 21.days.ago.strftime("%b, %d"), 14.days.ago.strftime("%b, %d"), 7.days.ago.strftime("%b, %d")],
       datasets: [{
         label: 'Your Progress',
-        backgroundColor: 'transparent',
+        backgroundColor: '#E5E5E5',
         borderColor: '#3B82F6',
-        data: [37, 83, 78, 54, 12, 5, 99]
+        data: [37, 83, 78, 54, 12, 5, 99],
+        fill: true
         }]
       }
       @chart_options = {
