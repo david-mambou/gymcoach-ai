@@ -6,7 +6,7 @@
 
     <div class="msg_cotainer">
       <%= locals[:content] %>
-      <span class="msg_time">8:40 AM, Today</span>
+      <span class="msg_time"><%= time_ago_in_words(locals[:created_at]) %> ago</span>
     </div>
 
   </div>
