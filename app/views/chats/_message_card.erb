@@ -5,32 +5,33 @@
   <div class="message-card-body">
   <h3>Push Workout</h3>
     <ol>
-      <li>Benchpress
-        <ul>
-          <li>Set 1: 15kg x 15</li>
-          <li>Set 2: 15kg x 15</li>
-          <li>Set 3: 15kg x 15</li>
-          <li>Set 4: 15kg x 15</li>
-        </ul>
+      <li>Dumbbell Benchpress<br>
+        <span class="badge badge-pill badge-secondary">15kg x 15</span>
+        <span class="badge badge-pill badge-secondary">15kg x 15</span>
+        <span class="badge badge-pill badge-secondary">15kg x 15</span>
+        <span class="badge badge-pill badge-secondary">15kg x 15</span>
       </li>
-      <li>Dips
-          <ul>
-          <li>Set 1: 15kg x 15</li>
-          <li>Set 2: 15kg x 15</li>
-          <li>Set 3: 15kg x 15</li>
-          <li>Set 4: 15kg x 15</li>
-        </ul>
+      <li>Dips<br>
+         <span class="badge badge-pill badge-secondary">15kg x 15</span>
+        <span class="badge badge-pill badge-secondary">15kg x 15</span>
+        <span class="badge badge-pill badge-secondary">15kg x 15</span>
+        <span class="badge badge-pill badge-secondary">15kg x 15</span>
       </li>
-      <li>Tricep Kickbacks
-          <ul>
-          <li>Set 1: 15kg x 15</li>
-          <li>Set 2: 15kg x 15</li>
-          <li>Set 3: 15kg x 15</li>
-          <li>Set 4: 15kg x 15</li>
-        </ul>
+      <li>Tricep Kickbacks<br>
+        <span class="badge badge-pill badge-secondary">15kg x 15</span>
+        <span class="badge badge-pill badge-secondary">15kg x 15</span>
+        <span class="badge badge-pill badge-secondary">15kg x 15</span>
+        <span class="badge badge-pill badge-secondary">15kg x 15</span>
       </li>
     </ol>
 
-  </div>
+    Why AI Recommended:<br>
+    <span class="badge badge-pill badge-primary">Focus Muscle Size Increase</span>
+    <span class="badge badge-pill badge-primary">Safe on elbows</span>
+    <span class="badge badge-pill badge-primary">Avoids barbell rack</span>
+    <hr>
+    <%= link_to "Choose Workout", workouts_path(template_workout: @template_workout) , method: :post, class: 'btn btn-primary btn-block' %>
+
   <span class="msg_time">8:40 AM, Today</span>
+  </div>
 </div>
