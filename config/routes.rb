@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  get 'stats/index'
   devise_for :users
   root to: 'pages#home'
 
@@ -7,6 +6,7 @@ Rails.application.routes.draw do
     resources :workout_sets, only: [:update]
   end
   resources :exercises, only: [:show]
+  # get 'charts/index'
 
   patch 'users/:id/routine/', to: 'users#routine', as: :user_routine
   get '/users/:id/goals', to: 'users#goals', as: :user_goals

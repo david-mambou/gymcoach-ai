@@ -18,7 +18,11 @@
           Last Week
         </div>
         <div class="card-body">
-          <canvas id="myChart" width="400" height="400"></canvas>
+          <canvas
+            data-controller="chart"
+            data-chart-data-value="<%= @chart_data.to_json %>"
+            data-chart-options-value="<%= @chart_options.to_json %>"
+            ></canvas>
         </div>
       </div>
     </div>
