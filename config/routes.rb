@@ -11,5 +11,5 @@ Rails.application.routes.draw do
   get '/users/:id/goals', to: 'users#goals', as: :user_goals
   get '/dashboard', to: 'users#dashboard', as: :dashboard
 
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+  resources :messages, only: [:create]
 end

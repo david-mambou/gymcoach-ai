@@ -4,6 +4,7 @@ class WorkoutsController < ApplicationController
     @template_workout = Workout.find_by(template: true)
     authorize @template_workout
     @messages = Message.all
+    @message = Message.new
   end
 
   def create
