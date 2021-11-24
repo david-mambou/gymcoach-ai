@@ -27,24 +27,24 @@ class ExercisesController < ApplicationController
         data: current_user.weight_history
         }]
       }
-    @chart_data_monthly = {
-      labels: [29.days.ago.strftime("%b, %d"), 21.days.ago.strftime("%b, %d"), 14.days.ago.strftime("%b, %d"), 7.days.ago.strftime("%b, %d")],
-      datasets: [{
-        label: 'Your Progress',
-        backgroundColor: '#E5E5E5',
-        borderColor: '#3B82F6',
-        data: current_user.weight_history,
-        fill: true
-        }]
-      }
-      @chart_options = {
-        scales: {
-          yAxes: [{
-            ticks: {
-              beginAtZero: true
-            }
-            }]
-          }
+      @chart_data_monthly = {
+        labels: [29.days.ago.strftime("%b, %d"), 21.days.ago.strftime("%b, %d"), 14.days.ago.strftime("%b, %d"), 7.days.ago.strftime("%b, %d")],
+        datasets: [{
+          label: 'Your Progress',
+          backgroundColor: '#E5E5E5',
+          borderColor: '#3B82F6',
+          data: current_user.weight_history,
+          fill: true
+          }]
         }
-  end
-end
+        @chart_options = {
+          scales: {
+            yAxes: [{
+              ticks: {
+                beginAtZero: true
+              }
+              }]
+            }
+          }
+        end
+      end

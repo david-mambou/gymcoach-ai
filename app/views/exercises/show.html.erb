@@ -18,6 +18,7 @@
           Last Week
         </div>
         <div class="card-body">
+          <p class="d-flex" style="position: absolute; top:198px; left:3px; color: #b7b7b7;">Kg</p>
           <canvas
             data-controller="chart"
             data-chart-data-value="<%= @chart_data_weekly.to_json %>"
@@ -32,6 +33,7 @@
           Last Month
         </div>
         <div class="card-body">
+          <p class="d-flex" style="position: absolute; top:198px; left:3px; color: #b7b7b7;">Kg</p>
           <canvas
             data-controller="chart"
             data-chart-data-value="<%= @chart_data_monthly.to_json %>"
