@@ -36,10 +36,11 @@ p "creating exercises.."
   # array = []
   # array.push(MUSCLES.sample)
   # new_exercise =
-  Exercise.create!(name: EXERCISES.sample,
-                  station: Station.all.sample
-                  # muscle_list: MUSCLES.sample
-                )
+  Exercise.create!(
+                  name: EXERCISES.sample,
+                  station: Station.all.sample,
+                  muscle_list: MUSCLES.sample
+                  )
   # puts new_exercise
   # new_exercise.tag_list.add(MUSCLES.sample)
   # new_exercise.save!
@@ -49,7 +50,7 @@ p "created #{Exercise.count} exercises"
 # create workout
 p "creating workout.."
 5.times.with_index do |i|
-  specific_workout = Workout.new(name: "workout template #{i}", template: true)
+  specific_workout = Workout.new(name: "workout template #{i}", template: true, pros_and_con_list: "good for gaining strength")
   specific_workout.user = User.first
   specific_workout.save!
   p "creating workout called: #{specific_workout.name} "

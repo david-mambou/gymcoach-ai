@@ -22,13 +22,12 @@ Show the chat window here! and the current workout
   <br>
 
 
-   <%# simple_form_for workout_set do |f| %>
-    <%# f.input :nb_of_reps %>
-    <%# f.input :weight %>
-    <%# f.input :difficulty %>
-    <%# f.input :completed %>
-
-  <%#end %>
+   <%#= simple_form_for [@workout, workout_set] do |f| %>
+    <%#= f.input :nb_of_reps, placeholder: workout_set.nb_of_reps %>
+    <%#= f.input :weight, placeholder: workout_set.weight, input_html: { step: "#{workout_set.exercise.station.base_incremental_weight}" } %>
+    <%#= f.input :difficulty, disabled: true %>
+    <%#= f.input :completed %>
+  <%# end %>
 
 <% end %>
 
