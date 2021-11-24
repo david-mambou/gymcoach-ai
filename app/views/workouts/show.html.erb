@@ -4,7 +4,7 @@
     <h2> Show the chat window here! and the current workout </h2>
     <% @workout.exercises.order(:id).uniq.each do |exercise| %>
       <p> <%= exercise.name.capitalize %> </p>
-      <p> Difficulty: <%= @workout.workout_sets.find_by(exercise: exercise.id).difficulty %> </p>
+      <%= link_to 'exercise info', exercise_path(exercise)%>
       <% @workout.workout_sets.where(exercise: exercise.id).order(:id).each_with_index do |workout_set, index| %>
         <%= render "workout_set", workout_set: workout_set, index: index %>
       <% end %>

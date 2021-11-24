@@ -3,11 +3,11 @@ class WorkoutSetsController < ApplicationController
     @workout_set = WorkoutSet.find(params[:id])
     authorize @workout_set
     @workout_set.update(sanitized_params)
-    if @workout_set.save
-      redirect_to workout_path(@workout_set.workout)
-    else
-      render "workouts/show"
-    end
+    # unable to get stimulus/ajax to work on submission action, so commented out
+    # respond_to do |format|
+    #   format.html { redirect_to workout_path(@workout_set.workout)}
+    #   format.text { render partial: "workouts/workout_set", locals: { workout: @workout_set.workout, workout_set: @workout_set }, formats: [:html] }
+    # end
     #todo
   end
 
