@@ -1,39 +1,41 @@
 <div class="container-fluid">
-			<div class="row justify-content-center">
-				<div class="col-md-8 col-xl-6 chat">
-					<div class="card">
+	<div class="row justify-content-center">
+		<div class="col-md-8 col-xl-6 chat">
+			<div class="card">
 
-						<div class="card-body msg_card_body">
+				<div class="card-body msg_card_body">
 
-              <%= render 'chats/message', locals: { 
-								direction: 'receive',
-								message: "Welcome Jesse! Ready for your workout? How do you feel today?"
-							} %>
+					<%= render 'chats/message', locals: { 
+						type: 'receive',
+						message: "Welcome Jesse! Ready for your workout? How do you feel today?"
+					} %>
 
-							<%= render 'chats/message', locals: { 
-								direction: 'send',
-								message: "Feeling good, had a long break. Whats the workout today?"
-							} %>
+					<%= render 'chats/message', locals: { 
+						type: 'send',
+						message: "Feeling good, had a long break. Whats the workout today?"
+					} %>
 
-							<%= render 'chats/message', locals: { 
-								direction: 'receive',
-								message: "Awesome. If thats the case, how about we do this workout today? You havn't worked chest since last week Monday."
-							} %>
+					<%= render 'chats/message', locals: { 
+						type: 'receive',
+						message: "Awesome. If thats the case, how about we do this workout today? You havn't worked chest since last week Monday."
+					} %>
 
-							<%= render 'chats/message', locals: { 
-								direction: 'receive',
-								message: "I made sure it is ok for your recent elbow injury."
-							} %>
-								
-              <%= render 'chats/message_card', locals: { type: "Workout Recommendation" } %>
+					<%= render 'chats/message', locals: { 
+						type: 'receive',
+						message: "I made sure it is ok for your recent elbow injury."
+					} %>
 
-						</div>
-
-						<%= render 'chats/message_input' %>
-
-					</div>
+					<%= render 'chats/message', locals: { 
+						type: 'card_workout',
+						workout_id: 'workout_id'
+					} %>
+						
 				</div>
+
+				<%= render 'chats/input' %>
+
 			</div>
 		</div>
-
+	</div>
+</div>
    
