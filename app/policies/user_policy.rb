@@ -4,4 +4,8 @@ class UserPolicy < ApplicationPolicy
       record.user == user
     end
   end
+
+  def dashboard?
+    true
+  end
 end
