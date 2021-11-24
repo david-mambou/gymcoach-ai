@@ -24,7 +24,7 @@ class ExercisesController < ApplicationController
         label: 'Your Progress',
         backgroundColor: 'transparent',
         borderColor: '#3B82F6',
-        data: [37, 83, 78, 54, 12, 5, 99]
+        data: current_user.weight_history
         }]
       }
     @chart_data_monthly = {
@@ -33,7 +33,7 @@ class ExercisesController < ApplicationController
         label: 'Your Progress',
         backgroundColor: '#E5E5E5',
         borderColor: '#3B82F6',
-        data: [37, 83, 78, 54, 12, 5, 99],
+        data: current_user.weight_history,
         fill: true
         }]
       }
