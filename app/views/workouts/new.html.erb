@@ -6,27 +6,27 @@
 				<div class="card-body msg_card_body">
 
 					<%= render 'chats/message', locals: { 
-						type: 'receive',
+						category: 'receive',
 						content: "Welcome Jesse! Ready for your workout? How do you feel today?"
 					} %>
 
 					<%= render 'chats/message', locals: { 
-						type: 'send',
+						category: 'submit',
 						content: "Feeling good, had a long break. Whats the workout today?"
 					} %>
 
 					<%= render 'chats/message', locals: { 
-						type: 'receive',
+						category: 'receive',
 						content: "Awesome. If thats the case, how about we do this workout today? You havn't worked chest since last week Monday."
 					} %>
 
 					<%= render 'chats/message', locals: { 
-						type: 'receive',
+						category: 'receive',
 						content: "I made sure it is ok for your recent elbow injury."
 					} %>
 
 					<%= render 'chats/message', locals: { 
-						type: 'card_workout',
+						category: 'card_workout',
 						workout_id: 'workout_id'
 					} %>
 						
