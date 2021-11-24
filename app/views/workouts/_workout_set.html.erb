@@ -1,0 +1,9 @@
+<ul>
+  <li> reps: <%= workout_set.nb_of_reps %> </li>
+  <li> difficulty: <%= workout_set.difficulty %> </li>
+  <%= simple_form_for [@workout, workout_set] do |f| %>
+    <li> <%= f.input :nb_of_reps, placeholder: workout_set.nb_of_reps, input_html: { min:"0", max:"30"}  %> </li>
+    <li> <%= f.input :weight, placeholder: workout_set.weight, input_html: { min:"0", max:"200", step: "#{workout_set.exercise.station.base_incremental_weight}" } %> </li>
+    <li> <%= f.input :completed %> </li>
+  <% end %>
+</ul>
