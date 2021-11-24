@@ -31,3 +31,5 @@ document.addEventListener('turbolinks:load', () => {
   // initSelect2();
   slideCard();
 });
+
+import "controllers"
