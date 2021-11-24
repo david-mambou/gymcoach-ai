@@ -3,28 +3,26 @@
 <%# message (string) - content of the message from the AI %>
 <div class="message-card mb-4">         
   <div class="message-card-body">
-  <h3>Push Workout</h3>
-    <ol>
-      <li>Dumbbell Benchpress<br>
-        <span class="badge badge-pill badge-secondary">15kg x 15</span>
-        <span class="badge badge-pill badge-secondary">15kg x 15</span>
-        <span class="badge badge-pill badge-secondary">15kg x 15</span>
-        <span class="badge badge-pill badge-secondary">15kg x 15</span>
-      </li>
-      <li>Dips<br>
-         <span class="badge badge-pill badge-secondary">15kg x 15</span>
-        <span class="badge badge-pill badge-secondary">15kg x 15</span>
-        <span class="badge badge-pill badge-secondary">15kg x 15</span>
-        <span class="badge badge-pill badge-secondary">15kg x 15</span>
-      </li>
-      <li>Tricep Kickbacks<br>
-        <span class="badge badge-pill badge-secondary">15kg x 15</span>
-        <span class="badge badge-pill badge-secondary">15kg x 15</span>
-        <span class="badge badge-pill badge-secondary">15kg x 15</span>
-        <span class="badge badge-pill badge-secondary">15kg x 15</span>
-      </li>
-    </ol>
+  <% workout = locals[:workout] %>
+  <h3><%= workout.name %> (45min)</h3>
 
+  <%# get unique exercises from the workout for looping %>
+  <% unique_exercises = retrieve_unique_exercises(workout) %>
+  
+  <ol>
+  <% unique_exercises.each do |exercise| %>
+    <li><%= exercise.name %><br>
+        <% workout.workout_sets.each do |workout_set| %>
+          <% if exercise.id == workout_set.exercise_id  %>
+            <span class="badge badge-pill badge-secondary">
+              <%= "#{workout_set.weight}kg x #{workout_set.nb_of_reps}" %>   
+            </span>
+          <% end %>
+        <% end %>
+    </li>
+  <% end %>
+  </ol>
+  
     Why AI Recommended:<br>
     <span class="badge badge-pill badge-primary">Focus Muscle Size Increase</span>
     <span class="badge badge-pill badge-primary">Safe on elbows</span>
