@@ -9,14 +9,27 @@
               } %>
 
               <%= render 'chats/message_response', locals: {
-                message: "Welcome Jesse! Ready for your workout? I was thinking we could do this today:",
+                message: "Welcome Jesse! <br>Ready for your workout? I was thinking we could do this today:",
                 card: 'partial/path'
               } %>
-              
+
               <%= render 'chats/message_response', locals: {
                 message: "Welcome Jesse! Ready for your workout? I was thinking we could do this today:",
                 card: 'partial/path'
               } %>
+
+              <%= render 'chats/message_card', locals: {
+              
+              } %>
+
+              <div class="d-flex justify-content-start mb-4">
+                <div class="img_cont_msg">
+                </div>
+                <div class="msg_cotainer">
+                  <%= "this is a test" %>
+                  <span class="msg_time">8:40 AM, Today</span>
+                </div>
+              </div>
 
 							<div class="d-flex justify-content-start mb-4">
 								<div class="img_cont_msg">
@@ -38,7 +51,7 @@
 							</div>
 							<div class="d-flex justify-content-end mb-4">
 								<div class="msg_cotainer_send">
-									Hi Khalid i am good tnx how about you?
+									Hey koach i am good tnx how about you?
 									<span class="msg_time_send">8:55 AM, Today</span>
 								</div>
 								<div class="img_cont_msg">
