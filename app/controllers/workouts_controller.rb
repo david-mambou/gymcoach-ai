@@ -3,6 +3,7 @@ class WorkoutsController < ApplicationController
     # add real template from workouts
     @template_workout = Workout.find_by(template: true)
     authorize @template_workout
+    @messages = Message.all
   end
 
   def create

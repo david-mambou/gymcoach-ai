@@ -7,8 +7,8 @@
 <% if locals[:category] == 'receive' %>
   <%= render 'chats/message_receive', locals: locals %>
 
-<% elsif locals[:category] == 'send' %>
-  <%= render 'chats/message_send', locals: locals %>
+<% elsif locals[:category] == 'submit' %>
+  <%= render 'chats/message_submit', locals: locals %>
 
 <% elsif locals[:category] == 'card_workout' %>
   <%= render 'chats/message_card_workout', locals: locals %>
