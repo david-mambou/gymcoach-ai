@@ -46,6 +46,7 @@ ActiveRecord::Schema.define(version: 2021_11_23_111115) do
   create_table "exercises", force: :cascade do |t|
     t.bigint "station_id", null: false
     t.string "name"
+    t.integer "muscle_group"
     t.string "good_for"
     t.string "bad_for"
     t.datetime "created_at", precision: 6, null: false
@@ -123,6 +124,8 @@ ActiveRecord::Schema.define(version: 2021_11_23_111115) do
     t.bigint "user_id", null: false
     t.boolean "template"
     t.date "day"
+    t.text "pros_and_cons"
+    t.string "mental_state"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "name"
