@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   def dashboard
-    #todo
+    authorize current_user
   end
 
   def goals
