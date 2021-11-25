@@ -3,7 +3,6 @@ module AiHelper
 
   # request AI to generate a generic reply based on user input
   def ai_generic_reply(user_message_content)
-    # double check that the message is not empty
     if user_message_content.present?
      client = OpenAI::Client.new
      client.files.upload(parameters: { file: 'db/data.jsonl', purpose: 'search' })
@@ -14,7 +13,8 @@ module AiHelper
        examples_context: "In 2017, U.S. life expectancy was 78.6 years.",
        examples: [["What is human life expectancy in the United States?", "78 years."]],
        max_rerank: 10,
-       max_tokens: 5
+       max_tokens: 5,
+       stop: ['\n', '===', '---']
      })
 
      ai_hash = JSON.parse response.to_s
@@ -30,7 +30,6 @@ module AiHelper
 
   # request AI to generate a new workout card based on user requests
   def ai_new_workout(user_message_content)
-    # double check that the message is not empty
     if user_message_content.present?
      client = OpenAI::Client.new
      client.files.upload(parameters: { file: 'db/data.jsonl', purpose: 'search' })
@@ -55,40 +54,8 @@ module AiHelper
     end
   end
 
-  # request AI to get top X exercises based on user needs
-  def ai_top_exercises
-     # double check that the message is not empty
-     if true
-      arr = []
-      exercises = Exercise.all.select([:id, :name])
-
-      exercises.each do |exercise|
-        arr << "exercise id #{exercise.id} works on muscle groups #{exercise.muscle_list}"
-      end
- 
-      client = OpenAI::Client.new
-      response = client.answers(parameters: {
-        documents: arr,
-        question: "What are three exercises that are safe for elbows",
-        model: "davinci", #babbage
-        examples_context: "user wants to recieve a list of exercises for a given muscle group",
-        examples: [
-          ["What are the top upper body exercises?", "bench press, pushups"],
-          ["What are some good leg exercises?", "lunges, squats"]
-        ],
-        max_tokens: 25
-      })
-
-      reply = JSON.parse response.to_s
-      reply = reply["answers"]
-      raise
-      return reply
-     end
-   end
-
    # request AI to get top X exercises based on user needs
    def ai_find_muscles_for_exercise(user_query)
-    # double check that the message is not empty
     if true
      arr = []
      muscles = ['hamstrings', 'glutes', 'pecs', 'deltoids', 'quads', 'calves', 'biceps', 'erector spinae' 'triceps', 'forearms', 'shoulders', 'traps', 'abs', 'obliques', 'trapezius', 'lats', 'glutes']
@@ -107,11 +74,11 @@ module AiHelper
        ],
        max_tokens: 25,
        temperature: 0,
-       stop: ['\n', '===']
+       stop: ['\n', '===', '---']
      })
 
      reply = JSON.parse response.to_s
-     reply = reply["answers"]
+     reply = reply["answers"][0]
      raise
      return reply
     end
@@ -126,58 +93,64 @@ module AiHelper
       documents: exercises,
       question: user_query,
       model: "davinci", #babbage
-      examples_context: "find the best exercises for the user to do",
+      examples_context: "find only 3 best exercises for the user to perform for their workout",
       examples: [
         ["I want to work my abs", "ab roller, rope crunches, leg lifts"],
         ["What should I do for a bigger chest?", "bench press, cable flies, fly machine"],
         ["What muscles are used in deadlift?", "hamstrings,glutes,erector spinae"],
+        ["I dont want to do dumbbell bench press.", "dumbbell flys,rope chest abduction,chest press machine"],
+        ["I want to work on chest. Can you suggest something that only uses dumbbells for today? I dont want to do dumbbell incline bench press", "dumbbell bench press, dumbbell flys, dumbbell supinated bench press"]
       ],
       max_tokens: 25,
       temperature: 0,
-      stop: ['\n', '===']
+      stop: ['\n', '===', '---']
     })
 
     reply = JSON.parse response.to_s
-    reply = reply["answers"]
+    reply = reply["answers"][0]
+
+    # generate a workout card
+    # Message.create!({
+    #   category: "card_workout",
+    #   workout: Workout.first
+    # })
+  end
+
+  # ai will direct user query to appropriate method for further processing
+  def ai_direct_query(user_query)
+    arr = []
+    possible_queries = ['find_exercise', 'update_workout', 'create_exercise', 'update_set', 'general_answer']
+  
+    client = OpenAI::Client.new
+    response = client.answers(parameters: {
+      documents: possible_queries,
+      question: user_query,
+      model: "davinci", #babbage
+      examples_context: "determine the best action based on user query",
+      examples: [
+        ["I am tired today, can you make this workout easier?", "update_workout"],
+        ["Can you exchange benchpress in this workout?", "update_workout"],
+        ["Can you change benchpress to another exercise?", "update_workout"],
+        ["Can you remove benchpress from this workout?", "update_workout"],
+        ["Can you make my workout shorter today?", "update_workout"],
+        ["I want to try this new machine", "create_station"],
+        ["Someone is using the bench, can you find an alternative to benchpress?", "update_workout"],
+        ["There is a new machine here that I want to use", "create_station"],
+        ["How can I do the benchpress", "find_exercise"],
+        ["what seat level should i do for this exercise?", "find_exercise"],
+        ["Hey what time is it?", "general_answer"],
+        ["I want to work my abs, what muscles?", "find_exercise_for_muscle"],
+        ["What should I do for a bigger chest?", "find_exercise_for_muscle"],
+        ["I want to work my abs", "ab roller, find_exercise_for_muscle"],
+      ],
+      max_tokens: 25,
+      temperature: 0,
+      stop: ['\n', '===', '---']
+    })
+
+    reply = JSON.parse response.to_s
+    reply = reply["answers"][0]
     raise
     return reply
   end
-
-  def ai_direct_query(user_query)
-      arr = []
-      possible_queries = ['find_exercise', 'update_workout', 'create_exercise', 'update_set', 'general_answer']
-    
-      client = OpenAI::Client.new
-      response = client.answers(parameters: {
-        documents: possible_queries,
-        question: user_query,
-        model: "davinci", #babbage
-        examples_context: "determine the best action based on user query",
-        examples: [
-          ["I am tired today, can you make this workout easier?", "update_workout"],
-          ["Can you exchange benchpress in this workout?", "update_workout"],
-          ["Can you change benchpress to another exercise?", "update_workout"],
-          ["Can you remove benchpress from this workout?", "update_workout"],
-          ["Can you make my workout shorter today?", "update_workout"],
-          ["I want to try this new machine", "create_station"],
-          ["Someone is using the bench, can you find an alternative to benchpress?", "update_workout"],
-          ["There is a new machine here that I want to use", "create_station"],
-          ["How can I do the benchpress", "find_exercise"],
-          ["what seat level should i do for this exercise?", "find_exercise"],
-          ["Hey what time is it?", "general_answer"],
-          ["I want to work my abs, what muscles?", "find_exercise_for_muscle"],
-          ["What should I do for a bigger chest?", "find_exercise_for_muscle"],
-          ["I want to work my abs", "ab roller, find_exercise_for_muscle"],
-
-        ],
-        max_tokens: 25,
-        temperature: 0,
-        stop: ['\n', '===', '---']
-      })
-  
-      reply = JSON.parse response.to_s
-      reply = reply["answers"]
-      raise
-      return reply
-    end
 end
