@@ -1,14 +1,17 @@
 <div class="container-fluid">
   <div class="row justify-content-center">
     <div class="col-md-8 col-xl-6 chat">
+      
       <% if current_user.workouts.present? %>
-        <h2>Your Dashboard</h2>
+        <h2>Today's Workouts</h2>
           <% if @today_workouts.empty? %>
            You have no workouts scheduled for today
           <% else %>
+
             <% @today_workouts.each do |workout| %>
              <%= render "users/workout_display", locals: {workout: workout} %>
             <% end %>
+
           <% end %>
           
         <h2>Upcoming Workouts</h2>
@@ -18,10 +21,10 @@
         <% end %>
         
         <h2>Workout History</h2>
-
-        <% current_user.workouts.each do |workout| %>
-         <%= render "users/workout_display", locals: {workout: workout} %>
+         <% @past_workouts.each do |workout| %>
+          <%= render "users/workout_display", locals: {workout: workout} %>
         <% end %>
+
       <% else %>
         user has not done any workouts yet.
       <% end %>
