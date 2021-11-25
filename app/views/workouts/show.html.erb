@@ -1,36 +1,30 @@
 <div class="container">
   <div class="row justify-content-center">
     <div class="col-6">
-    <h2> Show the chat window here! and the current workout </h2>
-    <% @workout.exercises.order(:id).uniq.each do |exercise| %>
-      <p> <%= exercise.name.capitalize %> </p>
-      <%= link_to '', exercise_path(exercise), class: "fas fa-info-circle", style: "text-decoration: none;"%>
-      <% @workout.workout_sets.where(exercise: exercise.id).order(:id).each_with_index do |workout_set, index| %>
-        <%= render "workout_set", workout_set: workout_set, index: index %>
+      <h2> Show the chat window here! and the current workout </h2>
+      <% @workout.exercises.order(:id).uniq.each do |exercise| %>
+        <div class="row">
+          <p> <%= exercise.name.capitalize %> </p>
+          <%= link_to '', exercise_path(exercise), class: "fas fa-info-circle ml-3", style: "text-decoration: none;"%>
+        </div>
+        <% @workout.workout_sets.where(exercise: exercise.id).order(:id).each_with_index do |workout_set, index| %>
+          <%= render "workout_set", workout_set: workout_set, index: index %>
+        <% end %>
       <% end %>
-    <% end %>
-    <%= link_to 'Finish Workout', workout_path(@workout), method: "patch", class: "btn btn-primary"  %>
-    <%# <%= link_to 'finish workout', dashboard_path(current_user), method: "get", class: "btn btn-primary" %>
-
+      <%= link_to 'Finish Workout', workout_path(@workout), method: "patch", class: "btn btn-primary"  %>
+      <%# <%= link_to 'finish workout', dashboard_path(current_user), method: "get", class: "btn btn-primary" %>
     </div>
   </div>
 </div>
-
-
-
-
-
-  <%# <div data-controller="search-exercises">
+<%# <div data-controller="search-exercises">
     <#%= form_with url: exercises_path, method: :get, html: { class:
       'mb-4', data: { search_exercises_target: 'form' } } do |f| %>
-      <%# f.text_field :query,
+  <%# f.text_field :query,
                       class: "form-control",
                       placeholder: 'Search Exercise',
                       value: params[:query],
                       data: { search_exercises_target: 'input',
                               action: 'keyup->search-exercises#update'} %>
-
-
   <%# TODO, create a list.html.erb to store exercises# %>
   <%# add this code to the list file \/ # %>
   <%# <div data-search-exercises-target="list"> # %>
