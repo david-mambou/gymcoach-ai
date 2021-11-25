@@ -10,6 +10,7 @@ Workout.destroy_all
 WorkoutSet.destroy_all
 Exercise.destroy_all
 Station.destroy_all
+Message.destroy_all
 p "database cleared.."
 
   # Station.create(name: 'name',
