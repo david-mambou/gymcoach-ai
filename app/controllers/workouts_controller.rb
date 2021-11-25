@@ -18,16 +18,16 @@ class WorkoutsController < ApplicationController
   def create
     @workout = Workout.find(params[:template_workout])
     # assign a new variable with the instance (makes a copy)
-    new_workout = @workout.amoeba_dup
-    new_workout.pros_and_con_list.add(@workout.pros_and_con_list)
+      # new_workout = @workout.amoeba_dup
+      # new_workout.pros_and_con_list.add(@workout.pros_and_con_list)
     # for amoeba, which duplicates children, tags are not duplicated, so do manually
-    new_workout.template = false
+    # new_workout.template = false
     authorize @workout
-    if new_workout.save!
-      redirect_to workout_path(new_workout)
-    else
-      render :new
-    end
+    redirect_to workout_path(@workout)
+    # if new_workout.save!
+    # else
+    #   render :new
+    # end
   end
 
   def show
