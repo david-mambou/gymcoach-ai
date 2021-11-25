@@ -62,7 +62,7 @@ p "creating workout.."
 
     p "creating workout sets"
     4.times do
-      new_set = WorkoutSet.new(order_index: 1, nb_of_reps: rand(5..12), weight: rand(5..20), difficulty: rand(1..3))
+      new_set = WorkoutSet.new(order_index: 1, nb_of_reps: rand(5..12), weight: rand(5..20), difficulty: rand(0..2))
       new_set.exercise = specific_exercise
       new_set.workout = specific_workout
       new_set.save!
