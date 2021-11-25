@@ -1,12 +1,10 @@
 <div class="card-footer chat-input">
   <%= simple_form_for @message do |f| %>
     <%= f.input :content, placeholder: "Type your message here...", as: :string %>
-    <%= f.submit 'Send', class: 'input-group-text send_btn' %>
+    <%= f.submit 'Send', class: ""%>
   <% end %>
-  
   <div class="input-group">
     <div class="input-group-append">
-      <span class="input-group-text attach_btn"><i class="fas fa-paperclip"></i></span>
     </div>
     <textarea name="" class="form-control type_msg" placeholder="Message your coach..."></textarea>
     <div class="input-group-append">
