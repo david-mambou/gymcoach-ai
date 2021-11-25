@@ -2,7 +2,12 @@ class WorkoutSetsController < ApplicationController
   def update
     @workout_set = WorkoutSet.find(params[:id])
     authorize @workout_set
-    @workout_set.update(sanitized_params)
+    if @workout_set.update(sanitized_params)
+      redirect_to workout_path(@workout_set.workout)
+    else
+      @workout = @workout_set.workout
+      render "workouts/show"
+    end
     # unable to get stimulus/ajax to work on submission action, so commented out
     # respond_to do |format|
     #   format.html { redirect_to workout_path(@workout_set.workout)}

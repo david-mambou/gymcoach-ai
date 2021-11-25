@@ -10,7 +10,6 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-
 ActiveRecord::Schema.define(version: 2021_11_24_130702) do
 
   # These are extensions that must be enabled in order to support this database
@@ -47,7 +46,6 @@ ActiveRecord::Schema.define(version: 2021_11_24_130702) do
   create_table "exercises", force: :cascade do |t|
     t.bigint "station_id", null: false
     t.string "name"
-    t.integer "muscle_group"
     t.string "good_for"
     t.string "bad_for"
     t.datetime "created_at", precision: 6, null: false
@@ -104,13 +102,6 @@ ActiveRecord::Schema.define(version: 2021_11_24_130702) do
     t.index ["name"], name: "index_tags_on_name", unique: true
   end
 
-  create_table "transmissions", force: :cascade do |t|
-    t.integer "category"
-    t.text "content"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -145,8 +136,6 @@ ActiveRecord::Schema.define(version: 2021_11_24_130702) do
     t.bigint "user_id", null: false
     t.boolean "template"
     t.date "day"
-    t.text "pros_and_cons"
-    t.string "mental_state"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "name"
