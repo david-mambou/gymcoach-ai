@@ -68,6 +68,7 @@ module AiHelper
           end
       end
       workout.save
+      raise
       Message.create!({
         category: "card_workout",
         workout: workout
