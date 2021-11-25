@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_23_111115) do
+ActiveRecord::Schema.define(version: 2021_11_25_012247) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -51,6 +51,7 @@ ActiveRecord::Schema.define(version: 2021_11_23_111115) do
     t.string "bad_for"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "user_notes"
     t.index ["station_id"], name: "index_exercises_on_station_id"
   end
 
