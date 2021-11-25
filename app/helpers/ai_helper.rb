@@ -63,15 +63,15 @@ module AiHelper
       exercises = Exercise.all.select([:id, :name])
 
       exercises.each do |exercise|
-        arr << "the #{exercise.name} exercise has id #{exercise.id} and works on muscle groups #{exercise.muscle_list}"
+        arr << "the #{exercise.name} exercise with id #{exercise.id} works on muscle groups #{exercise.muscle_list}"
       end
  
       client = OpenAI::Client.new
       response = client.answers(parameters: {
         documents: arr,
-        question: "What are good exercises to work on arms",
+        question: "What are three exercises that on muscle groups chest",
         model: "davinci", #babbage
-        examples_context: "user wants to recieve a list of ids from an array of exercises",
+        examples_context: "user wants to recieve a list of exercises for a given muscle group",
         examples: [
           ["What are the top upper body exercises?", "bench press, pushups"],
           ["What are some good leg exercises?", "lunges, squats"]
