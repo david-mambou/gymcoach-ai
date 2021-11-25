@@ -20,4 +20,7 @@
 </div>
 
 <%# only a test link to see if this works %>
- <%= button_to "Create workout", workouts_path(template_workout: @template_workout) , method: :post, class: 'btn btn-primary' %>
+
+<%#= link_to "Create workout", workouts_path(template_workout: @template_workout) , method: :post %>
+<%= button_to "Create workout", workouts_path(template_workout: @template_workout) , method: :post, class: 'btn btn-primary' %>
+
