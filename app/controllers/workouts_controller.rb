@@ -6,7 +6,7 @@ class WorkoutsController < ApplicationController
     @messages = Message.all
     @message = Message.new
 
-    # todo: delete just testing for ai. In reality call helpers.ai_new_workout AFTER the form, in the create method
+    # todo: delete just testing for ai. In reality call helpers.ai_new_workout AFTER the form, in the create method. OR TO BE MOVED
     ai_reply = ["pullups, chinups, woodchops, planks\n---"]
 
     # actually creating the response reader for new workout here
@@ -23,6 +23,16 @@ class WorkoutsController < ApplicationController
                                   weight: 20)
     end
     workout.save
+    # AI Functionality Tests
+    # muscles_used = helpers.ai_find_muscles_for_exercise("what does benchpress work on?")
+    # exercise_recommendation = helpers.ai_find_exercise_for_muscle("I want to work on chest")
+    # exercise_recommendation = helpers.ai_find_exercise_for_muscle("I want to work on my front delts")
+    exercise_recommendation = helpers.ai_find_exercise_for_muscle("lets workout my back")
+    # exercise_recommendation = helpers.ai_find_exercise_for_muscle(" I want to work back today")
+    # exercise_recommendation = helpers.ai_find_exercise_for_muscle("I want to work on chest. Can you suggest something that only uses dumbbells for today? I dont want to do dumbbell bench press")
+    # exercise_recommendation = helpers.ai_find_exercise_for_muscle("I am thinking to use only dumbbells today for chest")
+    # direct_user_query = helpers.ai_direct_query("this workout looks too easy")
+
   end
 
   def create

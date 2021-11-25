@@ -11,12 +11,12 @@ class WorkoutSetsController < ApplicationController
     # unable to get stimulus/ajax to work on submission action, so commented out
     respond_to do |format|
       format.html { redirect_to workout_path(@workout_set.workout)}
-      format.text { render partial: "workouts/workout_set", locals: { workout: @workout_set.workout, workout_set: @workout_set }, formats: [:html] }
+      format.text { render partial: "workouts/workout_set", locals: { workout: @workout_set.workout, workout_set: @workout_set, exercise: @workout_set.exercise }, formats: [:html] }
     end
     #todo
   end
 
-  
+
 
   private
 
