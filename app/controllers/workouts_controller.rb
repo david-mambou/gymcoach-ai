@@ -5,6 +5,10 @@ class WorkoutsController < ApplicationController
     authorize @template_workout
     @messages = Message.all
     @message = Message.new
+
+    # todo: delete just testing for ai
+    ai_reply = helpers.ai_top_exercises
+
   end
 
   def create

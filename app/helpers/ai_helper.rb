@@ -54,4 +54,35 @@ module AiHelper
       end
     end
   end
+
+  # request AI to get top X exercises based on user needs
+  def ai_top_exercises
+     # double check that the message is not empty
+     if true
+      arr = []
+      exercises = Exercise.all.select([:id, :name])
+
+      exercises.each do |exercise|
+        arr << "the #{exercise.name} exercise has id #{exercise.id} and works on muscle groups #{exercise.muscle_list}"
+      end
+ 
+      client = OpenAI::Client.new
+      response = client.answers(parameters: {
+        documents: arr,
+        question: "What are good exercises to work on arms",
+        model: "davinci", #babbage
+        examples_context: "user wants to recieve a list of ids from an array of exercises",
+        examples: [
+          ["What are the top upper body exercises?", "bench press, pushups"],
+          ["What are some good leg exercises?", "lunges, squats"]
+        ],
+        max_tokens: 25
+      })
+
+      reply = JSON.parse response.to_s
+      reply = reply["answers"]
+      raise
+      return reply
+     end
+   end
 end
