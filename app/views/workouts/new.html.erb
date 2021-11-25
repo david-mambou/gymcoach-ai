@@ -1,10 +1,25 @@
-Welcome to the workout.
-What do you think about this workout?
-<div class="container">
-  <div class="row">
-    <div class="col-12">
-      <%= link_to "Create workout", workouts_path(template_workout: @template_workout) , method: :post %>
-      <%# duplice instance %>
-    </div>
-  </div>
+<div class="container-fluid">
+	<div class="row justify-content-center">
+		<div class="col-md-8 col-xl-6 chat">
+			<div class="card">
+				<div class="card-body msg_card_body">
+			
+					<% @messages.each do |message| %>
+						<%= render 'chats/message', locals: { 
+							category: message.category,
+							content: (message.content if message.content.present?),
+							workout: (message.workout if message.workout.present?),
+							workout_set: (message.workout_set if message.workout_set.present?),
+							created_at: (message.created_at if message.created_at.present?)
+						} %>
+					<% end %>
+						
+				</div>
+
+				<%= render 'chats/input' %>
+
+			</div>
+		</div>
+	</div>
 </div>
+   

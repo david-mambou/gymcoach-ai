@@ -4,6 +4,6 @@ export default class extends Controller {
   static targets = ['set'];
 
   connect() { //template for future targets
-    console.log(this.setTarget);
   }
 }
+// stimulus not working with form submission
