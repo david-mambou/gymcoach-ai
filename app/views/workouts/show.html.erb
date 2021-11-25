@@ -6,14 +6,7 @@
         <p> <%= exercise.name.capitalize %> </p>
         <%= link_to '', exercise_path(exercise), class: "fas fa-info-circle ml-3", style: "text-decoration: none;"%>
       </div>
-      <div>
-        <%= render "workouts/workout_set_header" %>
-      </div>
-      <div>
-        <% @workout.workout_sets.where(exercise: exercise.id).order(:id).each_with_index do |workout_set, index| %>
-          <%= render "workouts/workout_set", workout_set: workout_set, workout: @workout, index: index %>
-        <% end %>
-      </div>
+      <%= render "workouts/workout_set", workout: @workout, exercise: exercise %>
     <% end %>
     <%= link_to 'Finish Workout', workout_path(@workout), method: "patch", class: "btn btn-primary"  %>
     <%# <%= link_to 'finish workout', dashboard_path(current_user), method: "get", class: "btn btn-primary" %>
