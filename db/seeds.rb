@@ -20,6 +20,17 @@ p "database cleared.."
 MUSCLES = ['hamstrings', 'glutes', 'pecs', 'deltoids', 'quads', 'calves', 'biceps', 'erector spinae' 'triceps', 'forearms', 'shoulders', 'traps', 'abs', 'obliques', 'trapezius', 'lats', 'glutes'].freeze
 STATION_NAMES = ["captains chair", "back extension machine", "incline ab bench", "ab wheel", "seated ab machine", "bench rope machine", "rack", "open space", "leg extension machine", "lying leg curl machine", "sitting calf raise machine", "pulldown machine", "pullups bar", "dumbbells", "barbell", "fly machine", "decline bench machine", "assisted rack", "preacher curl"].freeze
 EXERCISES = ['wood-chops', 'planks', 'pushups', 'lunge', 'sit-ups', 'leg-raises', 'chinups', 'pullups', 'dips'].freeze
+MENTAL_STATE = ['tired','hungry', 'hungover','Long Rest Before', 'Good sleep', 'headache', 'knee pain', 'elbow pain', 'good energy', 'low energy'].freeze
+
+def gen_random_workout_set(workout, exercise)
+  p "creating workout set.."
+  new_set = WorkoutSet.new(order_index: 1, nb_of_reps: rand(5..12), weight: rand(5..20), difficulty: rand(1..2))
+  new_set.exercise = exercise
+  new_set.workout = workout
+  new_set.save!
+end
+
+###############################################################################################
 
 # stations
 p "creating stations.."
@@ -30,6 +41,8 @@ p "creating stations.."
                   # bad_for: 'glutes')
 end
 p "created #{Station.count} stations"
+
+###############################################################################################
 
 # exercises
 p "creating exercises.."
@@ -48,8 +61,10 @@ p "creating exercises.."
 end
 p "created #{Exercise.count} exercises"
 
-# create workout
-p "creating workout.."
+###############################################################################################
+
+# create workout templates
+p "creating workout templates.."
 5.times.with_index do |i|
   specific_workout = Workout.new(name: "workout template #{i}", template: true, pros_and_con_list: "good for gaining strength")
   specific_workout.user = User.first
@@ -60,17 +75,33 @@ p "creating workout.."
   3.times do
     # get one exercise for 4 sets
     specific_exercise = Exercise.all.sample
-
-    p "creating workout sets"
     4.times do
-      new_set = WorkoutSet.new(order_index: 1, nb_of_reps: rand(5..12), weight: rand(5..20), difficulty: rand(1..2))
-      new_set.exercise = specific_exercise
-      new_set.workout = specific_workout
-      new_set.save!
-      p "workout set created for #{specific_exercise.name}"
+      gen_random_workout_set(specific_workout, specific_exercise)
     end
   end
 end
+###############################################################################################
+
+p 'creating push workout'
+40.times.with_index do |i|
+  specific_workout = Workout.new(name: "Push Day", pros_and_con_list: "Focuses on chest, triceps, and shoulders", mental_state: MENTAL_STATE.sample, day: Date.today + rand(-150..15))
+  specific_workout.user = User.first
+  specific_workout.save!
+  p "creating workout: #{specific_workout.name}"
+
+  # create workout sets
+  3.times do
+    # get one exercise for 4 sets
+    specific_exercise = Exercise.all.sample
+    4.times do
+      gen_random_workout_set(specific_workout, specific_exercise)
+    end
+  end
+end
+
+###############################################################################################
+
+
 
 # create users
 # User.all.each do |user|
