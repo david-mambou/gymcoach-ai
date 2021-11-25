@@ -1,10 +1,12 @@
 class WorkoutSetsController < ApplicationController
   def update
-    # if @workout_set.update(sanitized_params)
-    #   @workout.save
-    #   redirect_to workout_path(@workout)
-    # else
-    #   render :show
+    @workout_set = WorkoutSet.find(params[:id])
+    authorize @workout_set
+    @workout_set.update(sanitized_params)
+    # unable to get stimulus/ajax to work on submission action, so commented out
+    # respond_to do |format|
+    #   format.html { redirect_to workout_path(@workout_set.workout)}
+    #   format.text { render partial: "workouts/workout_set", locals: { workout: @workout_set.workout, workout_set: @workout_set }, formats: [:html] }
     # end
     #todo
   end
@@ -12,5 +14,6 @@ class WorkoutSetsController < ApplicationController
   private
 
   def sanitized_params
+    params.require("workout_set").permit(:nb_of_reps, :weight, :completed)
   end
 end
