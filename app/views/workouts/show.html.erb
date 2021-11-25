@@ -4,12 +4,14 @@
     <h2> Show the chat window here! and the current workout </h2>
     <% @workout.exercises.order(:id).uniq.each do |exercise| %>
       <p> <%= exercise.name.capitalize %> </p>
-      <%= link_to 'exercise info', exercise_path(exercise)%>
+      <%= link_to '', exercise_path(exercise), class: "fas fa-info-circle", style: "text-decoration: none;"%>
       <% @workout.workout_sets.where(exercise: exercise.id).order(:id).each_with_index do |workout_set, index| %>
         <%= render "workout_set", workout_set: workout_set, index: index %>
       <% end %>
     <% end %>
-    <%= link_to 'finish workout', workout_path(@workout), method: "patch"  %>
+    <%= link_to 'Finish Workout', workout_path(@workout), method: "patch", class: "btn btn-primary"  %>
+    <%# <%= link_to 'finish workout', dashboard_path(current_user), method: "get", class: "btn btn-primary" %>
+
     </div>
   </div>
 </div>

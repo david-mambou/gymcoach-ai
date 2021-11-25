@@ -1,7 +1,7 @@
 <div class="card-footer chat-input">
   <%= simple_form_for @message do |f| %>
     <%= f.input :content, placeholder: "Type your message here...", as: :string %>
-    <%= f.submit 'Send', class: ""%>
+    <%= f.submit 'Send', class: 'input-group-text send_btn' %>
   <% end %>
   <div class="input-group">
     <div class="input-group-append">
@@ -12,3 +12,5 @@
     </div>
   </div>
 </div>
+<br>
+<br>
