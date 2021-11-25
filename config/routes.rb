@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   devise_for :users
   root to: 'pages#home'
 
@@ -11,6 +12,10 @@ Rails.application.routes.draw do
   patch 'users/:id/routine/', to: 'users#routine', as: :user_routine
   get '/users/:id/goals', to: 'users#goals', as: :user_goals
   get '/dashboard', to: 'users#dashboard', as: :dashboard
+
+  authenticate :user, ->(user) { user.admin? } do
+    mount Blazer::Engine, at: "blazer"
+  end
 
   resources :messages, only: [:create]
 end

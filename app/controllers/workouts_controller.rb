@@ -5,6 +5,17 @@ class WorkoutsController < ApplicationController
     authorize @template_workout
     @messages = Message.all
     @message = Message.new
+
+    # AI Functionality Tests
+    # muscles_used = helpers.ai_find_muscles_for_exercise("what does benchpress work on?")
+    # exercise_recommendation = helpers.ai_find_exercise_for_muscle("I want to work on chest")
+    # exercise_recommendation = helpers.ai_find_exercise_for_muscle("I want to work on my front delts")
+    exercise_recommendation = helpers.ai_find_exercise_for_muscle("lets workout my back")
+    # exercise_recommendation = helpers.ai_find_exercise_for_muscle(" I want to work back today")
+    # exercise_recommendation = helpers.ai_find_exercise_for_muscle("I want to work on chest. Can you suggest something that only uses dumbbells for today? I dont want to do dumbbell bench press")
+    # exercise_recommendation = helpers.ai_find_exercise_for_muscle("I am thinking to use only dumbbells today for chest")
+    # direct_user_query = helpers.ai_direct_query("this workout looks too easy")
+    
   end
 
   def create
