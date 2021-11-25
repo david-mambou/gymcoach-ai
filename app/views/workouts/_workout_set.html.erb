@@ -2,9 +2,22 @@
 <%#<li> <%= workout_set.order_index % </li> %>
 <div data-controller="edit-set">
   <div class="row">
+    <div>
+      <p class="p-custom" style="display: flex; position: relative; right: -11px;">Set</p>
+    </div>
+    <div>
+      <p class="p-custom" style="display: flex; position: relative; right: -37px;">Reps</p>
+    </div>
+    <div>
+      <p class="p-custom" style="display: flex; position: relative; right: -60px;">Weight</p>
+    </div>
+    <div>
+      <p class="p-custom" style="display: flex; position: relative; right: -81px;">Difficulty</p>
+    </div>
     <% workout.workout_sets.where(exercise: exercise.id).order(:id).each_with_index do |workout_set, index| %>
       <%= simple_form_for [workout, workout_set], remote: true, namespace: "set-#{workout_set.id}", html: { novalidate: true, class: "no-bs-validation form-inline", data: {edit_set_target: "form"} } do |f| %>
-        <p><%= index + 1 %></p>
+        <p style="margin-right: 25px; margin-left: 20px">
+          <%= index + 1 %></p>
         <div class="col">
           <%= f.input :nb_of_reps, placeholder: workout_set.nb_of_reps, label: false, input_html: { min:"0", max:"30", data: {action: "change->edit-set#update"}} %>
         </div>
