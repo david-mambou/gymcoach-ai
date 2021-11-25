@@ -9,4 +9,5 @@ select.form-control {
 
 .was-validated select.form-control:valid, select.form-control.is-valid {
   padding: 0px !important;
+  border-radius: 15%;
 }
