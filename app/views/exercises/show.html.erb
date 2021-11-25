@@ -1,13 +1,19 @@
 <div class="container">
   <div class="row">
     <div class="col-12 centered">
+      <div>
+        <%= link_to "", workout_path, class: "fas fa-arrow-alt-circle-left"%>
+      </div>
       <br>
-      <h3><%= "#{@exercise.muscle_list}"%></h3> <%#=  muscle list wont let me Capitalize, just best to update seeds  %>
+      <h3><%= "#{@exercise.muscle_list}"%></h3>
+      <%#=  muscle list wont let me Capitalize, just best to update seeds  %>
       <h2 style="font-size: x-large !important;"><%= "#{@exercise.name.capitalize}:"%></h2>
       <br>
       <p style="font-size: 12px;">This is how to perform the exercise. First, you must Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam obcaecati esse at soluta veritatis nemo magni sapiente commodi reiciendis incidunt? Vero, cupiditate sit totam aliquid atque modi similique distinctio quia.</p>
     </div>
   </div>
+  <%= "-Current weight is #{current_user.weight_history.last}kg" %> <br>
+  <%="-Lets add #{current_user.user_increment.first}kg to your set?💪"%>
 </div>
 <div class="container">
   <div class="row">
@@ -43,15 +49,7 @@
     </div>
   </div>
 </div>
-<div class="container">
-  see isntructions on how to perform exercise, how to prepare for exercise,
-  <br>
-  <br>
-  ________Done, This is the user's incremenented weight, not recommended__________
-  <br>
-  <%= "Current weight is #{current_user.weight_history.last}kg, Add #{current_user.user_increment.last}kg to your set"%>
-  <br>
-  <br>
+<%# <div class="container">
   ___________Done, needs path/form for user______________
   <br>
   <br>
@@ -61,6 +59,6 @@
   where to grip the barbell
   <br>
   <br>
-  <h3><%= "#{@exercise.user_notes}"%> - User notes goes here</h3>
+  <h3><%= "#{@exercise.user_notes}"%> <%#=   User notes goes here</h3>
   etc.
-</div>
+</div> %>
