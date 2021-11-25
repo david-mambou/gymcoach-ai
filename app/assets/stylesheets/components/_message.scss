@@ -1,0 +1,20 @@
+.create {
+    background-color:#2fd62f;
+    -moz-border-radius:4px;
+    -webkit-border-radius:4px;
+    border-radius:4px;
+    border:1px solid #dcdcdc;
+    display:inline-block;
+    color:#fafafa;
+    font-family:arial;
+    font-size:12px;
+    font-weight:bold;
+    padding:7px 24px;
+    text-decoration:none;
+    text-shadow:0px 0px 0px #70706f;
+}.create:hover {
+    background-color:#2fbf0f;
+}.create:active {
+    position:relative;
+    top:1px;
+}  
