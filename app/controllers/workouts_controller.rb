@@ -6,31 +6,28 @@ class WorkoutsController < ApplicationController
     @messages = Message.all
     @message = Message.new
 
-    # AI Functionality Tests
-    # muscles_used = helpers.ai_find_muscles_for_exercise("what does benchpress work on?")
-    # exercise_recommendation = helpers.ai_find_exercise_for_muscle("I want to work on chest")
-    # exercise_recommendation = helpers.ai_find_exercise_for_muscle("I want to work on my front delts")
-    exercise_recommendation = helpers.ai_find_exercise_for_muscle("lets workout my back")
-    # exercise_recommendation = helpers.ai_find_exercise_for_muscle(" I want to work back today")
-    # exercise_recommendation = helpers.ai_find_exercise_for_muscle("I want to work on chest. Can you suggest something that only uses dumbbells for today? I dont want to do dumbbell bench press")
-    # exercise_recommendation = helpers.ai_find_exercise_for_muscle("I am thinking to use only dumbbells today for chest")
-    # direct_user_query = helpers.ai_direct_query("this workout looks too easy")
-
+    # AI Kick off user query with a generic message if start of chat
+    if Message.count == 0 
+      Message.create!({
+        category: "receive",
+        content: "Hi, I will be your personal coach today. What would you like to do today?"
+      })
+    end
   end
 
   def create
     @workout = Workout.find(params[:template_workout])
     # assign a new variable with the instance (makes a copy)
-    new_workout = @workout.amoeba_dup
-    new_workout.pros_and_con_list.add(@workout.pros_and_con_list)
+      # new_workout = @workout.amoeba_dup
+      # new_workout.pros_and_con_list.add(@workout.pros_and_con_list)
     # for amoeba, which duplicates children, tags are not duplicated, so do manually
-    new_workout.template = false
+    # new_workout.template = false
     authorize @workout
-    if new_workout.save!
-      redirect_to workout_path(new_workout)
-    else
-      render :new
-    end
+    redirect_to workout_path(@workout)
+    # if new_workout.save!
+    # else
+    #   render :new
+    # end
   end
 
   def show
