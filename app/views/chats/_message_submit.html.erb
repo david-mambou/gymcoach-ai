@@ -1,0 +1,15 @@
+  <div class="d-flex justify-content-end mb-4">
+  
+    <div class="msg_cotainer_send">
+      <%= locals[:content] %>
+      <span class="msg_time_send"><%= time_ago_in_words(locals[:created_at]) %> ago</span>
+    </div>
+
+    <div class="img_cont_msg">
+      <% if current_user.profile_pic.attached? %>
+        <img src= <%="#{cl_image_path(current_user.profile_pic.key)}"%> alt="place" class="rounded-circle user_img_msg">
+      <% else %>
+        <img src= <%= asset_path "generic_profile.png"%> class="rounded-circle user_img_msg">
+      <% end %>
+    </div>
+  </div>

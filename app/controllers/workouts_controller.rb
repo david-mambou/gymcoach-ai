@@ -3,6 +3,8 @@ class WorkoutsController < ApplicationController
     # add real template from workouts
     @template_workout = Workout.find_by(template: true)
     authorize @template_workout
+    @messages = Message.all
+    @message = Message.new
   end
 
   def create
@@ -32,7 +34,7 @@ class WorkoutsController < ApplicationController
     redirect_to dashboard_path
   end
 
-  # private
+  private
 
   # def sanitized_params
   #   #todo
