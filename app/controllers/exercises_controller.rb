@@ -16,7 +16,6 @@ class ExercisesController < ApplicationController
   def show
     @exercise = Exercise.find(params[:id])
     authorize @exercise
-    @workout = Workout.new
     #todo
     @chart_data_weekly = {
       labels: [6.days.ago.strftime("%a, %d"), 5.days.ago.strftime("%a, %d"), 4.days.ago.strftime("%a, %d"), 3.days.ago.strftime("%a, %d"), 2.days.ago.strftime("%a, %d"), 1.days.ago.strftime("%a, %d")],

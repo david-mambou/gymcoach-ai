@@ -9,4 +9,8 @@ class User < ApplicationRecord
   def weight_history
     WorkoutSet.joins(:workout).where(workout: { user: self }).pluck(:weight)
   end
+
+  def user_increment
+    Station.pluck(:base_incremental_weight)
+  end
 end
