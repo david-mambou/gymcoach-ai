@@ -2,14 +2,14 @@
 <%#<li> <%= workout_set.order_index % </li> %>
 <div data-controller="edit-set">
   <div class="row">
-    <table class="table table-bordered table-dark m-0">
+    <table class="table table-bordered table-dark m-0 workout-table">
       <thead>
         <tr>
           <th scope="col">Set</th>
           <th scope="col">Reps</th>
           <th scope="col">Weight</th>
           <th scope="col">Difficulty</th>
-          <th scope="col">Completed</th>
+          <th scope="col">Done</th>
         </tr>
       </thead>
       <tbody>
@@ -22,7 +22,7 @@
               <td><%= f.input :nb_of_reps, placeholder: workout_set.nb_of_reps, label: false, input_html: { min:"0", max:"30", data: {action: "change->edit-set#update"}} %></td>
               <td><%= f.input :weight, placeholder: workout_set.weight, label: false, input_html: { min:"0", max:"200", step: "#{workout_set.exercise.station.base_incremental_weight}", data: {action: "change->edit-set#update"} } %></td>
               <td><%= f.input :difficulty, label: false, collection: WorkoutSet.difficulties.keys, input_html: {data: {action: "change->edit-set#update"}} %></td>
-              <td><%= f.input :completed, label: false, input_html: {data: {action: "change->edit-set#update"}} %></td>
+              <td><%= f.input :completed, class: "checkbox_button", label: false, input_html: {data: {action: "change->edit-set#update"}} %></td>
             <% end %>
           </tr>
         <% end %>
