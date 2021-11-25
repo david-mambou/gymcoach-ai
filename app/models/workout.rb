@@ -4,7 +4,7 @@ class Workout < ApplicationRecord
   has_many :exercises, through: :workout_sets
   enum status: { not_done: 0, in_progress: 1, completed: 2 }
   # acts_as_taggable_on :mental_state
-  acts_as_taggable_on :pros_and_cons
+  acts_as_taggable_on :pros, :cons
   acts_as_taggable_on :emotional_states
 
   amoeba do
