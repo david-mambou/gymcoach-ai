@@ -7,7 +7,7 @@ class WorkoutsController < ApplicationController
     @message = Message.new
 
     # todo: delete just testing for ai
-    ai_reply = helpers.ai_top_exercises
+    ai_reply = helpers.ai_find_muscles_for_exercise
 
   end
 
