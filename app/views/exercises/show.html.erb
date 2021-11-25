@@ -1,4 +1,49 @@
-this is how to perform the exercise!<br>
+<div class="container">
+  <div class="row">
+    <div class="col-6 centered">
+      <p>this is how to perform the exercise!</p>
+      <h3>Reccomended reps</h3>
+      <br>
+      <h3><%= "#{@exercise.name}"%> - Here goes instructions</h3>
+      <br>
+      <h3><%= "#{@exercise.muscle_list}"%></h3>
+    </div>
+  </div>
+</div>
+<div class="container">
+  <div class="row">
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-header">
+          Last Week
+        </div>
+        <div class="card-body">
+          <p class="d-flex" style="position: absolute; top:198px; left:3px; color: #b7b7b7;">Kg</p>
+          <canvas
+            data-controller="chart"
+            data-chart-data-value="<%= @chart_data_weekly.to_json %>"
+            data-chart-options-value="<%= @chart_options.to_json %>"
+            ></canvas>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-header">
+          Last Month
+        </div>
+        <div class="card-body">
+          <p class="d-flex" style="position: absolute; top:198px; left:3px; color: #b7b7b7;">Kg</p>
+          <canvas
+            data-controller="chart"
+            data-chart-data-value="<%= @chart_data_monthly.to_json %>"
+            data-chart-options-value="<%= @chart_options.to_json %>"
+            ></canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 see isntructions on how to perform exercise, how to prepare for exercise,<br>
 what weights to increment<br>
 best seat position<br>

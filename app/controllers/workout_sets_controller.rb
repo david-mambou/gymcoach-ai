@@ -11,6 +11,8 @@ class WorkoutSetsController < ApplicationController
     #todo
   end
 
+  
+
   private
 
   def sanitized_params
