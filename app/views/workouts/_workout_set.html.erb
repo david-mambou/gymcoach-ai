@@ -1,12 +1,11 @@
 <%# placeholder for workout_set.photos.attached? %>
 <%#<li> <%= workout_set.order_index % </li> %>
 <div data-controller="edit-set">
-<p> Set <%= index + 1 %> </p>
-<%= simple_form_for [@workout, workout_set], remote: true, authenticity_token: true, namespace: "set-#{workout_set.id}", html: { class: 'form-inline' } do |f| %>
-  <%= f.input :nb_of_reps, placeholder: workout_set.nb_of_reps, label: "reps", input_html: { min:"0", max:"30"}  %>
-  <%= f.input :weight, placeholder: workout_set.weight, label: "weight", input_html: { min:"0", max:"200", step: "#{workout_set.exercise.station.base_incremental_weight}" } %>
-  <%= f.input :difficulty, label: "difficulty", collection: WorkoutSet.difficulties %>
-  <%= f.input :completed, input_html: {onchange: 'this.form.submit()'} %>
+<%= simple_form_for [workout, workout_set], remote: true, authenticity_token: true, namespace: "set-#{workout_set.id}", html: { class: 'form-inline', data: {edit_set_target: "form"} } do |f| %>
+  <%= f.input :nb_of_reps, placeholder: workout_set.nb_of_reps, label: "reps", input_html: { min:"0", max:"30", data: {action: "change->edit-set#update"}}  %>
+  <%= f.input :weight, placeholder: workout_set.weight, label: "weight", input_html: { min:"0", max:"200", step: "#{workout_set.exercise.station.base_incremental_weight}", data: {action: "change->edit-set#update"} } %>
+  <%= f.input :difficulty, label: "difficulty", collection: WorkoutSet.difficulties.keys, input_html: {data: {action: "change->edit-set#update"}} %>
+  <%= f.input :completed, input_html: {data: {action: "change->edit-set#update"}} %>
 <% end %>
 </div>
   <%#= link_to 'update set', workout_workout_set_path(@workout, workout_set), method: "patch", onclick: "$('#form_id_#{index+1})'.submit()" %>
