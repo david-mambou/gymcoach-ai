@@ -37,6 +37,7 @@ gem 'pundit'
 gem 'acts-as-taggable-on', '~> 8.1.0'
 gem 'amoeba'
 gem 'ruby-openai'
+gem 'turbolinks_render'
 
 group :development, :test do  gem 'pry-byebug'
   gem 'pry-rails'

@@ -8,7 +8,9 @@
           <%= link_to '', exercise_path(exercise), class: "fas fa-info-circle ml-3", style: "text-decoration: none;"%>
         </div>
         <% @workout.workout_sets.where(exercise: exercise.id).order(:id).each_with_index do |workout_set, index| %>
-          <%= render "workout_set", workout_set: workout_set, index: index %>
+            <p> Set <%= index + 1 %> </p>
+
+        <%= render "workouts/workout_set", workout_set: workout_set, workout: @workout %>
         <% end %>
       <% end %>
       <%= link_to 'Finish Workout', workout_path(@workout), method: "patch", class: "btn btn-primary"  %>
