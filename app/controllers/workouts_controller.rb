@@ -6,23 +6,6 @@ class WorkoutsController < ApplicationController
     @messages = Message.all
     @message = Message.new
 
-    # todo: delete just testing for ai. In reality call helpers.ai_new_workout AFTER the form, in the create method. OR TO BE MOVED
-    ai_reply = ["pullups, chinups, woodchops, planks\n---"]
-
-    # actually creating the response reader for new workout here
-    workout = Workout.new(name: 'Workout 1',
-      day: Date.today,
-      user: current_user)
-    ai_reply.first.split(', ').each_with_index do |exercise_name, index|
-      exercise = Exercise.where(name: exercise_name).first # to improve
-
-      workout_set = WorkoutSet.create(nb_of_reps: 5,
-                                  order_index: index,
-                                  exercise: exercise,
-                                  workout: workout,
-                                  weight: 20)
-    end
-    workout.save
     # AI Functionality Tests
     # muscles_used = helpers.ai_find_muscles_for_exercise("what does benchpress work on?")
     # exercise_recommendation = helpers.ai_find_exercise_for_muscle("I want to work on chest")

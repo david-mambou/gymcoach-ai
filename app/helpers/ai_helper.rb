@@ -43,36 +43,27 @@ module AiHelper
         max_tokens: 15
       })
 
-      # todo: delete just testing for ai. In reality call helpers.ai_new_workout AFTER the form, in the create method. OR TO BE MOVED
-    # ai_reply = ["pullups, chinups, woodchops, p lanks\n---"]
-
-    # actually creating the response reader for new workout here
-    # ai_reply.first.split(', ').each_with_index do |exercise_name, index|
-
-    # end
-    # workout.save
-    ai_hash = JSON.parse response.to_s
-    workout = Workout.new(name: 'Workout 1',
-      day: Date.today,
-      user: current_user)
-      # each answer is an exercise name
-      p ai_hash['answers']
-      ai_hash["answers"].first.split(', ').each_with_index do |exercise_name, index|
-        exercise = Exercise.where(name: exercise_name).first # to improve
-        3.times do
-          WorkoutSet.create(nb_of_reps: 5,
-                                        order_index: index,
-                                        exercise: exercise,
-                                        workout: workout,
-                                        weight: 20)
-          end
-      end
-      workout.save
-      raise
-      Message.create!({
-        category: "card_workout",
-        workout: workout
-      })
+    # ai_hash = JSON.parse response.to_s
+    # workout = Workout.new(name: 'Workout 1',
+    #   day: Date.today,
+    #   user: current_user)
+    #   # each answer is an exercise name
+    #   ai_hash["answers"].first.split(', ').each_with_index do |exercise_name, index|
+    #     exercise = Exercise.where(name: exercise_name).first # to improve
+    #     3.times do
+    #       WorkoutSet.create(nb_of_reps: 5,
+    #                                     order_index: index,
+    #                                     exercise: exercise,
+    #                                     workout: workout,
+    #                                     weight: 20)
+    #       end
+    #   end
+    #   workout.save
+    #   raise
+    #   Message.create!({
+    #     category: "card_workout",
+    #     workout: workout
+    #   })
     end
   end
 
@@ -129,13 +120,26 @@ module AiHelper
     })
 
     reply = JSON.parse response.to_s
-    reply = reply["answers"][0]
-
-    # generate a workout card
-    # Message.create!({
-    #   category: "card_workout",
-    #   workout: Workout.first
-    # })
+    reply = reply["answers"].first
+    workout = Workout.new(name: 'Workout 1',
+      day: Date.today,
+      user: current_user)
+    # each answer is an exercise name
+    reply.split(', ').each_with_index do |exercise_name, index|
+      exercise = Exercise.where(name: exercise_name).first # to improve
+      3.times do
+        WorkoutSet.create(nb_of_reps: 5,
+                                      order_index: index,
+                                      exercise: exercise,
+                                      workout: workout,
+                                      weight: 20)
+      end
+    end
+    workout.save
+    Message.create!({
+      category: "card_workout",
+      workout: workout
+                    })
   end
 
   # ai will direct user query to appropriate method for further processing
@@ -173,6 +177,6 @@ module AiHelper
     reply = JSON.parse response.to_s
     reply = reply["answers"][0]
     raise
-    return reply
+    reply
   end
 end
