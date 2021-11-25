@@ -1,7 +1,9 @@
 class UsersController < ApplicationController
   def dashboard
     authorize current_user
-    @upcoming_workouts = Workout.where('day > ?', Date.today)
+    @today_workouts = Workout.where('day = ?', Date.today).order(:day)
+    @upcoming_workouts = Workout.where('day > ?', Date.today).order(:day)
+    @past_workouts = Workout.where('day < ?', Date.today).order(day: :desc)
   end
 
   def goals
