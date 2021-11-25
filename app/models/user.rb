@@ -5,6 +5,8 @@ class User < ApplicationRecord
   :recoverable, :rememberable, :validatable
   has_many :workouts
   has_many :workout_sets, through: :workouts
+  
+  has_one_attached :profile_pic
 
   def weight_history
     WorkoutSet.joins(:workout).where(workout: { user: self }).pluck(:weight)
@@ -13,7 +15,4 @@ class User < ApplicationRecord
   def user_increment
     Station.pluck(:base_incremental_weight)
   end
-  
-  has_one_attached :profile_pic
-
 end
