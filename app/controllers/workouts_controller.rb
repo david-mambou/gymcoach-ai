@@ -6,9 +6,11 @@ class WorkoutsController < ApplicationController
     @messages = Message.all
     @message = Message.new
 
-    # todo: delete just testing for ai
-    ai_reply = helpers.ai_find_muscles_for_exercise
-
+    # WORKING - get muscles for given exercise
+    # muscles_used = helpers.ai_find_muscles_for_exercise("what does benchpress work on?")
+    # exercise_recommendation = helpers.ai_find_exercise_for_muscle("what are good exercises for bad back")
+    # exercise_recommendation = helpers.ai_direct_query("this workout looks too easy")
+    
   end
 
   def create
