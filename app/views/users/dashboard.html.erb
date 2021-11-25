@@ -1,10 +1,20 @@
+<div class="container-fluid">
+  <div class="row justify-content-center">
+    <div class="col-md-8 col-xl-6 chat">
+      <% if current_user.workouts.present? %>
+        <h1>Your Dashboard</h1>
 
-<% if current_user.workouts.present? %>
-  <% current_user.workouts.each do |workout| %>
-    workout is here<br>
-  <% end %>
-<% else %>
-  user has not done any workouts yet. <br>
-  they can ask ai for info from past workouts here <br>
-  they can check next workout schedule here.
-<% end %>
+        <h2>Upcoming Workouts</h2>
+        
+
+        <h2>Past Workouts</h2>
+
+        <% current_user.workouts.each do |workout| %>
+         <%= render "users/workout_display", locals: {workout: workout} %>
+        <% end %>
+      <% else %>
+        user has not done any workouts yet.
+      <% end %>
+    </div>
+  </div>
+</div>
