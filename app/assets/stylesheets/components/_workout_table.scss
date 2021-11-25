@@ -1,4 +1,18 @@
 .workout-table {
-  font-size: 12px;
+  font-size: 14px;
 }
 
+select.form-control {
+  padding-right: 0px !important;
+  width: 81px;
+}
+
+.was-validated select.form-control:valid, select.form-control.is-valid {
+  padding: 0px !important;
+  border-radius: 15%;
+}
+
+.p-custom {
+  text-decoration: underline;
+  margin-bottom: 5px;
+}

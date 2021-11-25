@@ -17,40 +17,53 @@ module AiHelper
        stop: ['\n', '===', '---']
      })
 
-     ai_hash = JSON.parse response.to_s
-      ai_hash["answers"].each do |answer|
+       ai_hash = JSON.parse response.to_s
+       ai_hash["answers"].each do |answer|
         # receive just a basic answer
         Message.create!({
           category: "receive",
           content: answer
-        })
+          })
+        end
       end
     end
-  end
 
   # request AI to generate a new workout card based on user requests
   def ai_new_workout(user_message_content)
     if user_message_content.present?
-     client = OpenAI::Client.new
-     client.files.upload(parameters: { file: 'db/data.jsonl', purpose: 'search' })
-     response = client.answers(parameters: {
-       documents: ["I bench press 3 sets of 25kg at 8 reps on july 7th, 2020 and it was easy.", "I barbell squat 20kg twice, but failed on the third set on november 1st, 2021. But it was hard."],
-       question: user_message_content,
-       model: "davinci",
-       examples_context: "In 2017, U.S. life expectancy was 78.6 years.",
-       examples: [["What is human life expectancy in the United States?","78 years."]],
-       max_rerank: 10,
-       max_tokens: 5
-     })
+      client = OpenAI::Client.new
+      client.files.upload(parameters: { file: 'db/data.jsonl', purpose: 'search' })
+      response = client.answers(parameters: {
+        documents: ["I bench press 3 sets of 25kg at 8 reps on july 7th, 2020 and it was easy.", "I barbell squat 20kg twice, but failed on the third set on november 1st, 2021. But it was hard."],
+        question: user_message_content,
+        model: "davinci",
+        examples_context: "In 2017, U.S. life expectancy was 78.6 years.",
+        examples: [["What is human life expectancy in the United States?","78 years."]],
+        max_rerank: 10,
+        max_tokens: 15
+      })
 
-     ai_hash = JSON.parse response.to_s
-      ai_hash["answers"].each do |answer|
-        # receive just a basic answer
-        Message.create!({
-          category: "card_workout",
-          workout: Workout.first
-        })
-      end
+    # ai_hash = JSON.parse response.to_s
+    # workout = Workout.new(name: 'Workout 1',
+    #   day: Date.today,
+    #   user: current_user)
+    #   # each answer is an exercise name
+    #   ai_hash["answers"].first.split(', ').each_with_index do |exercise_name, index|
+    #     exercise = Exercise.where(name: exercise_name).first # to improve
+    #     3.times do
+    #       WorkoutSet.create(nb_of_reps: 5,
+    #                                     order_index: index,
+    #                                     exercise: exercise,
+    #                                     workout: workout,
+    #                                     weight: 20)
+    #       end
+    #   end
+    #   workout.save
+    #   raise
+    #   Message.create!({
+    #     category: "card_workout",
+    #     workout: workout
+    #   })
     end
   end
 
@@ -87,7 +100,7 @@ module AiHelper
   def ai_find_exercise_for_muscle(user_query)
     arr = []
     exercises = ['glute bridge','lying hip abduction','barbell hip thrust','rope cable crunch','wood chops','planks','lying leg curl','sumo deadlift','standard deadlift','romanian deadlift','sumo squat','deadlift rack pull','dumbbell lunges','leg extensions (single leg)','leg extensions (both legs)','standard barbell squat','ass to grass squats','front squat','bulgarian barbell squat','sumo squat','goblin squats','lateral side step squats','jump squats','sitting calf raise','standing calf raise','smith machine barbell row','weighted pullups','standard pullups','hammergrip pullups','chinups','wide grip pullups','pulldown machine - narrow grip attachment','pulldown machine - single bar','pulldown machine - dual static position','row machine- underhand grip','row machine - overhand grip','row machine - hammer grip','Rope machine lat pullover','dumbbell single arm row','dumbbell supinated bicep curls','alternating dumbbell hammerhead curls','incline bench dumbbell curls','EZ bar standing bicep curl','preacher curl machine','spider curl','barbell bentover curl','dumbbell wrist curls','chest fly machine','chest press machine','smith machine bench press','weighted dips','chest fly machine straight arm','standard rope chest flies','Rope machine kneeling chest abductions','rope bench press (long handles)','barbell bench press','barbell incline bench','incline dumbbell bench press','standard pushups','archer pushups','diamond pushups','dumbbell lateral raises','hanging dumbbell lateral raises','side-lying bench lateral raise','single arm dumbbell lateral raise','shoulder shrugs','dumbbell reverse fly','dumbbell front raises','dumbbell shoulder military press','handstand pushups','wide pushups','straight bar pushdown','tricep dumbbell kickbacks','EZ bar skull crusher','close grip bench']
-  
+
     client = OpenAI::Client.new
     response = client.answers(parameters: {
       documents: exercises,
@@ -107,20 +120,33 @@ module AiHelper
     })
 
     reply = JSON.parse response.to_s
-    reply = reply["answers"][0]
-
-    # generate a workout card
-    # Message.create!({
-    #   category: "card_workout",
-    #   workout: Workout.first
-    # })
+    reply = reply["answers"].first
+    workout = Workout.new(name: 'Workout 1',
+      day: Date.today,
+      user: current_user)
+    # each answer is an exercise name
+    reply.split(', ').each_with_index do |exercise_name, index|
+      exercise = Exercise.where(name: exercise_name).first # to improve
+      3.times do
+        WorkoutSet.create(nb_of_reps: 5,
+                                      order_index: index,
+                                      exercise: exercise,
+                                      workout: workout,
+                                      weight: 20)
+      end
+    end
+    workout.save
+    Message.create!({
+      category: "card_workout",
+      workout: workout
+                    })
   end
 
   # ai will direct user query to appropriate method for further processing
   def ai_direct_query(user_query)
     arr = []
     possible_queries = ['find_exercise', 'update_workout', 'create_exercise', 'update_set', 'general_answer']
-  
+
     client = OpenAI::Client.new
     response = client.answers(parameters: {
       documents: possible_queries,
@@ -151,6 +177,6 @@ module AiHelper
     reply = JSON.parse response.to_s
     reply = reply["answers"][0]
     raise
-    return reply
+    reply
   end
 end
