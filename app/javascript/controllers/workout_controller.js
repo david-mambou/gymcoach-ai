@@ -9,4 +9,8 @@ export default class extends Controller {
     console.log(this.exerciseTarget);
   }
 
+  update() {
+    console.log("updating!")
+  }
+
 }
