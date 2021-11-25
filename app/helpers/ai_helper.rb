@@ -1,4 +1,6 @@
 module AiHelper
+  # determine the users intention based on their message
+
   # request AI to generate a generic reply based on user input
   def ai_generic_reply(user_message_content)
     # double check that the message is not empty
