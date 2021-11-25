@@ -31,28 +31,49 @@ module AiHelper
   # request AI to generate a new workout card based on user requests
   def ai_new_workout(user_message_content)
     if user_message_content.present?
-     client = OpenAI::Client.new
-     client.files.upload(parameters: { file: 'db/data.jsonl', purpose: 'search' })
-     response = client.answers(parameters: {
-       documents: ["I bench press 3 sets of 25kg at 8 reps on july 7th, 2020 and it was easy.", "I barbell squat 20kg twice, but failed on the third set on november 1st, 2021. But it was hard."],
-       question: user_message_content,
-       model: "davinci",
-       examples_context: "In 2017, U.S. life expectancy was 78.6 years.",
-       examples: [["What is human life expectancy in the United States?","78 years."]],
-       max_rerank: 10,
-       max_tokens: 5
-     })
+      client = OpenAI::Client.new
+      client.files.upload(parameters: { file: 'db/data.jsonl', purpose: 'search' })
+      response = client.answers(parameters: {
+        documents: ["I bench press 3 sets of 25kg at 8 reps on july 7th, 2020 and it was easy.", "I barbell squat 20kg twice, but failed on the third set on november 1st, 2021. But it was hard."],
+        question: user_message_content,
+        model: "davinci",
+        examples_context: "In 2017, U.S. life expectancy was 78.6 years.",
+        examples: [["What is human life expectancy in the United States?","78 years."]],
+        max_rerank: 10,
+        max_tokens: 15
+      })
 
-          ai_hash = JSON.parse response.to_s
-          ai_hash["answers"].each do |answer|
-            # receive just a basic answer
-            Message.create!({
-              category: "card_workout",
-              workout: Workout.first
-              })
-            end
+      # todo: delete just testing for ai. In reality call helpers.ai_new_workout AFTER the form, in the create method. OR TO BE MOVED
+    # ai_reply = ["pullups, chinups, woodchops, p lanks\n---"]
+
+    # actually creating the response reader for new workout here
+    # ai_reply.first.split(', ').each_with_index do |exercise_name, index|
+
+    # end
+    # workout.save
+    ai_hash = JSON.parse response.to_s
+    workout = Workout.new(name: 'Workout 1',
+      day: Date.today,
+      user: current_user)
+      # each answer is an exercise name
+      p ai_hash['answers']
+      ai_hash["answers"].first.split(', ').each_with_index do |exercise_name, index|
+        exercise = Exercise.where(name: exercise_name).first # to improve
+        3.times do
+          WorkoutSet.create(nb_of_reps: 5,
+                                        order_index: index,
+                                        exercise: exercise,
+                                        workout: workout,
+                                        weight: 20)
           end
-        end
+      end
+      workout.save
+      Message.create!({
+        category: "card_workout",
+        workout: workout
+      })
+    end
+  end
 
    # request AI to get top X exercises based on user needs
    def ai_find_muscles_for_exercise(user_query)
