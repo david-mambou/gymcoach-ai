@@ -27,7 +27,7 @@
         <div class="col">
           <%= f.input :difficulty, label: false, collection: WorkoutSet.difficulties.keys, input_html: {class: "set-1_workout_set_difficulty", data: {action: "change->edit-set#update"}} %>
         </div>
-        <%= f.input :completed, label: false, input_html: {data: {action: "change->edit-set#update"}} %>
+        <%= f.input :completed, label: false, input_html: {class: "transform: scale(2.0)",data: {action: "change->edit-set#update"}} %>
       <% end %>
     <% end %>
   </div>
