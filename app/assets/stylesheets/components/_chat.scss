@@ -1,6 +1,5 @@
 $message-border-radius: 15px;
 
-
 .chat{
   margin-top: auto;
   margin-bottom: auto;
@@ -253,4 +252,10 @@ background-color: rgba(0,0,0,0.2);
 
 .form-check-input {
   position: relative;
+}
+
+.message-box {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
 }

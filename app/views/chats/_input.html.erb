@@ -1,4 +1,4 @@
-  <%= simple_form_for @message, html: { class: "no-bs-validation form-inline  d-flex justify-space-between mx-auto" } do |f| %>
+  <%= simple_form_for @message, html: { class: "no-bs-validation form-inline  d-flex justify-space-between mx-auto message-box" } do |f| %>
     <%= f.input :content, placeholder: "Send Message..", as: :string, label: false, input_html: {class: "flex-grow-1"} %>
     <%= f.submit 'Send', class: ' btn btn-primary' %>
   <% end %>
