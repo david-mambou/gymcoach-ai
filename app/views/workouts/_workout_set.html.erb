@@ -12,9 +12,9 @@
           <%= f.input :weight, placeholder: workout_set.weight, label: false, input_html: { min:"0", max:"200", step: "#{workout_set.exercise.station.base_incremental_weight}", data: {action: "change->edit-set#update"} } %>
         </div>
         <div class="col">
-          <%= f.input :difficulty, label: false, collection: WorkoutSet.difficulties.keys, input_html: {data: {action: "change->edit-set#update"}} %>
+          <%= f.input :difficulty, label: false, collection: WorkoutSet.difficulties.keys, input_html: {class: "set-1_workout_set_difficulty", data: {action: "change->edit-set#update"}} %>
         </div>
-        <%= f.input :completed, class: "checkbox_button", label: false, input_html: {data: {action: "change->edit-set#update"}} %>
+        <%= f.input :completed, label: false, input_html: {data: {action: "change->edit-set#update"}} %>
       <% end %>
     <% end %>
   </div>
