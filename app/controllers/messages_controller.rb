@@ -8,7 +8,10 @@ class MessagesController < ApplicationController
 
       # todo: change this to a chat view.rb?
       # helpers.ai_generic_reply(message.content)
-      helpers.ai_generic_reply(message.content)
+
+      # elect the ai method here
+
+      helpers.ai_new_workout(message.content)
       redirect_to new_workout_path
     end
   end
