@@ -2,6 +2,7 @@
   .is-valid, .is-invalid {
     border-color: $gray-400;
     background-image: inherit;
+    font-size: 10px;
     &:focus {
       border-color: inherit;
       box-shadow: 0 0 0 .2rem $gray-400;

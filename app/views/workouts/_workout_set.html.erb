@@ -4,9 +4,7 @@
   <div class="row">
     <% workout.workout_sets.where(exercise: exercise.id).order(:id).each_with_index do |workout_set, index| %>
       <%= simple_form_for [workout, workout_set], remote: true, namespace: "set-#{workout_set.id}", html: { novalidate: true, class: "no-bs-validation form-inline", data: {edit_set_target: "form"} } do |f| %>
-        <div class="col">
-          <p><%= index + 1 %></p>
-        </div>
+        <p><%= index + 1 %></p>
         <div class="col">
           <%= f.input :nb_of_reps, placeholder: workout_set.nb_of_reps, label: false, input_html: { min:"0", max:"30", data: {action: "change->edit-set#update"}} %>
         </div>
