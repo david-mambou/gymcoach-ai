@@ -3,6 +3,8 @@ class WorkoutsController < ApplicationController
     # add real template from workouts
     @template_workout = Workout.find_by(template: true)
     authorize @template_workout
+    @messages = Message.all
+    @message = Message.new
   end
 
   def create
@@ -37,7 +39,7 @@ class WorkoutsController < ApplicationController
     end
   end
 
-  # private
+  private
 
   # def create_workout_groups
   #   workout_groups = []
