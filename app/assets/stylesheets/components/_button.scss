@@ -1,0 +1,117 @@
+// ______________________First Button_____________________________//
+
+.button_one {
+  border: 5em;
+  cursor: pointer;
+  outline: none;
+  font-size: 16px;
+  transform: translate(0);
+  padding: 0.7em 2em;
+  border-radius: 1rem;
+  box-shadow: 1px 1px 10px rgba(18, 18, 18, 0.438);
+  width: 100%;
+  color: white;
+  background-color: #5d5c5c;
+}
+.button_one:hover {
+  color: white;
+  background-color: #03aae7;
+}
+
+// ______________________Second Button_____________________________//
+
+.button_two {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.7rem 2rem;
+  font-family: "Poppins", sans-serif;
+  font-weight: 700;
+  font-size: 18px;
+  text-align: center;
+  border-radius: 1rem;
+  border: 1px solid #fff;
+  width: 100%;
+  color: white;
+  background-color: #5d5c5c;
+  text-decoration: none;
+}
+
+.button_two:hover {
+  color: #fff;
+  background-color: #ff00a6;
+  text-decoration: none;
+}
+
+// ______________________Third Button_____________________________//
+
+.button_three {
+  font-family: lato,sans-serif;
+  font-weight: bold;
+  font-size: 1em;
+  letter-spacing: 0.1em;
+  text-decoration: none;
+  display: inline-block;
+  padding: 10px 30px 10px 30px;
+  position: relative;
+  border: 3px solid #ffffff;
+  border-radius: 1rem;
+  width: 100%;
+  color: white;
+  background-color: #5d5c5c;
+}
+.button_three:hover {
+  background-color: #ff6200;
+  color: white;
+}
+
+// ______________________Forth Button_____________________________//
+
+.button_four {
+  display: inline-block;
+  padding: 0.3em 1.2em;
+  margin: 0 0.1em 0.1em 0;
+  border: 0.16em solid rgba(255,255,255,0);
+  border-radius: 1rem;
+  text-decoration: none;
+  font-family: lato,sans-serif;
+  font-weight: bold;
+  text-shadow: 0 0.04em 0.04em rgba(0,0,0,0.35);
+  text-align: center;
+  letter-spacing: 0.2rem;
+  width: 100%;
+  color: white;
+  background-color: #5d5c5c;
+  border: 2px transparent;
+}
+
+.button_four:hover {
+  background-color: #5500ff;
+  color: #ffffff;
+  border: 2px rgba(0, 221, 255, 0.559) solid;
+}
+
+// ______________________Fifth Button_____________________________//
+
+.button_five {
+  font-size: 18px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  display: inline-block;
+  text-align: center;
+  font-weight: bold;
+  padding: 0.7em 2em;
+  border: 3px solid #FF0072;
+  border-radius: 2px;
+  position: relative;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.1);
+  text-decoration: none;
+  width: 100%;
+  color: white;
+  background-color: #5d5c5c;
+}
+
+.button_five:hover {
+  color: #FF0072;
+  background-color: white;
+}
