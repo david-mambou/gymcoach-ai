@@ -1,20 +1,15 @@
 <div class="container">
-  <div class="row justify-content-center">
-    <div class="col-6">
-      <h2> Show the chat window here! and the current workout </h2>
-      <% @workout.exercises.order(:id).uniq.each do |exercise| %>
-        <div class="row">
-          <p> <%= exercise.name.capitalize %> </p>
-          <%= link_to '', exercise_path(exercise), class: "fas fa-info-circle ml-3", style: "text-decoration: none;"%>
-        </div>
-        <% @workout.workout_sets.where(exercise: exercise.id).order(:id).each_with_index do |workout_set, index| %>
-          <%= render "workouts/workout_set", workout_set: workout_set, workout: @workout %>
-          <p> Set <%= index + 1 %> </p>
-        <% end %>
-      <% end %>
-      <%= link_to 'Finish Workout', workout_path(@workout), method: "patch", class: "btn btn-primary"  %>
-      <%# <%= link_to 'finish workout', dashboard_path(current_user), method: "get", class: "btn btn-primary" %>
-    </div>
+  <div class="col-12 mx-auto grid">
+    <h2> Show the chat window here! and the current workout </h2>
+    <% @workout.exercises.order(:id).uniq.each do |exercise| %>
+      <div class="row">
+        <p class="mt-3"> <%= exercise.name.capitalize %> </p>
+        <%= link_to '', exercise_path(exercise), class: "fas fa-info-circle ml-2 m-3", style: "text-decoration: none;"%>
+      </div>
+      <%= render "workouts/workout_set", workout: @workout, exercise: exercise %>
+    <% end %>
+    <%= link_to 'Finish Workout', workout_path(@workout), method: "patch", class: "btn btn-primary m-3"  %>
+    <%# <%= link_to 'finish workout', dashboard_path(current_user), method: "get", class: "btn btn-primary" %>
   </div>
 </div>
 <%# <div data-controller="search-exercises">
