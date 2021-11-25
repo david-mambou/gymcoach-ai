@@ -13,4 +13,7 @@ class User < ApplicationRecord
   def user_increment
     Station.pluck(:base_incremental_weight)
   end
+  
+  has_one_attached :profile_pic
+
 end

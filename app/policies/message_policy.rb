@@ -1,12 +1,15 @@
-class WorkoutSetPolicy < ApplicationPolicy
+class MessagePolicy < ApplicationPolicy
   class Scope < Scope
     def resolve
       record.user == user
     end
   end
 
-  def update?
-    true
+  def new?
+    true 
   end
 
+  def create?
+    true
+  end
 end
