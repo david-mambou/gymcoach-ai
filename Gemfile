@@ -38,6 +38,8 @@ gem 'acts-as-taggable-on', '~> 8.1.0'
 gem 'amoeba'
 gem 'ruby-openai'
 gem 'turbolinks_render'
+gem 'rails_admin', '~> 2.0'
+gem 'blazer'
 
 group :development, :test do  gem 'pry-byebug'
   gem 'pry-rails'
