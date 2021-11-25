@@ -44,8 +44,25 @@
     </div>
   </div>
 </div>
-see isntructions on how to perform exercise, how to prepare for exercise,<br>
-what weights to increment<br>
-best seat position<br>
-where to grip the barbell<br>
-etc.
+
+<div class="container">
+  see isntructions on how to perform exercise, how to prepare for exercise,
+  <br>
+  <br>
+  ________Done, This is the user's incremenented weight, not recommended__________
+  <br>
+  <%= "Current weight is #{current_user.weight_history.last}kg, Add #{current_user.user_increment.last}kg to your set"%>
+  <br>
+  <br>
+  ___________Done, needs path/form for user______________
+  <br>
+  <br>
+  best seat position
+  <br>
+  <br>
+  where to grip the barbell
+  <br>
+  <br>
+  <h3><%= "#{@exercise.user_notes}"%> - User notes goes here</h3>
+  etc.
+</div>
