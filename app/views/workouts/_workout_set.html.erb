@@ -1,28 +1,30 @@
 <%# placeholder for workout_set.photos.attached? %>
 <%#<li> <%= workout_set.order_index % </li> %>
-<div data-controller="edit-set">
-  <p> Set <%= index + 1 %> </p>
-  <%= simple_form_for [@workout, workout_set], namespace: "set-#{workout_set.id}", html: { class: 'form-inline' } do |f| %>
-    <table class="table table-bordered table-dark">
-      <thead>
-        <tr>
-          <th scope="col">#</th>
-          <th scope="col">Reps</th>
-          <th scope="col">Weight</th>
-          <th scope="col">Difficulty</th>
-          <th scope="col">Completed</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <th scope="row">1</th>
-          <td><%= f.input :nb_of_reps, placeholder: workout_set.nb_of_reps, label: "reps", input_html: { min:"0", max:"30"} %></td>
-          <td><%= f.input :weight, placeholder: workout_set.weight, label: "weight", input_html: { min:"0", max:"200", step: "#{workout_set.exercise.station.base_incremental_weight}" } %></td>
-          <td><%= f.input :difficulty, label: "difficulty", collection: WorkoutSet.difficulties %></td>
-          <td><%= f.input :completed, input_html: {onchange: 'this.form.submit()'} %></td>
-        </tr>
-      </tbody>
-    </table>
-  <% end %>
+<div class="container">
+  <div data-controller="edit-set">
+    <p> Set <%= index + 1 %> </p>
+    <%= simple_form_for [@workout, workout_set], namespace: "set-#{workout_set.id}", html: { class: 'form-inline' } do |f| %>
+      <table class="table table-bordered table-dark">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Reps</th>
+            <th scope="col">Weight</th>
+            <th scope="col">Difficulty</th>
+            <th scope="col">Completed</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">1</th>
+            <td><%= f.input :nb_of_reps, placeholder: workout_set.nb_of_reps, label: "reps", input_html: { min:"0", max:"30"} %></td>
+            <td><%= f.input :weight, placeholder: workout_set.weight, label: "weight", input_html: { min:"0", max:"200", step: "#{workout_set.exercise.station.base_incremental_weight}" } %></td>
+            <td><%= f.input :difficulty, label: "difficulty", collection: WorkoutSet.difficulties %></td>
+            <td><%= f.hidden_field :completed, input_html: {onchange: 'this.form.submit()'} %></td>
+          </tr>
+        </tbody>
+      </table>
+    <% end %>
+  </div>
 </div>
 <%#= link_to 'update set', workout_workout_set_path(@workout, workout_set), method: "patch", onclick: "$('#form_id_#{index+1})'.submit()" %>
