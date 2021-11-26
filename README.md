@@ -6,7 +6,7 @@ rails db:migrate
 create user account
 rails db:seed
 bundle install
-yarn
+yarn install
 
 in .env file, add your openai key.
 OPENAI_ACCESS_TOKEN=access_token_goes_here
