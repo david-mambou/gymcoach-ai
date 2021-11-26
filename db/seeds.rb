@@ -52,20 +52,19 @@ team = User.create!(name: "team", email: "test@email.com", password: "123456", a
 p "creating template workouts"
 template_1 = Workout.create!(name: "Hypertrophy Pyramid Routine", user: team, template: true, pros: "improves muscle size", cons: "intense", date: Day.now)
 CSV.foreach(workout_set_filepath, csv_options).each do |row|
-  # WorkoutSet.create!(name: row["Name"], workout: row["Workout"], exercise: row["Exercise"], nb_of_reps: row["Number of reps"], order_index: row["Order index"], weight: row["Weight"])
+  # WorkoutSet.create!(name: row["Name"], workout: row["Workout"], exercise: row["Exercise"], nb_of_reps: row["Number of reps"].to_i, order_index: row["Order index"].to_i, weight: row["Weight"].to_i)
 end
 
 template_2 = Workout.create!(name: "3/7 Routine", template: true, user: team, pros: "saves time", cons: "hard to change weights, intense", date: Day.now)
 CSV.foreach(workout_set_filepath, csv_options).each do |row|
-  # new_exercise = Exercise.create!(name: row["Name"], muscle_list: row["Muscle group"], station: Station.find_by(name: row["Station"]))
-  # file = URI.open("#{row["Photos"]}")
-  # new_exercise.photo.attach(io: file, filename: 'filler.png', content_type: 'image/png')
-  # p "finishing exercise seed no. #{n+1}"
+  # WorkoutSet.create!(name: row["Name"], workout: row["Workout"], exercise: row["Exercise"], nb_of_reps: row["Number of reps"].to_i, order_index: row["Order index"].to_i, weight: row["Weight"].to_i)
 end
 
 
 template_3 = Workout.create!(name: "Strength Training Routine", template: true, user: team, pros: "can increase weights faster", cons: "not focused on muscle size", date: Day.now)
-
+CSV.foreach(workout_set_filepath, csv_options).each do |row|
+# WorkoutSet.create!(name: row["Name"], workout: row["Workout"], exercise: row["Exercise"], nb_of_reps: row["Number of reps"].to_i, order_index: row["Order index"].to_i, weight: row["Weight"].to_i)
+end
 
 
 
