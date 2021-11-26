@@ -1,16 +1,4 @@
-<div class="card-footer chat-input">
-  <%= simple_form_for @message do |f| %>
-    <%= f.input :content, placeholder: "Type your message here...", as: :string %>
-    <%= f.submit 'Send', class: 'input-group-text send_btn' %>
+  <%= simple_form_for @message, html: { class: "no-bs-validation form-inline  d-flex justify-space-between mx-auto message-box" } do |f| %>
+    <%= f.input :content, placeholder: "Send Message..", as: :string, label: false, input_html: {class: "flex-grow-1"} %>
+    <%= f.submit 'Send', class: ' btn btn-primary' %>
   <% end %>
-  <div class="input-group">
-    <div class="input-group-append">
-    </div>
-    <textarea name="" class="form-control type_msg" placeholder="Message your coach..."></textarea>
-    <div class="input-group-append">
-      <span class="input-group-text send_btn"><i class="fas fa-location-arrow"></i></span>
-    </div>
-  </div>
-</div>
-<br>
-<br>

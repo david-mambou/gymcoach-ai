@@ -1,35 +1,30 @@
-<%# placeholder for workout_set.photos.attached? %>
-<%#<li> <%= workout_set.order_index % </li> %>
-<div data-controller="edit-set">
-  <div class="row">
-    <div>
-      <p class="p-custom" style="display: flex; position: relative; right: -11px;">Set</p>
-    </div>
-    <div>
-      <p class="p-custom" style="display: flex; position: relative; right: -37px;">Reps</p>
-    </div>
-    <div>
-      <p class="p-custom" style="display: flex; position: relative; right: -60px;">Weight</p>
-    </div>
-    <div>
-      <p class="p-custom" style="display: flex; position: relative; right: -81px;">Difficulty</p>
-    </div>
-    <% workout.workout_sets.where(exercise: exercise.id).order(:id).each_with_index do |workout_set, index| %>
+  <% workout.workout_sets.where(exercise: exercise.id).order(:id).each_with_index do |workout_set, index| %>
+  <div class="" data-controller="edit-set">
+
       <%= simple_form_for [workout, workout_set], remote: true, namespace: "set-#{workout_set.id}", html: { novalidate: true, class: "no-bs-validation form-inline", data: {edit_set_target: "form"} } do |f| %>
-        <p style="margin-right: 25px; margin-left: 20px">
-          <%= index + 1 %></p>
+        
         <div class="col">
-          <%= f.input :nb_of_reps, placeholder: workout_set.nb_of_reps, label: false, input_html: { min:"0", max:"30", data: {action: "change->edit-set#update"}} %>
+          <% if index == 0 %>Set<br><% end %>
+            <%= f.input :order_index, disabled: true,label: false, input_html: { value: index }  %>
         </div>
+
         <div class="col">
+          <% if index == 0 %>Reps<br><% end %>
+           <%= f.input :nb_of_reps, placeholder: workout_set.nb_of_reps, label: false, input_html: { min:"0", max:"30", data: {action: "change->edit-set#update"}} %>
+        </div>
+
+        <div class="col">
+          <% if index == 0 %>Kg<br><% end %>
           <%= f.input :weight, placeholder: workout_set.weight, label: false, input_html: { min:"0", max:"200", step: "#{workout_set.exercise.station.base_incremental_weight}", data: {action: "change->edit-set#update"} } %>
         </div>
+
         <div class="col">
-          <%= f.input :difficulty, label: false, collection: WorkoutSet.difficulties.keys, input_html: {class: "set-1_workout_set_difficulty", data: {action: "change->edit-set#update"}} %>
+          <% if index == 0 %>Difficulty<br><% end %>
+          <%= f.input :difficulty, label: false, collection: WorkoutSet.difficulties.keys, input_html: {class: "workout-select-input", data: {action: "change->edit-set#update"}} %>
         </div>
+
         <%= f.input :completed, label: false, input_html: {class: "transform: scale(2.0)",data: {action: "change->edit-set#update"}} %>
       <% end %>
-    <% end %>
-  </div>
-</div>
-<%#= link_to 'update set', workout_workout_set_path(@workout, workout_set), method: "patch", onclick: "$('#form_id_#{index+1})'.submit()" %>
+
+    </div>
+  <% end %>
