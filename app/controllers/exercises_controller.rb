@@ -47,4 +47,9 @@ class ExercisesController < ApplicationController
             }
           }
         end
+
+
+        def go_back
+          redirect_to workout_path
+        end
       end

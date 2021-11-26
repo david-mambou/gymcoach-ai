@@ -3,7 +3,7 @@ class WorkoutsController < ApplicationController
     # add real template from workouts
     @template_workout = Workout.find_by(status: 'template')
     authorize @template_workout
-    @messages = Message.all
+    @messages = Message.order(:created_at)
     @message = Message.new
 
     # AI Kick off user query with a generic message if start of chat

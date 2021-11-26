@@ -10,3 +10,10 @@
 .navbar-custom .navbar-brand img {
   width: 40px;
 }
+
+.fixed-bottom {
+  position: sticky !important;
+  background-color: black;
+  margin: 3px !important;
+  align-items: center;
+}
