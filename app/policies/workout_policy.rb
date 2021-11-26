@@ -24,4 +24,8 @@ class WorkoutPolicy < ApplicationPolicy
   def update?
     true
   end
+
+  def mark_finished?
+    true
+  end
 end

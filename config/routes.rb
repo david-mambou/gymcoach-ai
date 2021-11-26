@@ -13,6 +13,8 @@ Rails.application.routes.draw do
   get '/users/:id/goals', to: 'users#goals', as: :user_goals
   get '/dashboard', to: 'users#dashboard', as: :dashboard
 
+  patch 'workouts/:id/finish', to: 'workouts#mark_finished', as: :mark_workout_finished
+
   # patch 'workouts/:id', to: 'workouts#activate', as: :activate_workout
 
   authenticate :user, ->(user) { user.admin? } do

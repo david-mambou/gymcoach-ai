@@ -59,6 +59,15 @@ class WorkoutsController < ApplicationController
     end
   end
 
+  def mark_finished
+    @workout = Workout.find(params[:id])
+    authorize @workout
+    @workout.status = 'finished'
+    @workout.save
+    # alert
+    redirect_to dashboard_path
+  end
+
   private
 
   # def create_workout_groups
