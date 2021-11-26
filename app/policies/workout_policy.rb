@@ -9,6 +9,10 @@ class WorkoutPolicy < ApplicationPolicy
     true
   end
 
+  def activate?
+    true
+  end
+
   def new?
     create?
   end

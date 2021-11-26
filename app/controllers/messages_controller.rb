@@ -18,14 +18,14 @@ class MessagesController < ApplicationController
         helpers.ai_general_answer(user_submission.content)
       end
     end
-    
-    redirect_to new_workout_path()
+
+    redirect_to new_workout_path
 
 
     # 1) get users intent
     # ai_direct_queryparams[:message][:content]
-    
-    
+
+
     # todo: change this to ajax call to make responses immediate
 
 
