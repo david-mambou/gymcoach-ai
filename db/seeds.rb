@@ -66,7 +66,7 @@ p "created #{Exercise.count} exercises"
 # create workout templates
 p "creating workout templates.."
 5.times.with_index do |i|
-  specific_workout = Workout.new(name: "workout template #{i}", template: true, pros_and_con_list: "good for gaining strength")
+  specific_workout = Workout.new(name: "workout template #{i}", status: 'template', pros_and_con_list: "good for gaining strength")
   specific_workout.user = User.first
   specific_workout.save!
   p "creating workout called: #{specific_workout.name} "
@@ -109,7 +109,6 @@ end
 #     # create past workout
 #     workout = Workout.first.clone
 #     workout.user = user
-#     workout.template = false
 #     workout.day = Date.now
 #     workout.mental_state = %w[motivated tired hungry heartbroken pumped].sample
 #   end

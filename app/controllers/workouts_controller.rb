@@ -1,13 +1,13 @@
 class WorkoutsController < ApplicationController
   def new
     # add real template from workouts
-    @template_workout = Workout.find_by(template: true)
+    @template_workout = Workout.find_by(status: 'template')
     authorize @template_workout
     @messages = Message.all
     @message = Message.new
 
     # AI Kick off user query with a generic message if start of chat
-    if Message.count == 0 
+    if Message.count == 0
       Message.create!({
         category: "receive",
         content: "Hi, I will be your personal coach today. What would you like to do today?"
@@ -21,7 +21,7 @@ class WorkoutsController < ApplicationController
       # new_workout = @workout.amoeba_dup
       # new_workout.pros_and_con_list.add(@workout.pros_and_con_list)
     # for amoeba, which duplicates children, tags are not duplicated, so do manually
-    # new_workout.template = false
+    # new_workout.status = 'template'
     authorize @workout
     redirect_to workout_path(@workout)
     # if new_workout.save!
@@ -38,7 +38,7 @@ class WorkoutsController < ApplicationController
 
   def update
     @workout = Workout.find(params[:id])
-    @workout.status = 2
+    # @workout.status = 2
     authorize @workout
     if @workout.save
       redirect_to dashboard_path
