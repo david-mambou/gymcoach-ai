@@ -83,7 +83,7 @@ end
 ###############################################################################################
 
 p 'creating push workout'
-40.times.with_index do |i|
+40.times do
   specific_workout = Workout.new(name: "Push Day", pros_and_con_list: "Focuses on chest, triceps, and shoulders", mental_state: MENTAL_STATE.sample, day: Date.today + rand(-150..15))
   status = specific_workout.day <= Date.today ? 'finished' : 'active'
   specific_workout.status = status

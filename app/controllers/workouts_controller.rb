@@ -22,7 +22,7 @@ class WorkoutsController < ApplicationController
     # new_workout.pros_and_con_list.add(@workout.pros_and_con_list)
     # for amoeba, which duplicates children, tags are not duplicated, so do manually
     # new_workout.status = 'template'
-    @workout.status = 2
+    @workout.status = 'active'
     @workout.name = "Your Workout ##{@workout.id}"
     @workout.save
     authorize @workout
