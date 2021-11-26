@@ -15,7 +15,9 @@
             </div>
           <% end %>
           <div class="navbar fixed-bottom navbar-expand" style="justify-content: center;">
-            <%= button_to 'Finish Workout', workout_path(@workout), method: "patch", class: "btn btn-primary m-3"%>
+            <%= simple_form_for @workout, method: :patch, url: mark_workout_finished_path(@workout) do |f| %>
+              <%= f.submit 'Finish Workout', class: "btn btn-primary m-3" %>
+            <% end %>
           </div>
         </div>
       </div>

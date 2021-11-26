@@ -9,6 +9,10 @@ class WorkoutPolicy < ApplicationPolicy
     true
   end
 
+  def activate?
+    true
+  end
+
   def new?
     create?
   end
@@ -18,6 +22,10 @@ class WorkoutPolicy < ApplicationPolicy
   end
 
   def update?
+    true
+  end
+
+  def mark_finished?
     true
   end
 end

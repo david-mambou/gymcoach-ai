@@ -66,7 +66,7 @@ p "created #{Exercise.count} exercises"
 # create workout templates
 p "creating workout templates.."
 5.times.with_index do |i|
-  specific_workout = Workout.new(name: "workout template #{i}", template: true, pros_and_con_list: "good for gaining strength")
+  specific_workout = Workout.new(name: "workout template #{i}", status: 'template', pros_and_con_list: "good for gaining strength")
   specific_workout.user = User.first
   specific_workout.save!
   p "creating workout called: #{specific_workout.name} "
@@ -83,8 +83,10 @@ end
 ###############################################################################################
 
 p 'creating push workout'
-40.times.with_index do |i|
+40.times do
   specific_workout = Workout.new(name: "Push Day", pros_and_con_list: "Focuses on chest, triceps, and shoulders", mental_state: MENTAL_STATE.sample, day: Date.today + rand(-150..15))
+  status = specific_workout.day <= Date.today ? 'finished' : 'active'
+  specific_workout.status = status
   specific_workout.user = User.first
   specific_workout.save!
   p "creating workout: #{specific_workout.name}"
@@ -101,15 +103,12 @@ end
 
 ###############################################################################################
 
-
-
 # create users
 # User.all.each do |user|
 #   rand(2..10).times do
 #     # create past workout
 #     workout = Workout.first.clone
 #     workout.user = user
-#     workout.template = false
 #     workout.day = Date.now
 #     workout.mental_state = %w[motivated tired hungry heartbroken pumped].sample
 #   end

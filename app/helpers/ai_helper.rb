@@ -16,13 +16,13 @@ module AiHelper
 
         # silly
         ["lol", "Whats so funny?"],
-        
+
         # opinions
         ["just think this is cool", "Thanks. How about we workout?"],
-        
+
         # short
         ["yes", "awesome."],
-        
+
          # distractions
          ["Can we eat soon?", "Let's finish a workout first. "],
 
@@ -35,10 +35,10 @@ module AiHelper
 
          # exhaustion
          ["im tired", "You can rest for a bit longer, would you like to continue the workout today?"],
-         
+
          # workout related
          ["lets not do body weight exercises", "No problem. Let's try something else then."],
-         
+
         ],
        max_tokens: 20,
        stop: ['\n', '===', '---']
@@ -67,7 +67,7 @@ module AiHelper
     response = client.answers(parameters: {
       documents: exercises,
       question: user_query,
-      model: "davinci", 
+      model: "davinci",
       examples_context: "find the 3 best exercises for the user to perform for their workout",
       examples: [
         ["I want to work my abs", "ab roller, rope crunches, leg lifts"],
@@ -98,7 +98,7 @@ module AiHelper
         exercise.station = Station.all.sample
       end
       exercise.save!
-      
+
       3.times do
         WorkoutSet.create!(nb_of_reps: rand(5..12),
                             order_index: index,
@@ -170,8 +170,9 @@ module AiHelper
     reply = JSON.parse response.to_s
     reply = reply["answers"].first
     workout = Workout.new(name: 'Workout 1',
-      day: Date.today,
-      user: current_user)
+                          day: Date.today,
+                          user: current_user,
+                          status: 'active')
     # each answer is an exercise name
     reply.split(', ').each_with_index do |exercise_name, index|
       exercise = Exercise.where(name: exercise_name).first # to improve
@@ -209,7 +210,7 @@ module AiHelper
         ["I want to work my abs", "create_workout"],
         ["lets get this party started", "create_workout"],
         ["looking to workout my traps, any recommendations?", "create_workout"],
-        
+
         # todo: Patterns to update workout sets
         # ["Someone is using the bench, can you find an alternative to benchpress?", "update_workout_set"],
         # ["Can you change benchpress to another exercise?", "update_workout_set"],
@@ -218,11 +219,11 @@ module AiHelper
         # Patterns to create a new station
         ["I want to try this new machine", "create_station"],
         ["There is a new machine here that I want to use", "create_station"],
-        
+
         # Patterns to find a specific exercise or create it
         ["How can I do the benchpress", "find_exercise"],
         ["what seat level should i do for this exercise?", "find_exercise"],
-        
+
         # Patterns to find a specific exercise or create it
         ["Tell me how to do squats", "find_exercise_for_muscle"],
         ["I want to work my abs, what muscles?", "find_exercise_for_muscle"],

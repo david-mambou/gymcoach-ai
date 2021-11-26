@@ -1,7 +1,7 @@
 class WorkoutsController < ApplicationController
   def new
     # add real template from workouts
-    @template_workout = Workout.find_by(template: true)
+    @template_workout = Workout.find_by(status: 'template')
     authorize @template_workout
     @messages = Message.order(:created_at)
     @message = Message.new
@@ -18,10 +18,13 @@ class WorkoutsController < ApplicationController
   def create
     @workout = Workout.find(params[:template_workout])
     # assign a new variable with the instance (makes a copy)
-      # new_workout = @workout.amoeba_dup
-      # new_workout.pros_and_con_list.add(@workout.pros_and_con_list)
+    # new_workout = @workout.amoeba_dup
+    # new_workout.pros_and_con_list.add(@workout.pros_and_con_list)
     # for amoeba, which duplicates children, tags are not duplicated, so do manually
-    # new_workout.template = false
+    # new_workout.status = 'template'
+    @workout.status = 'active'
+    @workout.name = "Your Workout ##{@workout.id}"
+    @workout.save
     authorize @workout
     redirect_to workout_path(@workout)
     # if new_workout.save!
@@ -36,15 +39,33 @@ class WorkoutsController < ApplicationController
     #todo
   end
 
+  # def activate
+  #   raise
+  #   @workout = Workout.find(params[:workout])
+  #   authorize @workout
+  #   @workout.status = 'active'
+  #   @workout.save
+  #   redirect_to workout_path(@workout)
+  # end
+
   def update
     @workout = Workout.find(params[:id])
-    @workout.status = 2
+    # @workout.status = 2
     authorize @workout
     if @workout.save
       redirect_to dashboard_path
     else
       render :show
     end
+  end
+
+  def mark_finished
+    @workout = Workout.find(params[:id])
+    authorize @workout
+    @workout.status = 'finished'
+    @workout.save
+    # alert
+    redirect_to dashboard_path
   end
 
   private

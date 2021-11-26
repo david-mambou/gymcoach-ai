@@ -19,14 +19,15 @@
         </li>
       <% end %>
     </ol>
+
     Why AI Recommended:<br>
     <span class="badge badge-pill badge-primary">Focus Muscle Size Increase</span>
     <span class="badge badge-pill badge-primary">Safe on elbows</span>
     <span class="badge badge-pill badge-primary">Avoids barbell rack</span>
     <br>
-    Est. Duration: 45min
+    Est. Duration: 45 min
     <hr>
-    <%= button_to "Create workout", workouts_path(template_workout: workout) , method: :post, class: 'btn btn-primary' %>
+    <%= button_to "Accept this workout", workouts_path(template_workout: workout), method: :post, class: 'btn btn-primary' %>
     <span class="msg_time"><%= time_ago_in_words(locals[:created_at]) %> ago</span>
   </div>
 </div>
