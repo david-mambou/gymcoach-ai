@@ -2,12 +2,14 @@
 <div class = "border border-dark my-3 p-3 rounded-lg">
   <%= workout.day %>
   <br>
-  
+
   <% workout.workout_sets.each do |workout_set| %>
-    
+
   <% end %>
-  
+
   Notes: <%= locals[:workout].mental_state %><br>
+  <%# For viewing purposes %>
+  Status: <%= locals[:workout].status %><br>
 
 
   <% unique_exercises = retrieve_unique_exercises(workout) %>
@@ -18,13 +20,13 @@
         <% workout.workout_sets.each do |workout_set| %>
           <% if exercise.id == workout_set.exercise_id  %>
             <span class="badge badge-pill badge-secondary">
-              <%= "#{workout_set.weight}kg x #{workout_set.nb_of_reps}" %>   
+              <%= "#{workout_set.weight}kg x #{workout_set.nb_of_reps}" %>
             </span>
           <% end %>
         <% end %>
         <br>
   <% end %>
-  
+
 
 
 </div>
