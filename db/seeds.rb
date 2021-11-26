@@ -34,11 +34,8 @@ exercise_filepath = "lib/csv_folder_for_presentation_seeds/simplified_exercise.c
 
 p "making station seeds"
 CSV.foreach(station_filepath, csv_options).each do |row|
-  Station.create!(name: row["Name"], base_incremental_weight: row["Base incremental weight"])
+  Station.create!(name: row["Name"], base_incremental_weight: row["Base incremental weight"].to_i)
 end
-
-Station.find_by(name: "assisted rack")
-
 
 p "making exercise seeds"
 n = 0
@@ -54,42 +51,20 @@ team = User.create!(name: "team", email: "test@email.com", password: "123456", a
 
 p "creating template workouts"
 template_1 = Workout.create!(name: "Hypertrophy Pyramid Routine", user: team, template: true, pros: "improves muscle size", cons: "intense", date: Day.now)
-WorkoutSet.create!(name: "warmup", exercise: Exercise.find_or_create_by(name: "Bench Press"), workout: template_1, nb_of_reps: 30, order_index: 1, weight: )
-WorkoutSet.create!(name: "feeder", exercise: Exercise.find_or_create_by(name: "Bench Press"), workout: template_1, nb_of_reps: 12, order_index: 2, weight: )
-WorkoutSet.create!(name: "feeder", exercise: , workout: template_1, nb_of_reps: 10, order_index: 3, weight: )
-WorkoutSet.create!(name: "working", exercise: , workout: template_1, nb_of_reps: 8, order_index: 4, weight: )
-WorkoutSet.create!(name: "cooldown", exercise: , workout: template_1, nb_of_reps: 15, order_index: 5, weight: )
-
-
-
+CSV.foreach(workout_set_filepath, csv_options).each do |row|
+  # WorkoutSet.create!(name: row["Name"], workout: row["Workout"], exercise: row["Exercise"], nb_of_reps: row["Number of reps"], order_index: row["Order index"], weight: row["Weight"])
+end
 
 template_2 = Workout.create!(name: "3/7 Routine", template: true, user: team, pros: "saves time", cons: "hard to change weights, intense", date: Day.now)
-WorkoutSet.create!(name: "3 reps", exercise: , workout: template_2, nb_of_reps: 3, order_index: 1, weight: )
-WorkoutSet.create!(name: "4 reps", exercise: , workout: template_12 nb_of_reps: 4, order_index: 2, weight: )
-WorkoutSet.create!(name: "5 reps", exercise: , workout: template_2, nb_of_reps: 5, order_index: 3, weight: )
-WorkoutSet.create!(name: "6 reps", exercise: , workout: template_2, nb_of_reps: 6, order_index: 4, weight: )
-WorkoutSet.create!(name: "7 reps", exercise: , workout: template_2, nb_of_reps: 7, order_index: 5, weight: )
-
-template_3 = Workout.create!(name: "German Volume training", template: true, user: team, pros: "increase endurance, burn alot of calories", cons: "cannot lift too heavy, cannot use type 1 muscle fibers, takes long time in gym", date: Day.now)
-WorkoutSet.create!(exercise: , workout: template_3, nb_of_reps: 10, order_index: 1, weight: )
-WorkoutSet.create!(exercise: , workout: template_3, nb_of_reps: 10, order_index: 2, weight: )
-WorkoutSet.create!(exercise: , workout: template_3, nb_of_reps: 10, order_index: 3, weight: )
-WorkoutSet.create!(exercise: , workout: template_3, nb_of_reps: 10, order_index: 4, weight: )
-WorkoutSet.create!(exercise: , workout: template_3, nb_of_reps: 10, order_index: 5, weight: )
-WorkoutSet.create!(exercise: , workout: template_3, nb_of_reps: 10, order_index: 6, weight: )
-WorkoutSet.create!(exercise: , workout: template_3, nb_of_reps: 10, order_index: 7, weight: )
-WorkoutSet.create!(exercise: , workout: template_3, nb_of_reps: 10, order_index: 8, weight: )
-WorkoutSet.create!(exercise: , workout: template_3, nb_of_reps: 10, order_index: 9, weight: )
-WorkoutSet.create!(exercise: , workout: template_3, nb_of_reps: 10, order_index: 10, weight: )
+CSV.foreach(workout_set_filepath, csv_options).each do |row|
+  # new_exercise = Exercise.create!(name: row["Name"], muscle_list: row["Muscle group"], station: Station.find_by(name: row["Station"]))
+  # file = URI.open("#{row["Photos"]}")
+  # new_exercise.photo.attach(io: file, filename: 'filler.png', content_type: 'image/png')
+  # p "finishing exercise seed no. #{n+1}"
+end
 
 
-
-template_4 = Workout.create!(name: "Strength Training Routine", template: true, user: team, pros: "can increase weights faster", cons: "not focused on muscle size", date: Day.now)
-WorkoutSet.create!(exercise: , workout: template_3, nb_of_reps: 5, order_index: 1, weight: )
-WorkoutSet.create!(exercise: , workout: template_3, nb_of_reps: 5, order_index: 2, weight: )
-WorkoutSet.create!(exercise: , workout: template_3, nb_of_reps: 5, order_index: 3, weight: )
-WorkoutSet.create!(exercise: , workout: template_3, nb_of_reps: 5, order_index: 4, weight: )
-WorkoutSet.create!(exercise: , workout: template_3, nb_of_reps: 5, order_index: 5, weight: )
+template_3 = Workout.create!(name: "Strength Training Routine", template: true, user: team, pros: "can increase weights faster", cons: "not focused on muscle size", date: Day.now)
 
 
 
