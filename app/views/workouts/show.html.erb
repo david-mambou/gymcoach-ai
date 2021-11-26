@@ -3,51 +3,39 @@
     <div class="col-md-8 col-xl-6 chat">
       <div class="card">
         <div class=" msg_card_body">
-          
-
           <h1><%= @workout.name %></h1>
           <% @workout.exercises.order(:id).uniq.each do |exercise| %>
             <div class="border border-dark rounded-lg mb-3 p-2">
-            <%# set header %>
+              <%# set header %>
               <div class="d-flex justify-content-between align-items-center">
-              <h5> <%= exercise.name.capitalize %> </h5>
-              <%= link_to '', exercise_path(exercise), class: "fas fa-info-circle ml-2 m-3", style: "text-decoration: none;"%>
+                <h5> <%= exercise.name.capitalize %> </h5>
+                <%= link_to '', exercise_path(exercise), class: "fas fa-info-circle ml-2 m-3", style: "text-decoration: none;"%>
               </div>
-              <% @workout.workout_sets.where(exercise: exercise.id).order(:id).each_with_index do |workout_set, index| %>
-                <%= render "workouts/workout_set", workout: @workout, workout_set: workout_set, index: index %>
-              <% end %>
+              <%= render "workouts/workout_set", workout: @workout, exercise: exercise %>
             </div>
           <% end %>
-
-
-          <%= button_to 'Finish Workout', workout_path(@workout), method: "patch", class: "btn btn-primary m-3"  %>
-
-
-
-
-
+          <div class="navbar fixed-bottom navbar-expand" style="justify-content: center;">
+            <%= button_to 'Finish Workout', workout_path(@workout), method: "patch", class: "btn btn-primary m-3"%>
+          </div>
+        </div>
       </div>
     </div>
   </div>
-</div>
-
-
-<div class="container">
-  <div class="col-12">
-    <%# <h2> <%= exercise.name.capitalize %>
-
-  <%# <%= link_to 'finish workout', dashboard_path(current_user), method: "get", class: "btn btn-primary" %>
-</div>
-</div>
-<%# <div data-controller="search-exercises">
+  <div class="container">
+    <div class="col-12">
+      <%# <h2> <%= exercise.name.capitalize %>
+      <%# <%= link_to 'finish workout', dashboard_path(current_user), method: "get", class: "btn btn-primary" %>
+    </div>
+  </div>
+  <%# <div data-controller="search-exercises">
     <#%= form_with url: exercises_path, method: :get, html: { class:
       'mb-4', data: { search_exercises_target: 'form' } } do |f| %>
-  <%# f.text_field :query,
+    <%# f.text_field :query,
                       class: "form-control",
                       placeholder: 'Search Exercise',
                       value: params[:query],
                       data: { search_exercises_target: 'input',
                               action: 'keyup->search-exercises#update'} %>
-  <%# TODO, create a list.html.erb to store exercises# %>
-  <%# add this code to the list file \/ # %>
-  <%# <div data-search-exercises-target="list"> # %>
+    <%# TODO, create a list.html.erb to store exercises# %>
+    <%# add this code to the list file \/ # %>
+    <%# <div data-search-exercises-target="list"> # %>
