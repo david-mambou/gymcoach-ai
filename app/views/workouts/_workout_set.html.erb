@@ -1,30 +1,27 @@
+<div class="", data-controller="edit-set">
   <% workout.workout_sets.where(exercise: exercise.id).order(:id).each_with_index do |workout_set, index| %>
-  <div class="" data-controller="edit-set">
-
-      <%= simple_form_for [workout, workout_set], remote: true, namespace: "set-#{workout_set.id}", html: { novalidate: true, class: "no-bs-validation form-inline", data: {edit_set_target: "form"} } do |f| %>
-        
-        <div class="col">
-          <% if index == 0 %>Set<br><% end %>
-            <%= f.input :order_index, disabled: true,label: false, input_html: { value: index }  %>
-        </div>
-
-        <div class="col">
-          <% if index == 0 %>Reps<br><% end %>
-           <%= f.input :nb_of_reps, placeholder: workout_set.nb_of_reps, label: false, input_html: { min:"0", max:"30", data: {action: "change->edit-set#update"}} %>
-        </div>
-
-        <div class="col">
-          <% if index == 0 %>Kg<br><% end %>
-          <%= f.input :weight, placeholder: workout_set.weight, label: false, input_html: { min:"0", max:"200", step: "#{workout_set.exercise.station.base_incremental_weight}", data: {action: "change->edit-set#update"} } %>
-        </div>
-
-        <div class="col">
-          <% if index == 0 %>Difficulty<br><% end %>
-          <%= f.input :difficulty, label: false, collection: WorkoutSet.difficulties.keys, input_html: {class: "workout-select-input", data: {action: "change->edit-set#update"}} %>
-        </div>
-
-        <%= f.input :completed, label: false, input_html: {class: "transform: scale(2.0)",data: {action: "change->edit-set#update"}} %>
-      <% end %>
-
-    </div>
-  <% end %>
+    <%= simple_form_for [workout, workout_set], remote: true, namespace: "set-#{workout_set.id}", html: { novalidate: true, class: "no-bs-validation form-inline", data: {edit_set_target: "form"} } do |f| %>
+      <div class="col">
+        <% if index == 0 %>Set<br>
+        <% end %>
+        <%= f.input :order_index, disabled: true,label: false, input_html: { value: index }  %>
+      </div>
+      <div class="col">
+        <% if index == 0 %>Reps<br>
+        <% end %>
+        <%= f.input :nb_of_reps, placeholder: workout_set.nb_of_reps, label: false, input_html: { min:"0", max:"30", data: {action: "change->edit-set#update"}} %>
+      </div>
+      <div class="col">
+        <% if index == 0 %>Kg<br>
+        <% end %>
+        <%= f.input :weight, placeholder: workout_set.weight, label: false, input_html: { min:"0", max:"200", step: "#{workout_set.exercise.station.base_incremental_weight}", data: {action: "change->edit-set#update"} } %>
+      </div>
+      <div class="col">
+        <% if index == 0 %>Difficulty<br>
+        <% end %>
+        <%= f.input :difficulty, label: false, collection: WorkoutSet.difficulties.keys, input_html: {class: "workout-select-input", data: {action: "change->edit-set#update"}} %>
+      </div>
+      <%= f.input :completed, label: false, input_html: {class: "transform: scale(2.0)",data: {action: "change->edit-set#update"}} %>
+    <% end %>
+  </div>
+<% end %>
