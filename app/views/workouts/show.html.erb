@@ -13,8 +13,9 @@
               <h5> <%= exercise.name.capitalize %> </h5>
               <%= link_to '', exercise_path(exercise), class: "fas fa-info-circle ml-2 m-3", style: "text-decoration: none;"%>
               </div>
-          
-              <%= render "workouts/workout_set", workout: @workout, exercise: exercise %>
+              <% @workout.workout_sets.where(exercise: exercise.id).order(:id).each_with_index do |workout_set, index| %>
+                <%= render "workouts/workout_set", workout: @workout, workout_set: workout_set, index: index %>
+              <% end %>
             </div>
           <% end %>
 
