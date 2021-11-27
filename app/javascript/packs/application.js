@@ -37,7 +37,7 @@ document.addEventListener('turbolinks:load', () => {
 
   // $(document).on("click", function() {
   //   $("#shoryu").show();
-  });
+  // });
   // slideCard();
 });
 
