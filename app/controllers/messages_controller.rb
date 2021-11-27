@@ -2,8 +2,6 @@ class MessagesController < ApplicationController
 
   def index
     @messages = policy_scope(Message)
-    
-
     @message = Message.new
 
     # AI Kick off user query with a generic message if start of chat
@@ -16,9 +14,8 @@ class MessagesController < ApplicationController
     end
   end
 
-
+  # send user message to AI
   def create
-    # send user message to AI
     @user = current_user
     user_submission = Message.new(message_params)
     user_submission.user = @user
@@ -39,12 +36,12 @@ class MessagesController < ApplicationController
       end
     end
 
-    redirect_to new_workout_path
+    redirect_to messages_path
 
   end
 
   private
-
+  
   def message_params
     params.require(:message).permit(:category, :content, :workout_id, :workout_set_id, :message, :user_id)
   end
