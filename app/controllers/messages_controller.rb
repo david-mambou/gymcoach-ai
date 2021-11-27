@@ -13,6 +13,10 @@ class MessagesController < ApplicationController
       })
    
     end
+
+    test = Exercise.first
+    rm = test.calc_single_rep_max
+    raise
   end
 
 
