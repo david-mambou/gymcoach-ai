@@ -14,7 +14,8 @@ jesse = User.new(
   admin: true,
   goal: 'increase size in my chest, shoulders, and biceps',
   age: 30,
-  name: 'Jesse'
+  name: 'Jesse',
+  routine: 'legs,chest,push'
 )
 jesse.save!
 
