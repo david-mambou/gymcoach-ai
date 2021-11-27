@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_27_115314) do
+ActiveRecord::Schema.define(version: 2021_11_27_125355) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -197,6 +197,15 @@ ActiveRecord::Schema.define(version: 2021_11_27_115314) do
     t.boolean "completed"
     t.index ["exercise_id"], name: "index_workout_sets_on_exercise_id"
     t.index ["workout_id"], name: "index_workout_sets_on_workout_id"
+  end
+
+  create_table "workout_templates", force: :cascade do |t|
+    t.string "name"
+    t.string "progression_curve"
+    t.string "good_for"
+    t.string "bad_for"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "workouts", force: :cascade do |t|
