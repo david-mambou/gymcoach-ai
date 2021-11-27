@@ -6,9 +6,16 @@
     </div>
   </div>
 </div>
-<div class="row justify-content-center mt-5">
-  <button class="btn btn-success w-50">Current Goal</button>
 </div>
-<div class="row justify-content-center" style="position: relative; top: 460px;">
+<div class="row justify-content-center" style="position: relative; top: 500px;">
   <%= link_to 'Start Session', new_workout_path, class: "btn btn-primary", style: "padding: 14px; font-size: 25px" %>
 </div>
+<div class="row justify-content-center mt-5">
+  <button class="btn btn-success w-50">Current Goal</button>
+  <div class="hidden mt-2" id="progress">
+    <h4> Weight progress bar here</h4>
+     <br>
+    <h4> Strength progress bar here</h4>
+     <br>
+    <h4> Current goal progress bar here</h4>
+  </div>
