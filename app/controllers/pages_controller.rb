@@ -3,6 +3,7 @@ class PagesController < ApplicationController
 
   def home
     # clear messages before starting new session
-    Message.destroy_all
+    @current_user = current_user
+    # current_user.messages.destroy_all if @current_user
   end
 end

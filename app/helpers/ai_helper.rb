@@ -49,6 +49,7 @@ module AiHelper
         # receive just a basic answer
         Message.create!({
           category: "receive",
+          user: current_user,
           content: answer
           })
         end
@@ -111,6 +112,7 @@ module AiHelper
     workout.save
     Message.create!({
       category: "card_workout",
+      user: current_user,
       workout: workout
                     })
   end

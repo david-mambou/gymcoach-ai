@@ -5,6 +5,7 @@ class User < ApplicationRecord
   :recoverable, :rememberable, :validatable
   has_many :workouts
   has_many :workout_sets, through: :workouts
+  has_many :messages, through: :workouts
   
   has_one_attached :profile_pic
 

@@ -1,7 +1,27 @@
 class MessagesController < ApplicationController
+
+  def index
+    @messages = policy_scope(Message)
+    
+
+    @message = Message.new
+
+    # AI Kick off user query with a generic message if start of chat
+    if Message.count == 0 
+      Message.create!({
+        user: current_user,
+        category: "receive",
+        content: "Hi, I will be your personal coach today. What would you like to do today?"
+      })
+    end
+  end
+
+
   def create
     # send user message to AI
+    @user = current_user
     user_submission = Message.new(message_params)
+    user_submission.user = @user
     authorize user_submission
 
     # check if user message is valid
@@ -21,44 +41,11 @@ class MessagesController < ApplicationController
 
     redirect_to new_workout_path
 
-
-    # 1) get users intent
-    # ai_direct_queryparams[:message][:content]
-
-
-    # todo: change this to ajax call to make responses immediate
-
-
-        # exercise_recommendation = helpers.ai_find_exercise_for_muscle("lets workout my back")
-    # muscles_used = helpers.ai_find_muscles_for_exercise("what does benchpress work on?")
-    # exercise_recommendation = helpers.ai_find_exercise_for_muscle("I want to work on chest")
-    # exercise_recommendation = helpers.ai_find_exercise_for_muscle("I want to work on my front delts")
-    # exercise_recommendation = helpers.ai_find_exercise_for_muscle(" I want to work back today")
-    # exercise_recommendation = helpers.ai_find_exercise_for_muscle("I want to work on chest. Can you suggest something that only uses dumbbells for today? I dont want to do dumbbell bench press")
-    # exercise_recommendation = helpers.ai_find_exercise_for_muscle("I am thinking to use only dumbbells today for chest")
-    # direct_user_query = helpers.ai_direct_query("this workout looks too easy")
-
-
-
-
-
-    # message = Message.new(message_params)
-    # authorize message
-    # if message.save! && message.content != ""
-
-                                      # todo: change this to a chat view.rb?
-
-                                      # elect the AI method here: if it's not a workout creation, the chat should another AI method
-                                      # helpers.ai_generic_reply(message.content)
-
-      # helpers.ai_find_exercise_for_muscle(message.content)
-      # redirect_to new_workout_path
-    # end
   end
 
   private
 
   def message_params
-    params.require(:message).permit(:category, :content, :workout_id, :workout_set_id, :message)
+    params.require(:message).permit(:category, :content, :workout_id, :workout_set_id, :message, :user_id)
   end
 end

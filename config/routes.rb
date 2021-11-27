@@ -21,5 +21,5 @@ Rails.application.routes.draw do
     mount Blazer::Engine, at: "blazer"
   end
 
-  resources :messages, only: [:create]
+  resources :messages, only: [:index, :create]
 end
