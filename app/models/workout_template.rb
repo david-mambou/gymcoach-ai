@@ -1,3 +1,3 @@
 class WorkoutTemplate < ApplicationRecord
-  
+
 end
