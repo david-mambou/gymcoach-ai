@@ -2,7 +2,7 @@ module AiHelper
   # determine the users intention based on their message
   # ai will direct user query to appropriate method for intended processing
   def ai_direct_query(user_query)
-    possible_queries = ['find_exercise', 'create_workout', 'create_exercise', 'update_set', 'general_answer']
+    possible_queries = ['find_exercise', 'recommend_workout', 'create_exercise', 'update_set', 'general_answer']
 
     client = OpenAI::Client.new
     response = client.answers(parameters: {
@@ -12,13 +12,13 @@ module AiHelper
       examples_context: "determine the best action based on user query",
       examples: [
         # Patterns to create workouts
-        ["I am tired today, can you make this workout easier?", "create_workout"],
-        ["Can you remove benchpress from this workout?", "create_workout"],
-        ["Can you make my workout shorter today?", "create_workout"],
-        ["Give me a good chest exercise", "create_workout"],
-        ["I want to work my abs", "create_workout"],
-        ["lets get this party started", "create_workout"],
-        ["looking to workout my traps, any recommendations?", "create_workout"],
+        ["I am tired today, can you make this workout easier?", "recommend_workout"],
+        ["Can you remove benchpress from this workout?", "recommend_workout"],
+        ["Can you make my workout shorter today?", "recommend_workout"],
+        ["Give me a good chest exercise", "recommend_workout"],
+        ["I want to work my abs", "recommend_workout"],
+        ["lets get this party started", "recommend_workout"],
+        ["looking to workout my traps, any recommendations?", "recommend_workout"],
 
         # todo: Patterns to update workout sets
         # ["Someone is using the bench, can you find an alternative to benchpress?", "update_workout_set"],
@@ -48,10 +48,11 @@ module AiHelper
       stop: ['\n', '===', '---']
     })
 
-    intent = JSON.parse response.to_s
+    intent = JSON.parse(response.to_s)['answers'].first
+
     case intent
-    when 'create_workout'
-      ai_create_workout(user_query)
+    when 'recommend_workout'
+      ai_recommend_workout(user_query)
     when 'general_answer'
       ai_general_answer(user_query)
     else
@@ -114,16 +115,15 @@ module AiHelper
     end
 
   # request AI to generate a new workout card based on user requests
-  def ai_create_workout(user_query)
+  def ai_recommend_workout(user_query)
 
     ai_general_answer(user_query)
 
-    arr = []
-    exercises = ['glute bridge','lying hip abduction','barbell hip thrust','rope cable crunch','wood chops','planks','lying leg curl','sumo deadlift','standard deadlift','romanian deadlift','sumo squat','deadlift rack pull','dumbbell lunges','leg extensions (single leg)','leg extensions (both legs)','standard barbell squat','ass to grass squats','front squat','bulgarian barbell squat','sumo squat','goblin squats','lateral side step squats','jump squats','sitting calf raise','standing calf raise','smith machine barbell row','weighted pullups','standard pullups','hammergrip pullups','chinups','wide grip pullups','pulldown machine - narrow grip attachment','pulldown machine - single bar','pulldown machine - dual static position','row machine- underhand grip','row machine - overhand grip','row machine - hammer grip','Rope machine lat pullover','dumbbell single arm row','dumbbell supinated bicep curls','alternating dumbbell hammerhead curls','incline bench dumbbell curls','EZ bar standing bicep curl','preacher curl machine','spider curl','barbell bentover curl','dumbbell wrist curls','chest fly machine','chest press machine','smith machine bench press','weighted dips','chest fly machine straight arm','standard rope chest flies','Rope machine kneeling chest abductions','rope bench press (long handles)','barbell bench press','barbell incline bench','incline dumbbell bench press','standard pushups','archer pushups','diamond pushups','dumbbell lateral raises','hanging dumbbell lateral raises','side-lying bench lateral raise','single arm dumbbell lateral raise','shoulder shrugs','dumbbell reverse fly','dumbbell front raises','dumbbell shoulder military press','handstand pushups','wide pushups','straight bar pushdown','tricep dumbbell kickbacks','EZ bar skull crusher','close grip bench']
+    # exercises = ['glute bridge','lying hip abduction','barbell hip thrust','rope cable crunch','wood chops','planks','lying leg curl','sumo deadlift','standard deadlift','romanian deadlift','sumo squat','deadlift rack pull','dumbbell lunges','leg extensions (single leg)','leg extensions (both legs)','standard barbell squat','ass to grass squats','front squat','bulgarian barbell squat','sumo squat','goblin squats','lateral side step squats','jump squats','sitting calf raise','standing calf raise','smith machine barbell row','weighted pullups','standard pullups','hammergrip pullups','chinups','wide grip pullups','pulldown machine - narrow grip attachment','pulldown machine - single bar','pulldown machine - dual static position','row machine- underhand grip','row machine - overhand grip','row machine - hammer grip','Rope machine lat pullover','dumbbell single arm row','dumbbell supinated bicep curls','alternating dumbbell hammerhead curls','incline bench dumbbell curls','EZ bar standing bicep curl','preacher curl machine','spider curl','barbell bentover curl','dumbbell wrist curls','chest fly machine','chest press machine','smith machine bench press','weighted dips','chest fly machine straight arm','standard rope chest flies','Rope machine kneeling chest abductions','rope bench press (long handles)','barbell bench press','barbell incline bench','incline dumbbell bench press','standard pushups','archer pushups','diamond pushups','dumbbell lateral raises','hanging dumbbell lateral raises','side-lying bench lateral raise','single arm dumbbell lateral raise','shoulder shrugs','dumbbell reverse fly','dumbbell front raises','dumbbell shoulder military press','handstand pushups','wide pushups','straight bar pushdown','tricep dumbbell kickbacks','EZ bar skull crusher','close grip bench']
 
     client = OpenAI::Client.new
     response = client.answers(parameters: {
-      documents: exercises,
+      documents: Exercise.all.pluck(:name),
       question: user_query,
       model: "davinci",
       examples_context: "find the 3 best exercises for the user to perform for their workout",
@@ -142,10 +142,11 @@ module AiHelper
     reply = JSON.parse response.to_s
     reply = reply["answers"].first
 
-
     workout = Workout.new(name: 'Workout Recommendation',
       day: Date.today,
-      user: current_user)
+      user: current_user,
+      workout_template: WorkoutTemplate.all.sample
+    )
 
     # each answer is an exercise name
     reply.split(',').take(3).each_with_index do |exercise_name, index|
@@ -156,6 +157,7 @@ module AiHelper
         exercise.station = Station.all.sample
       end
       exercise.save!
+      workout.save!
 
       3.times do
         WorkoutSet.create!(nb_of_reps: rand(5..12),
@@ -166,7 +168,6 @@ module AiHelper
                           )
       end
     end
-    workout.save
     Message.create!({
       category: "card_workout",
       user: current_user,
