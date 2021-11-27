@@ -35,8 +35,8 @@ document.addEventListener('turbolinks:load', () => {
     $("#progress").toggle();
   });
 
-  $(document).on("click", function() {
-    $("#shoryu").show();
+  // $(document).on("click", function() {
+  //   $("#shoryu").show();
   });
   // slideCard();
 });
