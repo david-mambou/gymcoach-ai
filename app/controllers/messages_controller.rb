@@ -11,11 +11,13 @@ class MessagesController < ApplicationController
         category: "receive",
         content: "Hi, I will be your personal coach today. What would you like to do today?"
       })
+   
     end
   end
 
-  # send user message to AI
+
   def create
+    # send user message to AI
     @user = current_user
     user_submission = Message.new(message_params)
     user_submission.user = @user
@@ -41,7 +43,7 @@ class MessagesController < ApplicationController
   end
 
   private
-  
+
   def message_params
     params.require(:message).permit(:category, :content, :workout_id, :workout_set_id, :message, :user_id)
   end

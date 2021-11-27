@@ -6,10 +6,14 @@ class Message < ApplicationRecord
   enum category: [:submit, :receive, :card_workout, :card_chart], _default: "submit"
 
   # user will receive a message from the AI in the chat interface
-  # def receive(message)
-  #  Message.create!({
-  #   user: current_user,
-  #   category: "receive",
-  #   content: message
-  # })
+  def self.receive(user, content)
+
+    message = Message.new({
+      user: user,
+      category: "receive",
+      content: content
+    })
+
+    message.save!
+   end
 end

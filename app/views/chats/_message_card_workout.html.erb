@@ -27,7 +27,7 @@
     <br>
     Est. Duration: 45 min
     <hr>
-    <%= button_to "Accept this workout", workouts_path(template_workout: workout), method: :post, class: 'btn btn-primary' %>
+    <%= button_to "Start Workout", workouts_path(template_workout: workout), method: :post, class: 'btn btn-primary' %>
     <span class="msg_time"><%= time_ago_in_words(locals[:created_at]) %> ago</span>
   </div>
 </div>
