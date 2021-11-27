@@ -115,6 +115,7 @@ p 'creating workouts'
   specific_workout.status = status
   specific_workout.user = User.first
   specific_workout.workout_template = WorkoutTemplate.all.sample
+  specific_workout.routine_tags = ['legs','chest','push'].sample
   specific_workout.save!
   p "creating workout: #{specific_workout.name}"
 

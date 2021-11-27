@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_27_175806) do
+ActiveRecord::Schema.define(version: 2021_11_27_182320) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -213,6 +213,7 @@ ActiveRecord::Schema.define(version: 2021_11_27_175806) do
     t.boolean "completed"
     t.integer "status"
     t.bigint "workout_template_id", null: false
+    t.string "routine_tags"
     t.index ["user_id"], name: "index_workouts_on_user_id"
     t.index ["workout_template_id"], name: "index_workouts_on_workout_template_id"
   end

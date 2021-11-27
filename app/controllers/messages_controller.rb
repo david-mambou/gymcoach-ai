@@ -6,14 +6,23 @@ class MessagesController < ApplicationController
     @message = Message.new # so that we can use the input form anytime
 
     if params[:new_session]
-      if Message.count == 0 
-        # first time user
-        Message.receive(current_user, "Welcome! I will be your new coach, nice to meet you")
-      else
+      purgable_messages = current_user.messages
+      purgable_messages.destroy_all
+
+      # if Message.count == 0 
+      #   # first time user
+      #   Message.receive(current_user, "Welcome! I will be your new coach, nice to meet you")
+      # else
         # returning user
-        Message.receive(current_user, "Welcome back #{current_user.name}! Ready to start your workout?")
-        # helpers.next_workout(current_user)
-      end
+        Message.receive(current_user, "Welcome back #{current_user.name}!")
+        Message.receive(current_user, "We are scheduled to do your #{ current_user.current_routine } routine today, still ok with this plan?")
+        next_workout = Workout.latest_workout_for_routine(current_user.current_routine)
+        Message.create!({
+          category: "card_workout",
+          user: current_user,
+          workout: next_workout
+                        })
+      # end
     end
   end
 

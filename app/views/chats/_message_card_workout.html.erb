@@ -3,7 +3,9 @@
 <div class="message-card mb-4">
   <div class="message-card-body">
     <% workout = locals[:workout] %>
-    <h5><%= workout.name %> (45min)</h5>
+    <h5> <%= workout.routine_tags.capitalize %> Routine (45min)</h5>
+     <span class="badge badge-pill badge-primary"><%= workout.workout_template.name %></span><br>
+
     <%# get unique exercises from the workout for looping %>
     <% unique_exercises = retrieve_unique_exercises(workout) %>
        Exercises: <br>

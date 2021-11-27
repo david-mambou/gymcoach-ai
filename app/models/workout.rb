@@ -12,4 +12,9 @@ class Workout < ApplicationRecord
     # include_association :pros_and_cons
     include_association :workout_sets
   end
+
+  # return latest workout for matching routine
+  def self.latest_workout_for_routine(next_routine)
+    return Workout.where("routine_tags = ?", next_routine).first
+  end
 end
