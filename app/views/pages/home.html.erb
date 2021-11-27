@@ -10,12 +10,16 @@
 <div class="row justify-content-center" style="position: relative; top: 500px;">
   <%= link_to 'Start Session', new_workout_path, class: "btn btn-primary", style: "padding: 14px; font-size: 25px" %>
 </div>
-<div class="row justify-content-center mt-5">
-  <button class="btn btn-success w-50">Current Goal</button>
-  <div class="hidden mt-2" id="progress">
-    <h4> Weight progress bar here</h4>
-     <br>
-    <h4> Strength progress bar here</h4>
-     <br>
-    <h4> Current goal progress bar here</h4>
+<div class="row justify-content-center">
+  <button class="btn btn-primary w-50">Current Progress</button>
+  <div class="row col-9 justify-content-center hidden mt-2" id="progress">
+    <br>
+    <h6> /\ This button needs different styling i think</h6>
+    <h6> Weight progress bar here</h6>
+    <h6> Strength progress bar here</h6>
+    <h6> Current goal progress bar here</h6>
+    <button class="btn btn-primary" style="display: flex;position: relative; left: 72px; top: 14px;">Change Goal</button>
   </div>
+  <%# <div class="hidden">
+    <%= image_tag "ken.gif", style: "display: flex;position: relative;top: 328px;left: 221px;z-index: -1;width: 80px;" %>
+  <%#=</div> %>
