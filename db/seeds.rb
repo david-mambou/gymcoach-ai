@@ -34,26 +34,26 @@ end
 ###############################################################################################
 
 # workout templates
-p 'generating workout templates'
-WorkoutTemplate.new(
+p 'generating workout templates..'
+WorkoutTemplate.create!(
   name: "German Volume Training", 
   progression_curve: "40x10,40x10,40x10,40x10,40x10,40x10,40x10,40x10,40x10,40x10",
   good_for: "Improving endurance, Fewer Gym Workouts Per Week, High Volume",
   bad_for: "Sore Body Common, Not good for strength, fewer exercises per gym session")
 
-WorkoutTemplate.new(
+WorkoutTemplate.create!(
   name: "Pyramid 12/10/8/15", 
   progression_curve: "60x12,70x10,80x8,50x15",
   good_for: "Covers 8-12 hypertrophy range",
   bad_for: "Requires 4 or more sets with same muscles for best results.")
   
-WorkoutTemplate.new(
+WorkoutTemplate.create!(
   name: "3/7 Method", 
   progression_curve: "60x12,70x10,80x8,50x15",
   good_for: "Great for short gym sessions",
   bad_for: "")
 
-p 'finished with workout templates'
+p "Created #{WorkoutTemplate.count} workout templates"
 
 ###############################################################################################
 
