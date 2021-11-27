@@ -1,6 +1,63 @@
 module AiHelper
-
   # determine the users intention based on their message
+  # ai will direct user query to appropriate method for intended processing
+  def ai_direct_query(user_query)
+    possible_queries = ['find_exercise', 'create_workout', 'create_exercise', 'update_set', 'general_answer']
+
+    client = OpenAI::Client.new
+    response = client.answers(parameters: {
+      documents: possible_queries,
+      question: user_query,
+      model: "curie", # using curie to get more accurate results and cheaper
+      examples_context: "determine the best action based on user query",
+      examples: [
+        # Patterns to create workouts
+        ["I am tired today, can you make this workout easier?", "create_workout"],
+        ["Can you remove benchpress from this workout?", "create_workout"],
+        ["Can you make my workout shorter today?", "create_workout"],
+        ["Give me a good chest exercise", "create_workout"],
+        ["I want to work my abs", "create_workout"],
+        ["lets get this party started", "create_workout"],
+        ["looking to workout my traps, any recommendations?", "create_workout"],
+
+        # todo: Patterns to update workout sets
+        # ["Someone is using the bench, can you find an alternative to benchpress?", "update_workout_set"],
+        # ["Can you change benchpress to another exercise?", "update_workout_set"],
+        ["Can you exchange benchpress in this workout?", "update_workout_set"],
+
+        # Patterns to create a new station
+        ["I want to try this new machine", "create_station"],
+        ["There is a new machine here that I want to use", "create_station"],
+
+        # Patterns to find a specific exercise or create it
+        ["How can I do the benchpress", "find_exercise"],
+        ["what seat level should i do for this exercise?", "find_exercise"],
+
+        # Patterns to find a specific exercise or create it
+        ["Tell me how to do squats", "find_exercise_for_muscle"],
+        ["I want to work my abs, what muscles?", "find_exercise_for_muscle"],
+        ["What should I do for a bigger chest?", "find_exercise_for_muscle"],
+
+        # Patterns to find a specific exercise
+        ["Hey what time is it?", "general_answer"],
+        ["ok this is cool", "general_answer"],
+        ["what is your name?", "general_answer"]
+      ],
+      max_tokens: 25,
+      temperature: 0,
+      stop: ['\n', '===', '---']
+    })
+
+    intent = JSON.parse response.to_s
+    case intent
+    when 'create_workout'
+      ai_create_workout(user_query)
+    when 'general_answer'
+      ai_general_answer(user_query)
+    else
+      ai_general_answer(user_query)
+    end
+  end
 
   # request AI to generate a generic reply based on user input
   def ai_general_answer(user_message_content)
@@ -193,55 +250,5 @@ module AiHelper
                     })
   end
 
-  # ai will direct user query to appropriate method for intended processing
-  def ai_direct_query(user_query)
-    possible_queries = ['find_exercise', 'create_workout', 'create_exercise', 'update_set', 'general_answer']
-
-    client = OpenAI::Client.new
-    response = client.answers(parameters: {
-      documents: possible_queries,
-      question: user_query,
-      model: "curie", # using curie to get more accurate results and cheaper
-      examples_context: "determine the best action based on user query",
-      examples: [
-        # Patterns to create workouts
-        ["I am tired today, can you make this workout easier?", "create_workout"],
-        ["Can you remove benchpress from this workout?", "create_workout"],
-        ["Can you make my workout shorter today?", "create_workout"],
-        ["Give me a good chest exercise", "create_workout"],
-        ["I want to work my abs", "create_workout"],
-        ["lets get this party started", "create_workout"],
-        ["looking to workout my traps, any recommendations?", "create_workout"],
-
-        # todo: Patterns to update workout sets
-        # ["Someone is using the bench, can you find an alternative to benchpress?", "update_workout_set"],
-        # ["Can you change benchpress to another exercise?", "update_workout_set"],
-        ["Can you exchange benchpress in this workout?", "update_workout_set"],
-
-        # Patterns to create a new station
-        ["I want to try this new machine", "create_station"],
-        ["There is a new machine here that I want to use", "create_station"],
-
-        # Patterns to find a specific exercise or create it
-        ["How can I do the benchpress", "find_exercise"],
-        ["what seat level should i do for this exercise?", "find_exercise"],
-
-        # Patterns to find a specific exercise or create it
-        ["Tell me how to do squats", "find_exercise_for_muscle"],
-        ["I want to work my abs, what muscles?", "find_exercise_for_muscle"],
-        ["What should I do for a bigger chest?", "find_exercise_for_muscle"],
-
-        # Patterns to find a specific exercise
-        ["Hey what time is it?", "general_answer"],
-        ["ok this is cool", "general_answer"],
-        ["what is your name?", "general_answer"]
-      ],
-      max_tokens: 25,
-      temperature: 0,
-      stop: ['\n', '===', '---']
-    })
-
-    reply = JSON.parse response.to_s
-    return reply["answers"].first
-  end
+  
 end

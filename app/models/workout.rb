@@ -1,5 +1,6 @@
 class Workout < ApplicationRecord
   belongs_to :user
+  belongs_to :workout_template
   has_many :workout_sets, dependent: :destroy
   has_many :messages, dependent: :nullify
   has_many :exercises, through: :workout_sets

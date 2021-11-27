@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_27_125355) do
+ActiveRecord::Schema.define(version: 2021_11_27_170726) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -161,13 +161,6 @@ ActiveRecord::Schema.define(version: 2021_11_27_125355) do
     t.index ["name"], name: "index_tags_on_name", unique: true
   end
 
-  create_table "transmissions", force: :cascade do |t|
-    t.integer "category"
-    t.text "content"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -218,7 +211,9 @@ ActiveRecord::Schema.define(version: 2021_11_27_125355) do
     t.string "name"
     t.boolean "completed"
     t.integer "status"
+    t.bigint "workout_template_id", null: false
     t.index ["user_id"], name: "index_workouts_on_user_id"
+    t.index ["workout_template_id"], name: "index_workouts_on_workout_template_id"
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
@@ -230,4 +225,5 @@ ActiveRecord::Schema.define(version: 2021_11_27_125355) do
   add_foreign_key "workout_sets", "exercises"
   add_foreign_key "workout_sets", "workouts"
   add_foreign_key "workouts", "users"
+  add_foreign_key "workouts", "workout_templates"
 end

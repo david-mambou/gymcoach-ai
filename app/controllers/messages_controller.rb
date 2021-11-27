@@ -1,49 +1,35 @@
 class MessagesController < ApplicationController
 
+  # existing session, just show messages, wait for user action
   def index
     @messages = policy_scope(Message)
-    @message = Message.new
+    @message = Message.new # so that we can use the input form anytime
 
-    # AI Kick off user query with a generic message if start of chat
-    if Message.count == 0 
-      Message.create!({
-        user: current_user,
-        category: "receive",
-        content: "Hi, I will be your personal coach today. What would you like to do today?"
-      })
-   
+    if params[:new_session]
+      if Message.count == 0 
+        # first time user
+        Message.receive(current_user, "Welcome! I will be your new coach, nice to meet you")
+      else
+        # returning user
+        Message.receive(current_user, "Welcome back #{current_user.name}! Ready to start your workout?")
+        # helpers.next_workout(current_user)
+      end
     end
-
-    test = Exercise.first
-    rm = test.calc_single_rep_max
-    raise
   end
 
-
+  # send user message to AI
   def create
-    # send user message to AI
     @user = current_user
     user_submission = Message.new(message_params)
     user_submission.user = @user
     authorize user_submission
 
-    # check if user message is valid
     if user_submission.save!
-      # determine user intent and process with AI
-      intent = helpers.ai_direct_query(user_submission.content)
-
-      case intent
-      when 'create_workout'
-        helpers.ai_create_workout(user_submission.content)
-      when 'general_answer'
-        helpers.ai_general_answer(user_submission.content)
-      else
-        helpers.ai_general_answer(user_submission.content)
-      end
+      # determine user intent and respond with AI
+      helpers.ai_direct_query(user_submission.content)
     end
 
     redirect_to messages_path
-
   end
 
   private
