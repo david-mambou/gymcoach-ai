@@ -1,12 +1,14 @@
-<div class="contatiner">
+<div class="container">
   <div class="row justify-content-center">
-    <div class="col-md-6" style= "display: flex;
-    justify-content: center;
-    flex-direction: column;
-    align-items: center;">
+    <div class="col-md-6" style= "display: flex; justify-content: center; flex-direction: column;  align-items: center;">
       <h1>Welcome</h1>
       <p>Ready to workout?</p>
-      <%= link_to 'Start Session', new_workout_path, class: "btn btn-primary"  %>
     </div>
   </div>
+</div>
+<div class="row justify-content-center mt-5">
+  <button class="btn btn-success w-50">Current Goal</button>
+</div>
+<div class="row justify-content-center" style="position: relative; top: 460px;">
+  <%= link_to 'Start Session', new_workout_path, class: "btn btn-primary", style: "padding: 14px; font-size: 25px" %>
 </div>

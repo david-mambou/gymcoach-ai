@@ -14,6 +14,8 @@ class ApplicationController < ActionController::Base
   #   redirect_to(root_path)
   # end
 
+  respond_to :json, :js, :html
+
   def configure_permitted_parameters
     devise_parameter_sanitizer.permit(:sign_up, keys: [:name, :age])
   end
