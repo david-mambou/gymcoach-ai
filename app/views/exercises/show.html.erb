@@ -61,3 +61,8 @@
   <h3><%= "#{@exercise.user_notes}"%> <%#=   User notes goes here</h3>
   etc.
 </div> %>
+
+<%# WorkoutSet.find_by(@workout: workout).workout %>
+<%= raise %>
+ <%# WorkoutSet.find_by(exercise_id: @exercise.id).workout  %>
+ <%= link_to 'back',  workout_path(WorkoutSet.find_by(exercise_id: @exercise.id).workout) %>
