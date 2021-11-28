@@ -8,5 +8,4 @@ export default class extends Controller {
     const message = this.messageTargets[this.messageTargets.length - 1]
     message.scrollIntoView();
   }
-
 };

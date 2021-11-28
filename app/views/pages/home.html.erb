@@ -8,8 +8,9 @@
   <div class="row justify-content-center" style="position: relative; top: 500px;">
     <%= link_to 'Start Session', new_workout_path, class: "btn btn-primary", style: "padding: 14px; font-size: 25px" %>
   </div>
+  <%# <div data-controller="time"></div> NEED to put this in a box to display time%>
   <div class="row justify-content-center">
-    <button class="btn btn-primary">Current Progress</button>
+    <button class="btn btn-primary" data-controller="button-toggle">Current Progress</button>
     <div class="row justify-content-center hidden mt-2" id="progress">
       <br>
       <h6> /\ This button needs different styling i think</h6>

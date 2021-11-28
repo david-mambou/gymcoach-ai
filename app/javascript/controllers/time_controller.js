@@ -1,7 +1,7 @@
 import { Controller } from "stimulus";
 
 export default class extends Controller {
-  static targets = [''];
+  static targets = ['time'];
 
   connect() { //template for future targets
     // console.log(this.exerciseTarget);

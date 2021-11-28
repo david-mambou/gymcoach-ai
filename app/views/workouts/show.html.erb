@@ -1,11 +1,8 @@
-<div class="time-container">
-  <%= render partial: "date" %>
-</div>
 <div class="container-fluid">
   <div class="row justify-content-center">
     <div class="col-md-8 col-xl-6 chat">
       <div class="card">
-        <div class=" msg_card_body">
+        <div class="msg_card_body">
           <h1><%= @workout.name %></h1>
           <% @workout.exercises.order(:id).uniq.each do |exercise| %>
             <div class="border border-dark rounded-lg mb-3 p-2">
