@@ -14,8 +14,7 @@ class MessagesController < ApplicationController
       #   Message.receive(current_user, "Welcome! I will be your new coach, nice to meet you")
       # else
         # returning user
-        Message.receive(current_user, "Welcome back #{current_user.name}!")
-        Message.receive(current_user, "We are scheduled to do your #{ current_user.current_routine } routine today, still ok with this plan?")
+        Message.receive(current_user, "Welcome back #{current_user.name}! Today, we are scheduled for a #{ current_user.current_routine } routine. How do you feel about this?")
         next_workout = Workout.latest_workout_for_routine(current_user.current_routine)
         Message.create!({
           category: "card_workout",
