@@ -28,15 +28,6 @@ document.addEventListener('turbolinks:load', () => {
   // Call your functions here, e.g:
   // initSelect2();
   
-
-  // Need to move this code for it to work specifically to one button
-  $(document).on("click", function() {
-    $("#progress").toggle();
-  });
-
-  // $(document).on("click", function() {
-  //   $("#shoryu").show();
-  // });
 });
 
 import "controllers";
