@@ -1,4 +1,5 @@
-$message-border-radius: 15px;
+$message-border-radius: 8px 8px 8px 1px;
+$message-border-radius-right: 8px 1px 8px 8px;
 
 
 .chat{
@@ -155,7 +156,7 @@ $message-border-radius: 15px;
   margin-top: auto;
   margin-bottom: auto;
   margin-right: 10px;
-  border-radius: $message-border-radius;
+  border-radius: $message-border-radius-right;
   background-color: #5d48cf;
   padding: 10px;
   position: relative;
@@ -333,8 +334,8 @@ $message-border-radius: 15px;
       width: 40px;
       height: 40px;
       padding: 0;
-      background: #1E74FD !important;
-      border-color: #1E74FD !important;
+      background: $blue !important;
+      border-color: $blue !important;
       color: #ffffff !important;
       cursor: pointer;
       border-radius: 100px !important;
