@@ -1,17 +1,12 @@
 <% workout = locals[:workout] %>
-<div class = "border border-dark my-3 p-3 rounded-lg">
+<div class = "border border-dark my-1 p-3 rounded-lg workout-card">
   <%= workout.name %>
   <br>
   <% workout.workout_sets.each do |workout_set| %>
   <% end %>
-  Notes: <%= locals[:workout].mental_state %><br>
-  <%# For viewing purposes %>
-  <%# Group by date %>
-  <%# iterate over the hash Key(date) => value(workouts) %>
-  Status: <%= locals[:workout].status %><br>
   <% unique_exercises = retrieve_unique_exercises(workout) %>
   <% unique_exercises.each do |exercise| %>
-    <%= exercise.name %>:
+    <%= exercise.name.capitalize  %>:
     <% workout.workout_sets.each do |workout_set| %>
       <% if exercise.id == workout_set.exercise_id  %>
         <span class="badge badge-pill badge-secondary">
@@ -21,4 +16,6 @@
     <% end %>
     <br>
   <% end %>
+  Status: <%= locals[:workout].status %><br>
+  Notes: <%= locals[:workout].mental_state %><br>
 </div>

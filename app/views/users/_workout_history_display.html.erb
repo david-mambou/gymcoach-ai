@@ -1,24 +1,18 @@
 <div class="card card-body">
   <div class="card-header border-top">
     <div class="row justify-content-center">
-      <%# <h6> <%= Date.today.strftime("(%A) %d/%b/%Y") %>
       <h5 class="row"><%= workout.day%> </h5>
       <a class="fas fa-eye" data-toggle="collapse" href="#workout-collapse-<%= workout.id %>" role="button" aria-expanded="false" aria-controls="workout-collapse-<%= workout.id %>" style="width: 200px; height: 30px; color: black; position: absolute; opacity: 0;">
-    </a>
+      </a>
     </div>
     <div class="collapse multi-collapse" id="workout-collapse-<%= workout.id %>">
-      <div class = "border border-dark my-3 p-3 rounded-lg">
+      <div class = "border border-dark my-1 p-3 rounded-lg">
         <br>
         <% workout.workout_sets.each do |workout_set| %>
         <% end %>
-        Notes: <%= workout.mental_state %><br>
-        <%# For viewing purposes %>
-        <%# Group by date %>
-        <%# iterate over the hash Key(date) => value(workouts) %>
-        Status: <%= workout.status %><br>
         <% unique_exercises = retrieve_unique_exercises(workout) %>
         <% unique_exercises.each do |exercise| %>
-          <%= exercise.name %>:
+          <%= exercise.name.capitalize %>:
           <% workout.workout_sets.each do |workout_set| %>
             <% if exercise.id == workout_set.exercise_id  %>
               <span class="badge badge-pill badge-secondary">
@@ -28,6 +22,8 @@
           <% end %>
           <br>
         <% end %>
+        Status: <%= workout.status %><br>
+        Notes: <%= workout.mental_state %><br>
       </div>
     </div>
   </div>
