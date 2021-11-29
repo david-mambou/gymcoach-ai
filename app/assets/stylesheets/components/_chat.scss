@@ -1,5 +1,6 @@
 $message-border-radius: 15px;
 
+
 .chat{
   margin-top: auto;
   margin-bottom: auto;
@@ -8,6 +9,7 @@ $message-border-radius: 15px;
   // height: 94vh;
   border-radius: 15px !important;
   background-color: inherit !important;
+  margin-top: 25px;
   margin-bottom: 143px;
 
 }
@@ -279,14 +281,14 @@ $message-border-radius: 15px;
   position: fixed;
   left: 0;
   right: 0;
-  bottom: 57px;
+  bottom: 48px;
   width: 100%;
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding-left: 14px;
   padding-right: 14px;
-  background: #0F1C2F;
+  background: #23233e;
   border-top-color: #1B283B;
 
   form {
