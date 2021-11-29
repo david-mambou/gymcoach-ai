@@ -9,7 +9,7 @@ class MessagesController < ApplicationController
       purgable_messages = current_user.messages
       purgable_messages.destroy_all
 
-      # if Message.count == 0 
+      # if Message.count == 0
       #   # first time user
       #   Message.receive(current_user, "Welcome! I will be your new coach, nice to meet you")
       # else
@@ -27,6 +27,8 @@ class MessagesController < ApplicationController
 
   # send user message to AI
   def create
+    set_existing_messages_as_read
+    # send user message to AI
     @user = current_user
     user_submission = Message.new(message_params)
     user_submission.user = @user
@@ -44,5 +46,9 @@ class MessagesController < ApplicationController
 
   def message_params
     params.require(:message).permit(:category, :content, :workout_id, :workout_set_id, :message, :user_id)
+  end
+
+  def set_existing_messages_as_read
+      Message.where(read: false).update_all(read: true)
   end
 end
