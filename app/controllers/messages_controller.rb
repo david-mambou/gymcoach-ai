@@ -1,5 +1,6 @@
 class MessagesController < ApplicationController
   def create
+    set_existing_messages_as_read
     # send user message to AI
     user_submission = Message.new(message_params)
     authorize user_submission
@@ -60,5 +61,9 @@ class MessagesController < ApplicationController
 
   def message_params
     params.require(:message).permit(:category, :content, :workout_id, :workout_set_id, :message)
+  end
+
+  def set_existing_messages_as_read
+      Message.where(read: false).update_all(read: true)
   end
 end

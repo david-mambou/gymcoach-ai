@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_26_023407) do
+ActiveRecord::Schema.define(version: 2021_11_29_073032) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -120,6 +120,7 @@ ActiveRecord::Schema.define(version: 2021_11_26_023407) do
     t.integer "user_rating"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.boolean "read", default: false
     t.index ["workout_id"], name: "index_messages_on_workout_id"
     t.index ["workout_set_id"], name: "index_messages_on_workout_set_id"
   end
