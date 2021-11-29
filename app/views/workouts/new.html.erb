@@ -8,6 +8,7 @@
 							category: message.category,
 							content: (message.content if message.content.present?),
 							workout: (message.workout if message.workout.present?),
+              read: (message.read),
 							workout_set: (message.workout_set if message.workout_set.present?),
 							created_at: (message.created_at if message.created_at.present?)
 						} %>
