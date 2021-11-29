@@ -3,7 +3,8 @@
     <div class="row justify-content-between">
       <%# <h6> <%= Date.today.strftime("(%A) %d/%b/%Y") %>
       <h5><%= workout.day %> </h5>
-      <a class="fas fa-eye" data-toggle="collapse" href="#workout-collapse-<%= workout.id %>" role="button" aria-expanded="false" aria-controls="workout-collapse-<%= workout.id %>"></a>
+      <a class="fas fa-eye" data-toggle="collapse" href="#workout-collapse-<%= workout.id %>" role="button" aria-expanded="false" aria-controls="workout-collapse-<%= workout.id %>" style="width: 560px; height: 30px; color: black; position: absolute; opacity: 0;">
+    </a>
     </div>
     <div class="collapse multi-collapse" id="workout-collapse-<%= workout.id %>">
       <div class = "border border-dark my-3 p-3 rounded-lg">
