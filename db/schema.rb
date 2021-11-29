@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_26_023407) do
+ActiveRecord::Schema.define(version: 2021_11_27_182320) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -120,6 +120,7 @@ ActiveRecord::Schema.define(version: 2021_11_26_023407) do
     t.integer "user_rating"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "user_id"
     t.index ["workout_id"], name: "index_messages_on_workout_id"
     t.index ["workout_set_id"], name: "index_messages_on_workout_set_id"
   end
@@ -171,6 +172,8 @@ ActiveRecord::Schema.define(version: 2021_11_26_023407) do
     t.integer "age"
     t.boolean "admin"
     t.string "name"
+    t.text "goal"
+    t.string "routine"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
@@ -190,6 +193,15 @@ ActiveRecord::Schema.define(version: 2021_11_26_023407) do
     t.index ["workout_id"], name: "index_workout_sets_on_workout_id"
   end
 
+  create_table "workout_templates", force: :cascade do |t|
+    t.string "name"
+    t.string "progression_curve"
+    t.string "good_for"
+    t.string "bad_for"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "workouts", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.date "day"
@@ -200,7 +212,10 @@ ActiveRecord::Schema.define(version: 2021_11_26_023407) do
     t.string "name"
     t.boolean "completed"
     t.integer "status"
+    t.bigint "workout_template_id", null: false
+    t.string "routine_tags"
     t.index ["user_id"], name: "index_workouts_on_user_id"
+    t.index ["workout_template_id"], name: "index_workouts_on_workout_template_id"
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
@@ -212,4 +227,5 @@ ActiveRecord::Schema.define(version: 2021_11_26_023407) do
   add_foreign_key "workout_sets", "exercises"
   add_foreign_key "workout_sets", "workouts"
   add_foreign_key "workouts", "users"
+  add_foreign_key "workouts", "workout_templates"
 end
