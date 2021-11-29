@@ -8,7 +8,7 @@
     <%= render 'chats/message_receive', locals: locals %>
   <% elsif locals[:category] == 'submit' %>
     <%= render 'chats/message_submit', locals: locals %>
-  <% elsif locals[:category] == 'card_workout' %>
+  <% elsif locals[:category] == 'card_workout' && locals[:workout] %>
     <%= render 'chats/message_card_workout', locals: locals %>
   <% elsif locals[:category] == 'card_workout_set' %>
     <%# TODO: category 'card-workout-set' will render a card for a single set %>

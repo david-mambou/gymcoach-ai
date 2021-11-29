@@ -6,7 +6,7 @@ class User < ApplicationRecord
   has_many :workouts, dependent: :destroy
   has_many :workout_sets, through: :workouts
   has_many :messages
-  
+
   has_one_attached :profile_pic
 
   def weight_history
@@ -18,14 +18,14 @@ class User < ApplicationRecord
   end
 
   def current_routine
-    routine.split(',').first
+    routine&.split(',')&.first
   end
 
   def next_routine
-    routine.split(',').second
+    routine&.split(',')&.second
   end
 
   def last_routine
-    routine.split(',').last
+    routine&.split(',')&.last
   end
 end
