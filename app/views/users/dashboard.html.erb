@@ -3,48 +3,22 @@
     <div class="col-md-8 col-xl-6 chat">
       <% if current_user.workouts.present? %>
         <h2>Today's Workouts</h2>
-        <div id="accordion">
-          <div class="card">
-            <div class="card-header border-top" id="headingOne">
-              <h5 class="mb-0">
-                <div class="row justify-content-between">
-                  <h5>Date + Workout name(main)</h5>
-                  <a class="fas fa-eye" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne"></a>
-                </div>
-              </h5>
-            </div>
-            <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
-              <div class="card-body">
-                <div>
-                  <% if @today_workouts.empty? %>
-                    You have no workouts scheduled for today
-                  <% else %>
-                    <% @today_workouts.each do |workout| %>
-                      <%= render "users/workout_display", locals: {workout: workout} %>
-                    <% end %>
-                  <% end %>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+        <% if @today_workouts.empty? %>
+          You have no workouts scheduled for today
+        <% else %>
+          <%= render "workout_collapse", id:"colapseOne", workouts: @today_workouts %>
+        <% end %>
+        <h2>Upcoming Workouts</h2>
+        <%= render "workout_collapse", id:"colapseTwo", workouts: @upcoming_workouts %>
+        <h2>Workout History</h2>
+        <%= render "workout_collapse", id:"colapseThree", workouts: @past_workouts %>
+      <% else %>
+        No workouts yet.
+        <%= link_to 'Start New Session', messages_path(new_session: true), class: "btn btn-primary"  %>
+      <% end %>
     </div>
-    <%# <div> %>
-    <%# <%= workout.day %>
-    <%# </div> %>
-    <h2>Upcoming Workouts</h2>
-    <% @upcoming_workouts.each do |workout| %>
-      <%= render "users/workout_display", locals: {workout: workout} %>
-    <% end %>
-    <h2>Workout History</h2>
-    <% @past_workouts.each do |workout| %>
-      <%= render "users/workout_display", locals: {workout: workout} %>
-    <% end %>
-  <% else %>
-    No workouts yet.
-    <%= link_to 'Start New Session', messages_path(new_session: true), class: "btn btn-primary"  %>
-  <% end %>
+  </div>
 </div>
-</div>
-</div>
+<%# <div> %>
+<%# <%= workout.day %>
+<%# </div> %>
