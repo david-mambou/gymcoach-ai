@@ -8,11 +8,6 @@
     <%= render 'chats/message_receive', locals: locals %>
   <% elsif locals[:category] == 'submit' %>
     <%= render 'chats/message_submit', locals: locals %>
-    <%# IMPORTANT %>
-    <%# IMPORTANT %>
-    <%# IMPORTANT %>
-    <%# IMPORTANT %>
-    <%# IMPORTANT %>
   <% elsif locals[:category] == 'card_workout' && locals[:workout] %>
     <%= render 'chats/message_card_workout', locals: locals %>
     <%# this card is failing when ther eis no comment, card is being rendered before workout exists %>
