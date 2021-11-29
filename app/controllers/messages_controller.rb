@@ -49,6 +49,6 @@ class MessagesController < ApplicationController
   end
 
   def set_existing_messages_as_read
-      Message.where(read: false).update_all(read: true)
+    Message.where(read: false).update_all(read: true)
   end
 end
