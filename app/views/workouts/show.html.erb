@@ -4,9 +4,11 @@
       <div class="card">
         <div class=" msg_card_body">
         
+        <%# show if there is active workout %>
         <% if @workout.present? %>
 
-                    <h1><%= @workout.name %></h1>
+          <h1><%= @workout.name %></h1>
+
           <% @workout.exercises.order(:id).uniq.each do |exercise| %>
             <div class="border border-dark rounded-lg mb-3 p-2">
               <%# set header %>
@@ -25,6 +27,7 @@
             <% end %>
           </div>
         <% else %>
+            <%# no current workout, alert user %>
             Start a workout with your coach!
         <% end %>
 
