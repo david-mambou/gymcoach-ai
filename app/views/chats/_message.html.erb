@@ -3,7 +3,7 @@
 <%# content (string) - text content for messages (receive/send) %>
 <%# workout (instance) - for workout suggestion card to populate %>
 <%# Choose correct message partial based on category %>
-<div data-controller='messages' data-messages-target="message" data-spoken="false">
+<div data-controller='messages' data-messages-target="message">
   <% if locals[:category] == 'receive' %>
     <%= render 'chats/message_receive', locals: locals %>
   <% elsif locals[:category] == 'submit' %>

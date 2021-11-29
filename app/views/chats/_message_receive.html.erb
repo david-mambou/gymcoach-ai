@@ -5,7 +5,7 @@
     </div>
 
     <div class="msg_cotainer">
-      <div data-messages-target="speech"><%= locals[:content] %></div>
+      <div data-controller='generate-speech' data-generate-speech-target="speech" data-spoken="false"><%= locals[:content] %></div>
       <span class="msg_time"><%= time_ago_in_words(locals[:created_at]) %> ago</span>
     </div>
 
