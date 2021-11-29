@@ -3,7 +3,10 @@
     <div class="col-md-8 col-xl-6 chat">
       <div class="card">
         <div class=" msg_card_body">
-          <h1><%= @workout.name %></h1>
+        
+        <% if @workout.present? %>
+
+                    <h1><%= @workout.name %></h1>
           <% @workout.exercises.order(:id).uniq.each do |exercise| %>
             <div class="border border-dark rounded-lg mb-3 p-2">
               <%# set header %>
@@ -21,25 +24,13 @@
               <%= f.submit 'Finish Workout', class: "btn btn-primary m-3" %>
             <% end %>
           </div>
+        <% else %>
+            Start a workout with your coach!
+        <% end %>
+        
+
         </div>
       </div>
     </div>
   </div>
-  <div class="container">
-    <div class="col-12">
-      <%# <h2> <%= exercise.name.capitalize %>
-      <%# <%= link_to 'finish workout', dashboard_path(current_user), method: "get", class: "btn btn-primary" %>
-    </div>
-  </div>
-  <%# <div data-controller="search-exercises">
-    <#%= form_with url: exercises_path, method: :get, html: { class:
-      'mb-4', data: { search_exercises_target: 'form' } } do |f| %>
-    <%# f.text_field :query,
-                      class: "form-control",
-                      placeholder: 'Search Exercise',
-                      value: params[:query],
-                      data: { search_exercises_target: 'input',
-                              action: 'keyup->search-exercises#update'} %>
-    <%# TODO, create a list.html.erb to store exercises# %>
-    <%# add this code to the list file \/ # %>
-    <%# <div data-search-exercises-target="list"> # %>
+

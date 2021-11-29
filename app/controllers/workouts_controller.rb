@@ -32,9 +32,13 @@ class WorkoutsController < ApplicationController
   end
 
   def show
-    @workout = Workout.find(params[:id])
-    authorize @workout
-    #todo
+    workout_arr = Workout.where(id: params[:id])
+    authorize workout_arr
+
+    if workout_arr.present?
+      @workout = workout_arr.first
+      authorize @workout
+    end
   end
 
   def update

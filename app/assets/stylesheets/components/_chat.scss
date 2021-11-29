@@ -1,5 +1,5 @@
-$message-border-radius: 8px 8px 8px 1px;
-$message-border-radius-right: 8px 1px 8px 8px;
+$message-border-radius: 6px 6px 6px 1px;
+$message-border-radius-right: 6px 6px 1px 6px;
 
 
 .chat{
@@ -10,8 +10,8 @@ $message-border-radius-right: 8px 1px 8px 8px;
   // height: 94vh;
   border-radius: 15px !important;
   background-color: inherit !important;
-  margin-top: 25px;
-  margin-bottom: 143px;
+  padding-top: 25px;
+  padding-bottom: 143px;
 
 }
 .contacts_body{
@@ -41,10 +41,7 @@ $message-border-radius-right: 8px 1px 8px 8px;
   border:0 !important;
   color:white !important;
 }
-.search:focus{
-  box-shadow:none !important;
-  outline:0px !important;
-}
+
 .type_msg{
   background-color: rgba(0,0,0,0.3) !important;
   border:0 !important;
@@ -52,10 +49,7 @@ $message-border-radius-right: 8px 1px 8px 8px;
   height: 60px !important;
   overflow-y: auto;
 }
-.type_msg:focus{
-  box-shadow:none !important;
-  outline:0px !important;
-}
+
 .attach_btn{
   border-radius: 15px 0 0 15px !important;
   background-color: rgba(0,0,0,0.3) !important;
@@ -265,18 +259,13 @@ $message-border-radius-right: 8px 1px 8px 8px;
   justify-content: center;
 }
 
-
-
-
-
-
 // Footer
 .chatFooter {
   font-family: "Inter",sans-serif;
   font-size: 15px;
   line-height: 1.55rem;
   letter-spacing: -.015rem;
-  color: #8195a6;
+  color: #ffffff;
   min-height: 56px;
   border-top: 1px solid #E1E1E1;
   position: fixed;
@@ -289,8 +278,8 @@ $message-border-radius-right: 8px 1px 8px 8px;
   justify-content: space-between;
   padding-left: 14px;
   padding-right: 14px;
-  background: #23233e;
-  border-top-color: #1B283B;
+  background: transparent;
+  border-top-color: transparent;
 
   form {
     font-weight: var(--bs-body-font-weight);
@@ -302,7 +291,6 @@ $message-border-radius-right: 8px 1px 8px 8px;
     line-height: 1.55rem;
     letter-spacing: -.015rem;
     -webkit-font-smoothing: antialiased;
-    color: #8195a6;
     box-sizing: border-box;
     width: 100%;
     display: flex;
@@ -310,7 +298,6 @@ $message-border-radius-right: 8px 1px 8px 8px;
     justify-content: space-between;
 
     button {
-  
       box-sizing: border-box;
       margin: 0;
       font-family: inherit;
@@ -354,10 +341,6 @@ $message-border-radius-right: 8px 1px 8px 8px;
       margin: 0;
       padding: 8px 0;
       width: calc(100% - 54px);
-
-   
     }
-
-  
   }
 }
