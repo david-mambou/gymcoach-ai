@@ -120,8 +120,8 @@ ActiveRecord::Schema.define(version: 2021_11_29_073032) do
     t.integer "user_rating"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.boolean "read", default: false
     t.integer "user_id"
+    t.boolean "read", default: false
     t.index ["workout_id"], name: "index_messages_on_workout_id"
     t.index ["workout_set_id"], name: "index_messages_on_workout_set_id"
   end
