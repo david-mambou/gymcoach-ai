@@ -1,13 +1,22 @@
 <div class="card card-body">
   <div class="card-header border-top">
     <div class="row justify-content-between">
-      <h5>Date + Workout name(main) <%#= workout.day %> </h5>
+      <% if id == :today %>
+        <h6> <%= Date.today.strftime("(%A) %d/%b/%Y")  %></h6>
+      <% else  %>
+        <h5>Check Me Out</h5>
+      <% end %>
       <a class="fas fa-eye" data-toggle="collapse" href="#Collapse-<%= id %>" role="button" aria-expanded="false" aria-controls="Collapse-<%= id %>"></a>
     </div>
     <div class="collapse multi-collapse" id="Collapse-<%= id %>">
       <% workouts.each do |workout| %>
-        <%= render "users/workout_display", locals: {workout: workout} %>
+        <% if id == :today || id == :upcoming %> <%#= <<<< this line is efed? %>
+          <%= render "users/workout_display", locals: {workout: workout} %>
+        <% else %>
+          <%= render "users/workout_history_display", workout: workout, id: id %>
+        <% end %>
       <% end %>
     </div>
   </div>
 </div>
+<%# Workout.all.order(day: :DESC) %>

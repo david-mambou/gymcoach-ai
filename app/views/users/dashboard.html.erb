@@ -3,7 +3,6 @@
     <div class="col-md-8 col-xl-6 chat">
       <% if current_user.workouts.present? %>
         <h2>Today's Workouts</h2>
-        <h5> <%= Date.today.strftime("(%A) %d/%b/%Y") %></h5>
         <% if @today_workouts.empty? %>
           You have no workouts scheduled for today
         <% else %>
