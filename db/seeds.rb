@@ -6,11 +6,26 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 p "clearing database.."
+User.destroy_all
+jesse = User.new(
+  email: 'jesse@lewagon.com', 
+  password: 'password123!',
+  password_confirmation: 'password123!',
+  admin: true,
+  goal: 'increase size in my chest, shoulders, and biceps',
+  age: 30,
+  name: 'Jesse',
+  routine: 'legs,chest,push'
+)
+jesse.save!
+
+Workout.destroy_all
 Workout.destroy_all
 WorkoutSet.destroy_all
 Exercise.destroy_all
 Station.destroy_all
 Message.destroy_all
+WorkoutTemplate.destroy_all
 p "database cleared.."
 
   # Station.create(name: 'name',
@@ -29,6 +44,36 @@ def gen_random_workout_set(workout, exercise)
   new_set.workout = workout
   new_set.save!
 end
+
+###############################################################################################
+
+# workout templates
+p 'generating workout templates..'
+WorkoutTemplate.create!(
+  name: "German Volume Training", 
+  progression_curve: "40x10,40x10,40x10,40x10,40x10,40x10,40x10,40x10,40x10,40x10",
+  good_for: "Improving endurance, Fewer Gym Workouts Per Week, High Volume",
+  bad_for: "Sore Body Common, Not good for strength, fewer exercises per gym session")
+
+WorkoutTemplate.create!(
+  name: "Pyramid 12/10/8/15", 
+  progression_curve: "60x12,70x10,80x8,50x15",
+  good_for: "Covers 8-12 hypertrophy range",
+  bad_for: "Requires 4 or more sets with same muscles for best results.")
+  
+WorkoutTemplate.create!(
+  name: "3/7 Method", 
+  progression_curve: "60x12,70x10,80x8,50x15",
+  good_for: "Great for short gym sessions",
+  bad_for: "")
+
+WorkoutTemplate.create!(
+  name: "1 Rep Max Test (Beginner)", 
+  progression_curve: "0x10,0x8,0x6,0x5,0x5,0x5",
+  good_for: "Ideal for Beginners, First time test",
+  bad_for: "getting actual workout done")
+
+p "Created #{WorkoutTemplate.count} workout templates"
 
 ###############################################################################################
 
@@ -63,31 +108,14 @@ p "created #{Exercise.count} exercises"
 
 ###############################################################################################
 
-# create workout templates
-p "creating workout templates.."
-5.times.with_index do |i|
-  specific_workout = Workout.new(name: "workout template #{i}", status: 'template', pros_and_con_list: "good for gaining strength")
-  specific_workout.user = User.first
-  specific_workout.save!
-  p "creating workout called: #{specific_workout.name} "
-
-  # create workout sets
-  3.times do
-    # get one exercise for 4 sets
-    specific_exercise = Exercise.all.sample
-    4.times do
-      gen_random_workout_set(specific_workout, specific_exercise)
-    end
-  end
-end
-###############################################################################################
-
-p 'creating push workout'
+p 'creating workouts'
 40.times do
-  specific_workout = Workout.new(name: "Push Day", pros_and_con_list: "Focuses on chest, triceps, and shoulders", mental_state: MENTAL_STATE.sample, day: Date.today + rand(-150..15))
+  specific_workout = Workout.new(name: "Push Day", mental_state: MENTAL_STATE.sample, day: Date.today + rand(-150..15))
   status = specific_workout.day <= Date.today ? 'finished' : 'active'
   specific_workout.status = status
   specific_workout.user = User.first
+  specific_workout.workout_template = WorkoutTemplate.all.sample
+  specific_workout.routine_tags = ['legs','chest','push'].sample
   specific_workout.save!
   p "creating workout: #{specific_workout.name}"
 

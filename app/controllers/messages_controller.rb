@@ -1,64 +1,48 @@
 class MessagesController < ApplicationController
+
+  # existing session, just show messages, wait for user action
+  def index
+    @messages = policy_scope(Message)
+    @message = Message.new # so that we can use the input form anytime
+
+    if params[:new_session]
+      purgable_messages = current_user.messages
+      purgable_messages.destroy_all
+
+      # if Message.count == 0 
+      #   # first time user
+      #   Message.receive(current_user, "Welcome! I will be your new coach, nice to meet you")
+      # else
+        # returning user
+        Message.receive(current_user, "Welcome back #{current_user.name}! Today, we are scheduled for a #{ current_user.current_routine } routine. How do you feel about this?")
+        next_workout = Workout.latest_workout_for_routine(current_user.current_routine)
+        Message.create!({
+          category: "card_workout",
+          user: current_user,
+          workout: next_workout
+                        })
+      # end
+    end
+  end
+
+  # send user message to AI
   def create
-    # send user message to AI
+    @user = current_user
     user_submission = Message.new(message_params)
+    user_submission.user = @user
     authorize user_submission
 
-    # check if user message is valid
     if user_submission.save!
-      # determine user intent and process with AI
-      intent = helpers.ai_direct_query(user_submission.content)
-
-      case intent
-      when 'create_workout'
-        helpers.ai_create_workout(user_submission.content)
-      when 'general_answer'
-        helpers.ai_general_answer(user_submission.content)
-      else
-        helpers.ai_general_answer(user_submission.content)
-      end
+      # determine user intent and respond with AI
+      helpers.ai_direct_query(user_submission.content)
     end
 
-    redirect_to new_workout_path
-
-
-    # 1) get users intent
-    # ai_direct_queryparams[:message][:content]
-
-
-    # todo: change this to ajax call to make responses immediate
-
-
-        # exercise_recommendation = helpers.ai_find_exercise_for_muscle("lets workout my back")
-    # muscles_used = helpers.ai_find_muscles_for_exercise("what does benchpress work on?")
-    # exercise_recommendation = helpers.ai_find_exercise_for_muscle("I want to work on chest")
-    # exercise_recommendation = helpers.ai_find_exercise_for_muscle("I want to work on my front delts")
-    # exercise_recommendation = helpers.ai_find_exercise_for_muscle(" I want to work back today")
-    # exercise_recommendation = helpers.ai_find_exercise_for_muscle("I want to work on chest. Can you suggest something that only uses dumbbells for today? I dont want to do dumbbell bench press")
-    # exercise_recommendation = helpers.ai_find_exercise_for_muscle("I am thinking to use only dumbbells today for chest")
-    # direct_user_query = helpers.ai_direct_query("this workout looks too easy")
-
-
-
-
-
-    # message = Message.new(message_params)
-    # authorize message
-    # if message.save! && message.content != ""
-
-                                      # todo: change this to a chat view.rb?
-
-                                      # elect the AI method here: if it's not a workout creation, the chat should another AI method
-                                      # helpers.ai_generic_reply(message.content)
-
-      # helpers.ai_find_exercise_for_muscle(message.content)
-      # redirect_to new_workout_path
-    # end
+    redirect_to messages_path
   end
 
   private
 
   def message_params
-    params.require(:message).permit(:category, :content, :workout_id, :workout_set_id, :message)
+    params.require(:message).permit(:category, :content, :workout_id, :workout_set_id, :message, :user_id)
   end
 end

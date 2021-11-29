@@ -1,7 +1,7 @@
 class MessagePolicy < ApplicationPolicy
   class Scope < Scope
     def resolve
-      record.user == user
+      scope.where(user: user)
     end
   end
 

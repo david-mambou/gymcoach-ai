@@ -1,14 +1,15 @@
 class WorkoutsController < ApplicationController
   def new
     # add real template from workouts
-    @template_workout = Workout.find_by(status: 'template')
+    @template_workout = Workout.first
     authorize @template_workout
-    @messages = Message.order(:created_at)
+    @messages = Message.all
     @message = Message.new
 
     # AI Kick off user query with a generic message if start of chat
-    if Message.count == 0
+    if Message.count == 0 
       Message.create!({
+        user: current_user,
         category: "receive",
         content: "Hi, I will be your personal coach today. What would you like to do today?"
       })
@@ -18,13 +19,10 @@ class WorkoutsController < ApplicationController
   def create
     @workout = Workout.find(params[:template_workout])
     # assign a new variable with the instance (makes a copy)
-    # new_workout = @workout.amoeba_dup
-    # new_workout.pros_and_con_list.add(@workout.pros_and_con_list)
+      # new_workout = @workout.amoeba_dup
+      # new_workout.pros_and_con_list.add(@workout.pros_and_con_list)
     # for amoeba, which duplicates children, tags are not duplicated, so do manually
-    # new_workout.status = 'template'
-    @workout.status = 'active'
-    @workout.name = "Your Workout ##{@workout.id}"
-    @workout.save
+    # new_workout.template = false
     authorize @workout
     redirect_to workout_path(@workout)
     # if new_workout.save!
@@ -67,18 +65,9 @@ class WorkoutsController < ApplicationController
     }
   end
 
-  # def activate
-  #   raise
-  #   @workout = Workout.find(params[:workout])
-  #   authorize @workout
-  #   @workout.status = 'active'
-  #   @workout.save
-  #   redirect_to workout_path(@workout)
-  # end
-
   def update
     @workout = Workout.find(params[:id])
-    # @workout.status = 2
+    @workout.status = 2
     authorize @workout
     if @workout.save
       redirect_to dashboard_path
