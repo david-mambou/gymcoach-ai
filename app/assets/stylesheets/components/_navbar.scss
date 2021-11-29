@@ -1,6 +1,13 @@
+
+
 .navbar-custom {
   justify-content: space-between;
-  background-color: #000000;
+  background-color: #23233e;
+  color: #f6f6f9;
+
+  a {
+    color: #f6f6f9;
+  }
 }
 
 .navbar-custom .navbar-collapse {
@@ -13,7 +20,57 @@
 
 .fixed-bottom {
   position: sticky !important;
-  background-color: black;
-  margin: 3px !important;
   align-items: center;
+}
+
+// BOTTOM MENU
+.appBottomMenu {
+  font-weight: var(--bs-body-font-weight);
+  text-align: var(--bs-body-text-align);
+  -webkit-text-size-adjust: 100%;
+  -webkit-tap-highlight-color: transparent;
+  font-family: "Inter",sans-serif;
+  font-size: 15px;
+  line-height: 1.55rem;
+  letter-spacing: -.015rem;
+  -webkit-font-smoothing: antialiased;
+  color: #8195a6;
+  box-sizing: border-box;
+  min-height: 56px;
+  position: fixed;
+  z-index: 999;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-top: 1px solid #E1E1E1;
+  padding-left: 4px;
+  padding-right: 4px;
+  padding-bottom: env(safe-area-inset-bottom);
+  background: #0F1C2F;
+  border-top-color: #1B283B;
+
+    
+    .item {
+      font-weight: var(--bs-body-font-weight);
+      font-family: "Inter",sans-serif;
+      -webkit-font-smoothing: antialiased;
+      box-sizing: border-box;
+      transition: none;
+      color: #1E74FD;
+      outline: 0 !important;
+      text-decoration: none;
+      font-size: 9px;
+      letter-spacing: 0;
+      text-align: center;
+      width: 100%;
+      height: 56px;
+      line-height: 1.2em;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
 }
