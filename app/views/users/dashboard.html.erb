@@ -6,12 +6,12 @@
         <% if @today_workouts.empty? %>
           You have no workouts scheduled for today
         <% else %>
-          <%= render "workout_collapse", id:"colapseOne", workouts: @today_workouts %>
+          <%= render "workout_collapse", id: :today, workouts: @today_workouts %>
         <% end %>
         <h2>Upcoming Workouts</h2>
-        <%= render "workout_collapse", id:"colapseTwo", workouts: @upcoming_workouts %>
+        <%= render "workout_collapse", id: :upcoming, workouts: @upcoming_workouts %>
         <h2>Workout History</h2>
-        <%= render "workout_collapse", id:"colapseThree", workouts: @past_workouts %>
+        <%= render "workout_collapse", id: :past, workouts: @past_workouts %>
       <% else %>
         No workouts yet.
         <%= link_to 'Start New Session', messages_path(new_session: true), class: "btn btn-primary"  %>

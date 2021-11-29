@@ -6,6 +6,8 @@
   <% end %>
   Notes: <%= locals[:workout].mental_state %><br>
   <%# For viewing purposes %>
+  <%# Group by date %>
+  <%# iterate over the hash Key(date) => value(workouts) %>
   Status: <%= locals[:workout].status %><br>
   <% unique_exercises = retrieve_unique_exercises(workout) %>
   <% unique_exercises.each do |exercise| %>

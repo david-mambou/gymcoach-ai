@@ -1,19 +1,13 @@
-<div id="accordion">
-  <div class="card">
-    <div class="card-header border-top" id="headingOne">
-      <h5 class="mb-0">
-        <div class="row justify-content-between">
-          <h5>Date + Workout name(main)</h5>
-          <a class="fas fa-eye" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne"></a>
-        </div>
-      </h5>
+<div class="card card-body">
+  <div class="card-header border-top">
+    <div class="row justify-content-between">
+      <h5>Date + Workout name(main) <%#= workout.day %> </h5>
+      <a class="fas fa-eye" data-toggle="collapse" href="#Collapse-<%= id %>" role="button" aria-expanded="false" aria-controls="Collapse-<%= id %>"></a>
     </div>
-    <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
-      <div class="card-body">
-        <% workouts.each do |workout| %>
-          <%= render "users/workout_display", locals: {workout: workout} %>
-        <% end %>
-      </div>
+    <div class="collapse multi-collapse" id="Collapse-<%= id %>">
+      <% workouts.each do |workout| %>
+        <%= render "users/workout_display", locals: {workout: workout} %>
+      <% end %>
     </div>
   </div>
 </div>
