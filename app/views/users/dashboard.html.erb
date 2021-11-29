@@ -2,18 +2,17 @@
   <div class="row justify-content-center">
     <div class="col-md-8 col-xl-6 chat">
       <% if current_user.workouts.present? %>
-        <h2>Today's Workouts</h2>
+        <h2 class="row justify-content-center">Workouts</h2>
         <% if @today_workouts.empty? %>
-          You have no workouts scheduled for today
+          You have no workouts scheduled for today.
+          <%= link_to 'Start New Session', messages_path(new_session: true), class: "btn btn-primary"  %>
         <% else %>
           <%= render "workout_collapse", id: :today, workouts: @today_workouts %>
         <% end %>
-        <h2>Upcoming Workouts</h2>
         <%= render "workout_collapse", id: :upcoming, workouts: @upcoming_workouts %>
-        <h2>Workout History</h2>
         <%= render "workout_collapse", id: :past, workouts: @past_workouts %>
       <% else %>
-        No workouts yet.
+        No workouts yet!
         <%= link_to 'Start New Session', messages_path(new_session: true), class: "btn btn-primary"  %>
       <% end %>
     </div>
