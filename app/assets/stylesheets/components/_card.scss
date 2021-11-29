@@ -8,11 +8,12 @@
 }
 
 .sets-dot {
-  height: 40px;
-  width: 40px;
-  background-color: #bbb;
+  display: flex;
+  height: 20px;
+  width: 20px;
+  background-color: rgb(251, 0, 0);
   border-radius: 50%;
-  display: inline-block;
+  font-size: 10px;
   p {
     margin-top: 7.5px;
     margin-bottom: 1rem;
