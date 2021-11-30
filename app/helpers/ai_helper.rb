@@ -103,7 +103,7 @@ module AiHelper
      })
 
        ai_hash = JSON.parse response.to_s
-       ai_hash["answers"].each do |answer|
+       ai_hash["answers"]&.each do |answer|
         # receive just a basic answer
         Message.create!({
           category: "receive",
@@ -149,7 +149,7 @@ module AiHelper
     )
 
     # each answer is an exercise name
-    reply.split(',').take(3).each_with_index do |exercise_name, index|
+    reply&.split(',').take(3).each_with_index do |exercise_name, index|
       # get existing exercise, else create new
       exercise = Exercise.where(name: exercise_name).first
       if exercise.nil?
@@ -234,7 +234,7 @@ module AiHelper
                           user: current_user,
                           status: 'active')
     # each answer is an exercise name
-    reply.split(', ').each_with_index do |exercise_name, index|
+    reply&.split(', ').each_with_index do |exercise_name, index|
       exercise = Exercise.where(name: exercise_name).first # to improve
       3.times do
         WorkoutSet.create(nb_of_reps: 5,

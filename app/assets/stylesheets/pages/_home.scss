@@ -3,3 +3,13 @@ body,html{
   background: #282c33;
   color: white;
 }
+
+.home-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  height: 85vh;
+  text-align: center;
+  margin: 0 45px;
+}
