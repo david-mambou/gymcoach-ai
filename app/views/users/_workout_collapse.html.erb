@@ -1,9 +1,7 @@
 <div class="card-body">
   <div class="card-header border-top">
     <div class="row justify-content-between">
-      <% if id == :today %>
-        <h5> Today (<%= Date.today.strftime("%Y - %m - %d") %>) <span class='pulse-button'>P</span> </h5>
-      <% elsif id == :upcoming  %>
+      <% if id == :upcoming  %>
         <h5>Upcoming Workouts</h5>
       <% else id == :past  %>
         <h5>Past Workouts</h5>

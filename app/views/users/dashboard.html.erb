@@ -5,9 +5,12 @@
         <h2 class="row justify-content-center">Workouts</h2>
         <% if @today_workouts.empty? %>
           You have no workouts scheduled for today.
-          <%= link_to 'Start New Session', messages_path(new_session: true), class: "btn btn-primary"  %>
+          <% if @current_workout.present? %>
+            <%= link_to 'Start New Session', messages_path(new_session: true), class: "btn btn-primary d-flex justify-content-center mb-3"%>
+          <% end %>
         <% else %>
-          <%= render "workout_collapse", id: :today, workouts: @today_workouts %>
+          <h5> Current Workout <span class='pulse-button'></span></h5>
+          <%= render "users/workout_display", workouts: @today_workouts, locals: { workout: @current_workout } %>
         <% end %>
         <%= render "workout_collapse", id: :upcoming, workouts: @upcoming_workouts %>
         <%= render "workout_collapse", id: :past, workouts: @past_workouts %>
@@ -15,11 +18,5 @@
         No workouts yet!
         <%= link_to 'Start New Session', messages_path(new_session: true), class: "btn btn-primary"  %>
       <% end %>
-      </div>
     </div>
   </div>
-  <h2 class="row justify-content-center">Goals</h2>
-</div>
-<%# <div> %>
-<%# <%= workout.day %>
-<%# </div> %>
