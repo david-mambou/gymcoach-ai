@@ -36,8 +36,8 @@ class WorkoutsController < ApplicationController
 
   def show
     # get latest active workout for user
-    @workout = Workout.where(status: 'active').last
-    authorize Workout
+    @workout = Workout.where(status: 'active').last || Workout.new
+    authorize @workout
 
     @chart_data_weekly = {
       labels: [6.days.ago.strftime("%a, %d"), 5.days.ago.strftime("%a, %d"), 4.days.ago.strftime("%a, %d"), 3.days.ago.strftime("%a, %d"), 2.days.ago.strftime("%a, %d"), 1.days.ago.strftime("%a, %d")],
