@@ -21,7 +21,7 @@
           <% if index == 0 %>Difficulty<br><% end %>
           <%= f.input :difficulty, label: false, collection: WorkoutSet.difficulties.keys, input_html: {class: "workout-select-input", data: {action: "change->edit-set#update"}} %>
         </div>
-
+        <%# To be removed %>
         <%= f.input :completed, label: false, input_html: {class: "transform: scale(2.0)",data: {action: "change->edit-set#update"}} %>
       <% end %>
 
