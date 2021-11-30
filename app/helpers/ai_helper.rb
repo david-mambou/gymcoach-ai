@@ -71,7 +71,10 @@ module AiHelper
        model: "davinci",
        examples_context: "This is a gym coach, very friendly, and will respond always to keep user in the gym to do their workout",
        examples: [
-         
+
+        # silly
+        ["lol", "Whats so funny?"],
+
         # opinions
         ["just think this is cool", "Thanks. How about we workout?"],
 
