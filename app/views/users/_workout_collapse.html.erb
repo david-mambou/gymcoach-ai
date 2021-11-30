@@ -8,7 +8,7 @@
       <% else id == :past  %>
         <h5>Past Workouts</h5>
       <% end %>
-      <a class="fas fa-eye" data-toggle="collapse" href="#Collapse-<%= id %>" role="button" aria-expanded="false" aria-controls="Collapse-<%= id %>"></a>
+      <a class="fas fa-eye text-decoration-none" data-toggle="collapse" href="#Collapse-<%= id %>" role="button" aria-expanded="false" aria-controls="Collapse-<%= id %>"></a>
     </div>
     <div class="collapse multi-collapse" id="Collapse-<%= id %>">
       <% workouts.each do |workout| %>
