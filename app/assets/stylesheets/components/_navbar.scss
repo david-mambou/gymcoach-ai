@@ -1,10 +1,11 @@
 $nav-bg-color: #34383f;
 
-
 .navbar-custom {
   justify-content: space-between;
   background-color: $nav-bg-color;
   color: #f6f6f9;
+
+
 
   a {
     color: #f6f6f9;
@@ -22,6 +23,12 @@ $nav-bg-color: #34383f;
 .fixed-bottom {
   position: sticky !important;
   align-items: center;
+}
+
+.navbar-custom a {
+  &:hover {
+    text-decoration: none;
+  }
 }
 
 // BOTTOM MENU

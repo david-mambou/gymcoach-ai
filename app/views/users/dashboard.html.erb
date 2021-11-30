@@ -1,8 +1,8 @@
 <div class="container-fluid">
   <div class="row justify-content-center">
-    <div class="col-md-8 col-xl-6 chat">
-      
-      <% if current_user.workouts.present? %>
+    <div class="col-md-8 col-xl-6">
+      <div class="py-5">
+              <% if current_user.workouts.present? %>
         <h2>Today's Workouts</h2>
           <% if @today_workouts.empty? %>
            You have no workouts scheduled for today
@@ -28,6 +28,7 @@
       <% else %>
         user has not done any workouts yet.
       <% end %>
+      </div>
     </div>
   </div>
 </div>

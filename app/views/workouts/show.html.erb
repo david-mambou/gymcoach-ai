@@ -1,8 +1,8 @@
 <div class="container-fluid">
   <div class="row justify-content-center">
     <div class="col-md-8 col-xl-6 chat">
-      <div class="">
-        <div class=" msg_card_body">
+      <div class="py-5">
+        <div class="msg_card_body">
         
         <%# show if there is active workout %>
         <% if @workout.present? %>
@@ -34,14 +34,17 @@
               </div>
             </div>
           <% end %>
-          <div class="navbar fixed-bottom navbar-expand" style="justify-content: center;">
+          <div class="navbar  navbar-expand" style="justify-content: center;">
             <%= simple_form_for @workout, method: :patch, url: mark_workout_finished_path(@workout) do |f| %>
               <%= f.submit 'Finish Workout', class: "btn btn-primary m-3" %>
             <% end %>
           </div>
         <% else %>
             <%# no current workout, alert user %>
-            Start a workout with your coach!
+            <div class="border border-dark rounded-lg mb-3 p-2 text-center">
+              Looks like you don't have any workouts started. <br>
+              Talk to your <%= link_to 'coach', messages_path %> to start a workout!</div>
+            </div>
         <% end %>
 
 
