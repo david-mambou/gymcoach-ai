@@ -3,6 +3,8 @@ class WorkoutSetsController < ApplicationController
     @workout_set = WorkoutSet.find(params[:id])
     authorize @workout_set
     @workout_set.update(sanitized_params)
+    @workout_set.completed = @workout_set.difficulty.present?
+    @workout_set.save!
     #   redirect_to workout_path(@workout_set.workout)
     # else
     #   @workout = @workout_set.workout
