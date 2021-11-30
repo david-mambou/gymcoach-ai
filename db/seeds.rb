@@ -83,7 +83,6 @@ p "created #{Exercise.count} exercises"
 
 ###############################################################################################
 # prep workout set generation
-MUSCLES = ['hamstrings', 'glutes', 'pecs', 'deltoids', 'quads', 'calves', 'biceps', 'erector spinae' 'triceps', 'forearms', 'shoulders', 'traps', 'abs', 'obliques', 'trapezius', 'lats', 'glutes'].freeze
 MENTAL_STATE = ['tired','hungry', 'hungover','Long Rest Before', 'Good sleep', 'headache', 'knee pain', 'elbow pain', 'good energy', 'low energy'].freeze
 
 def gen_random_workout_set(workout, exercise)
