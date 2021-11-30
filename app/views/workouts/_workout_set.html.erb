@@ -18,6 +18,8 @@
           <%= f.input :weight, placeholder: workout_set.weight, label: false, input_html: { min:"0", max:"200", step: "#{workout_set.exercise.station.base_incremental_weight}", data: {action: "change->edit-set#update"} } %>
         </div>
 
+        <%# Install simple_form_extension gem to use this %>
+        <%# as: :slider, min: 0, max: 5, step: 1 %>
         <div class="col">
           <% if index == 0 %>Difficulty<br><% end %>
           <%= f.input :difficulty, label: false, collection: WorkoutSet.difficulties.keys, input_html: {class: "workout-select-input", data: {action: "change->edit-set#update"}} %>
