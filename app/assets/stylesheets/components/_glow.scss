@@ -1,0 +1,30 @@
+// make elements
+.glow {
+  font-size: 80px;
+  color: #fff;
+  text-align: center;
+  -webkit-animation: glow 1s ease-in-out infinite alternate;
+  -moz-animation: glow 1s ease-in-out infinite alternate;
+  animation: glow 1s ease-in-out infinite alternate;
+}
+
+$glow-color-start: #00b0e6;
+$glow-color-end: #12bfd6;
+
+@-webkit-keyframes glow {
+  from {
+    text-shadow: 
+    0 0 10px #fff, 0 0 20px #fff, 0 0 30px $glow-color-start, 
+    0 0 40px $glow-color-start, 0 0 50px $glow-color-start, 
+    0 0 60px $glow-color-start, 0 0 70px $glow-color-start;
+  }
+  to {
+    text-shadow: 0 0 20px #fff, 
+    0 0 30px $glow-color-start, 
+    0 0 40px $glow-color-start, 
+    0 0 50px $glow-color-start, 
+    0 0 60px $glow-color-start, 
+    0 0 70px $glow-color-start, 
+    0 0 80px $glow-color-start;
+  }
+}

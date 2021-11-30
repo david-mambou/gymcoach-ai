@@ -1,13 +1,16 @@
-$message-border-radius: 15px;
+$message-border-radius: 6px 6px 6px 1px;
+$message-border-radius-right: 6px 6px 1px 6px;
 
 .chat{
   margin-top: auto;
   margin-bottom: auto;
 }
-.card{
+.message-container{
   // height: 94vh;
   border-radius: 15px !important;
-  background-color: rgba(0,0,0,0.4) !important;
+  background-color: inherit !important;
+  padding-top: 25px;
+  padding-bottom: 143px;
 
 }
 .contacts_body{
@@ -37,10 +40,7 @@ $message-border-radius: 15px;
   border:0 !important;
   color:white !important;
 }
-.search:focus{
-  box-shadow:none !important;
-  outline:0px !important;
-}
+
 .type_msg{
   background-color: rgba(0,0,0,0.3) !important;
   border:0 !important;
@@ -48,10 +48,7 @@ $message-border-radius: 15px;
   height: 60px !important;
   overflow-y: auto;
 }
-.type_msg:focus{
-  box-shadow:none !important;
-  outline:0px !important;
-}
+
 .attach_btn{
   border-radius: 15px 0 0 15px !important;
   background-color: rgba(0,0,0,0.3) !important;
@@ -144,7 +141,7 @@ $message-border-radius: 15px;
   margin-bottom: auto;
   margin-left: 10px;
   border-radius: $message-border-radius;
-  background-color: #011b21;
+  background-color: #1fb6fd;
   padding: 10px;
   position: relative;
 }
@@ -152,8 +149,8 @@ $message-border-radius: 15px;
   margin-top: auto;
   margin-bottom: auto;
   margin-right: 10px;
-  border-radius: $message-border-radius;
-  background-color: #25b4a9;
+  border-radius: $message-border-radius-right;
+  background-color: #164974;
   padding: 10px;
   position: relative;
 }
@@ -227,7 +224,7 @@ $message-border-radius: 15px;
   width: 100%;
   min-height: 200px;
   margin-left: 0;
-  background-color: #1f1f1f;
+  background-color: #34383f;
   border-radius: $message-border-radius;
   position: relative;
   justify-content: space-between;
@@ -259,4 +256,90 @@ $message-border-radius: 15px;
   bottom: 18px;
   width: 100%;
   justify-content: center;
+}
+
+// Footer
+.chatFooter {
+  font-family: "Inter",sans-serif;
+  font-size: 15px;
+  line-height: 1.55rem;
+  letter-spacing: -.015rem;
+  color: #ffffff;
+  min-height: 56px;
+  border-top: 1px solid #E1E1E1;
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 48px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-left: 14px;
+  padding-right: 14px;
+  background: #282c33;
+  border-top-color: #282c33;
+
+  form {
+    font-weight: var(--bs-body-font-weight);
+    text-align: var(--bs-body-text-align);
+    -webkit-text-size-adjust: 100%;
+    -webkit-tap-highlight-color: transparent;
+    font-family: "Inter",sans-serif;
+    font-size: 15px;
+    line-height: 1.55rem;
+    letter-spacing: -.015rem;
+    -webkit-font-smoothing: antialiased;
+    box-sizing: border-box;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    button {
+      box-sizing: border-box;
+      margin: 0;
+      font-family: inherit;
+      text-transform: none;
+      outline: 0 !important;
+      -webkit-appearance: button;
+      text-align: center;
+      vertical-align: middle;
+      user-select: none;
+      border: 1px solid transparent;
+      font-size: 13px;
+      line-height: 1.2em;
+      font-weight: 500;
+      box-shadow: none !important;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      transition: none;
+      text-decoration: none !important;
+      border-width: 2px;
+      width: 40px;
+      height: 40px;
+      padding: 0;
+      background: $blue !important;
+      border-color: $blue !important;
+      color: #ffffff !important;
+      cursor: pointer;
+      border-radius: 100px !important;
+    }
+
+    .boxed {
+      font-weight: var(--bs-body-font-weight);
+      text-align: var(--bs-body-text-align);
+      font-family: "Inter",sans-serif;
+      font-size: 15px;
+      line-height: 1.55rem;
+      letter-spacing: -.015rem;
+      -webkit-font-smoothing: antialiased;
+      color: #8195a6;
+      box-sizing: border-box;
+      margin: 0;
+      padding: 8px 0;
+      width: calc(100% - 54px);
+    }
+  }
 }
