@@ -1,25 +1,12 @@
-// _________________________________card_one____________________________________
+// _________________________________Workout Card____________________________________
 
 .workout-card {
   background-color: rgba(109, 248, 255, 0.1);
-  color: #F5B353;
+  color: #f5da53;
   border-radius: 10px !important;
   margin: 3px !important;
 }
-
-.sets-dot {
-  display: flex;
-  height: 20px;
-  width: 20px;
-  background-color: rgb(251, 0, 0);
-  border-radius: 50%;
-  font-size: 10px;
-  p {
-    margin-top: 7.5px;
-    margin-bottom: 1rem;
-    justify-content: center;
-  }
-}
+// _________________________________Overwrites :/____________________________________
 
 .container-fluid {
   padding: 10px !important;
@@ -28,5 +15,3 @@
 .card-body {
   padding: 10px !important;
 }
-
-// _________________________________card_two____________________________________
