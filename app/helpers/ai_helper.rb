@@ -48,7 +48,7 @@ module AiHelper
       stop: ['\n', '===', '---']
     })
 
-    intent = JSON.parse(response.to_s)['answers'].first
+    intent = JSON.parse(response.to_s)['answers']&.first
 
     case intent
     when 'recommend_workout'
@@ -140,7 +140,7 @@ module AiHelper
     })
 
     reply = JSON.parse response.to_s
-    reply = reply["answers"].first
+    reply = reply["answers"]&.first
 
     workout = Workout.new(name: 'Workout Recommendation',
       day: Date.today,
@@ -151,7 +151,7 @@ module AiHelper
     # each answer is an exercise name
     reply&.split(',').take(3).each_with_index do |exercise_name, index|
       # get existing exercise, else create new
-      exercise = Exercise.where(name: exercise_name).first
+      exercise = Exercise.find_by(name: exercise_name)
       if exercise.nil?
         exercise = Exercise.new(name: exercise_name)
         exercise.station = Station.all.sample
@@ -228,14 +228,14 @@ module AiHelper
     })
 
     reply = JSON.parse response.to_s
-    reply = reply["answers"].first
+    reply = reply["answers"]&.first
     workout = Workout.new(name: 'Workout 1',
                           day: Date.today,
                           user: current_user,
                           status: 'active')
     # each answer is an exercise name
     reply&.split(', ').each_with_index do |exercise_name, index|
-      exercise = Exercise.where(name: exercise_name).first # to improve
+      exercise = Exercise.find_by(name: exercise_name) # to improve
       3.times do
         WorkoutSet.create(nb_of_reps: 5,
                                       order_index: index,
