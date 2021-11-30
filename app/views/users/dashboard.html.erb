@@ -2,13 +2,15 @@
   <div class="row justify-content-center">
     <div class="col-md-8 col-xl-6 chat">
       <% if current_user.workouts.present? %>
-        <h2 class="row justify-content-center">Workouts</h2>
+        <div class="row justify-content-center mb-5">
+          <h2>Workouts</h2>
+        </div>
         <% if @current_workout == nil %>
           You have no workouts scheduled for today.
           <%= link_to 'Start New Session', messages_path(new_session: true), class: "btn btn-primary d-flex justify-content-center mb-3"%>
         <% else %>
           <% if @current_workout.present? %>
-            <h5> Current Workout <span class='pulse-button'></span></h5>
+            <span class='pulse-button'></span>
             <%= render "users/workout_display", workouts: @today_workouts, locals: { workout: @current_workout } %>
           <% end %>
         <% end %>
