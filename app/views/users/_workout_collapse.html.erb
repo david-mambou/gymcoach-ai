@@ -12,12 +12,8 @@
     </div>
     <div class="collapse multi-collapse" id="Collapse-<%= id %>">
       <% workouts.each do |workout| %>
-        <% if id == :past %>
-          <%= render "users/workout_history_display", workout: workout, id: id %>
-        <% else %>
           <%= render "users/workout_display", locals: {workout: workout} %>
         <% end %>
-      <% end %>
     </div>
   </div>
 </div>
