@@ -1,5 +1,5 @@
   <div class="" data-controller="edit-set">
-      <% form_class = 'no-bs-validation form-inline' %>
+      <% form_class = 'no-bs-validation form-inline workout-set' %>
       <% form_class << ' set-completed' if workout_set.completed? %>
       <%= simple_form_for [workout, workout_set], remote: true, namespace: "set-#{workout_set.id}", html: { novalidate: true, class: form_class, data: {edit_set_target: "form"} } do |f| %>
         <%= hidden_field_tag :index, index %>
