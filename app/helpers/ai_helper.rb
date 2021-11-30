@@ -251,5 +251,5 @@ module AiHelper
                     })
   end
 
-  
+
 end
