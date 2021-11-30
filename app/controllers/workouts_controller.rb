@@ -18,13 +18,16 @@ class WorkoutsController < ApplicationController
 
   def create
     @workout = Workout.find(params[:template_workout])
+    @workout.status = 'active'
+    authorize @workout
+    if @workout.save!
+      redirect_to workout_path(@workout)
+    end
     # assign a new variable with the instance (makes a copy)
       # new_workout = @workout.amoeba_dup
       # new_workout.pros_and_con_list.add(@workout.pros_and_con_list)
     # for amoeba, which duplicates children, tags are not duplicated, so do manually
     # new_workout.template = false
-    authorize @workout
-    redirect_to workout_path(@workout)
     # if new_workout.save!
     # else
     #   render :new
@@ -32,9 +35,10 @@ class WorkoutsController < ApplicationController
   end
 
   def show
-    @workout = Workout.find(params[:id])
+    # get latest active workout for user
+    @workout = Workout.where(status: 'active').last || Workout.new
     authorize @workout
-    #todo
+
     @chart_data_weekly = {
       labels: [6.days.ago.strftime("%a, %d"), 5.days.ago.strftime("%a, %d"), 4.days.ago.strftime("%a, %d"), 3.days.ago.strftime("%a, %d"), 2.days.ago.strftime("%a, %d"), 1.days.ago.strftime("%a, %d")],
       datasets: [{
