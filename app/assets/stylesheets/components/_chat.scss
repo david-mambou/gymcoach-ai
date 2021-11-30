@@ -142,7 +142,7 @@ $message-border-radius-right: 6px 6px 1px 6px;
   margin-bottom: auto;
   margin-left: 10px;
   border-radius: $message-border-radius;
-  background-color: #319efc;
+  background-color: #1fb6fd;
   padding: 10px;
   position: relative;
 }
@@ -151,7 +151,7 @@ $message-border-radius-right: 6px 6px 1px 6px;
   margin-bottom: auto;
   margin-right: 10px;
   border-radius: $message-border-radius-right;
-  background-color: #5d48cf;
+  background-color: #164974;
   padding: 10px;
   position: relative;
 }
@@ -225,7 +225,7 @@ $message-border-radius-right: 6px 6px 1px 6px;
   width: 100%;
   min-height: 200px;
   margin-left: 0;
-  background-color: #1f1f1f;
+  background-color: #34383f;
   border-radius: $message-border-radius;
   position: relative;
   justify-content: space-between;
@@ -278,8 +278,8 @@ $message-border-radius-right: 6px 6px 1px 6px;
   justify-content: space-between;
   padding-left: 14px;
   padding-right: 14px;
-  background: #101223;
-  border-top-color: #101223;
+  background: #282c33;
+  border-top-color: #282c33;
 
   form {
     font-weight: var(--bs-body-font-weight);
