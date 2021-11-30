@@ -30,7 +30,11 @@
         <% else %>
           <%=  image_tag ["Ryu-working.gif"].sample, class: "gif-size"%>
         <% end %>
-        Notes<%= locals[:workout].mental_state %>
+        <% if locals[:workout].mental_state == nil %>
+          <p style="opacity: 0.3;">Add Note..</p>
+        <% else %>
+          Notes<%= locals[:workout].mental_state %>
+        <% end %>
       </div>
     </div>
   </div>
