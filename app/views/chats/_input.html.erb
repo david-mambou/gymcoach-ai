@@ -1,6 +1,6 @@
 <div class="navbar fixed-bottom navbar-expand">
-  <%= simple_form_for @message, html: { class: "sticky-bottom no-bs-validation form-inline d-flex justify-space-between mx-auto message-box" } do |f| %>
+  <%= simple_form_for @message, remote: true, html: { class: "sticky-bottom no-bs-validation form-inline d-flex justify-space-between mx-auto message-box" } do |f| %>
     <%= f.input :content, placeholder: "Send Message..", as: :string, label: false, input_html: {class: "flex-grow-1"} %>
-    <%= f.submit 'Send', class: 'btn btn-primary' %>
+    <%= f.submit 'Send', class: 'btn btn-primary', id: 'send-button' %>
   <% end %>
 </div>
