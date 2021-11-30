@@ -1,20 +1,19 @@
 <% workout = locals[:workout] %>
 <div class = "border border-dark my-1 p-2 rounded-lg workout-card">
   <div class="container">
-    <%= workout.name %>
     <% workout.workout_sets.each do |workout_set| %>
     <% end %>
     <% unique_exercises = retrieve_unique_exercises(workout) %>
     <% unique_exercises.each do |exercise| %>
-      <%= exercise.name.capitalize %>:
+      <%= exercise.name.capitalize %>
       <div class="d-flex">
         <% workout.workout_sets.each do |workout_set| %>
           <% if exercise.id == workout_set.exercise_id %>
             <div class="p-1" style="display: inline-grid !important;">
-              <div class="badge badge-light" style="border-radius: 50px;">
+              <div class="badge badge-light" style="border-radius: 20px 20px 0px 0px;">
                 <%=workout_set.nb_of_reps%>
               </div>
-              <div class="badge badge-light" style="border-radius: 50px; font-size: 5px; background-color: white;">
+              <div class="badge badge-light" style="border-radius: 50px; font-size: 5px; background-color: white; position: relative; top: -4px;">
                 <%= "#{workout_set.weight}kg" %>
               </div>
             </div>
@@ -22,7 +21,9 @@
         <% end %>
       </div>
     <% end %>
-    Status: <%= locals[:workout].status %> <br>
-    Notes: <%= locals[:workout].mental_state %>
+    <div>
+      Status: <%= locals[:workout].status %> <br>
+      Notes: <%= locals[:workout].mental_state %>
+    </div>
   </div>
 </div>
