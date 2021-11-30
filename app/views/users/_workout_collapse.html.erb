@@ -2,7 +2,7 @@
   <div class="card-header border-top">
     <div class="row justify-content-between">
       <% if id == :today %>
-        <h5> Today (<%= Date.today.strftime("%Y - %m - %d") %>)</h5>
+        <h5>Current Workout</h5>
       <% elsif id == :upcoming  %>
         <h5>Upcoming Workouts</h5>
       <% else id == :past  %>
