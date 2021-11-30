@@ -20,9 +20,12 @@ class WorkoutsController < ApplicationController
     @workout = Workout.find(params[:template_workout])
     @workout.status = 'active'
     authorize @workout
-    if @workout.save!
-      redirect_to workout_path(@workout)
-    end
+    return unless @workout.save!
+
+    Message.create(category: "card_workout_set",
+                   user: current_user,
+                   workout: @workout)
+    redirect_to messages_path
     # assign a new variable with the instance (makes a copy)
       # new_workout = @workout.amoeba_dup
       # new_workout.pros_and_con_list.add(@workout.pros_and_con_list)

@@ -1,0 +1,4 @@
+<% if @workout %>
+  <% current_set = @workout.workout_sets.where(!completed?).first %>
+  <%= render "workouts/workout_set", workout: @workout, workout_set: current_set %>
+<% end %>
