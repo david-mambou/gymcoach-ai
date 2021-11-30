@@ -13,7 +13,7 @@ export default class extends Controller {
       const textString = this.speechTarget.textContent;
       const convertedTextString = new SpeechSynthesisUtterance(textString);
       convertedTextString.lang = "en-GB";
-      const femaleVoices = ["Google UK English Female"]
+      const femaleVoices = ["Google UK English Female", "Google US English", "Google UK English Male"];
       const foundVoice = speechSynthesis.getVoices().find(({ name }) => femaleVoices.includes(name));
       convertedTextString.volume = 1;
       if (foundVoice) {
