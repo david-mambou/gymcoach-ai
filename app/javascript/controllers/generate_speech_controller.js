@@ -17,7 +17,7 @@ export default class extends Controller {
       const foundVoice = speechSynthesis.getVoices().find(({ name }) => femaleVoices.includes(name));
       convertedTextString.volume = 1;
       if (foundVoice) {
-        utter.voice = foundVoice;
+        convertedTextString.voice = foundVoice;
       }
       synth.speak(convertedTextString);
       this.element.dataset.spoken = "true";
