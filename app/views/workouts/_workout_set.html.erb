@@ -4,7 +4,7 @@
         <%= hidden_field_tag :index, index %>
         <div class="col">
           <% if index == 0 %>Set<br><% end %>
-            <%= f.input :order_index, disabled: true,label: false, input_html: { value: index }  %>
+            <%= f.input :order_index, disabled: true,label: false, input_html: { value: index + 1 }  %>
         </div>
 
         <div class="col">
@@ -13,7 +13,7 @@
         </div>
 
         <div class="col">
-          <% if index == 0 %>Kg<br><% end %>
+          <% if index == 0 %>Weight (kg)<br><% end %>
           <%= f.input :weight, placeholder: workout_set.weight, label: false, input_html: { min:"0", max:"200", step: "#{workout_set.exercise.station.base_incremental_weight}", data: {action: "change->edit-set#update"} } %>
         </div>
 
