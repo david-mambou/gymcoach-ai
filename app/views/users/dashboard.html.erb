@@ -10,14 +10,15 @@
           <%= render "workout_collapse", id: :today, workouts: @today_workouts %>
         <% end %>
         <%= render "workout_collapse", id: :upcoming, workouts: @upcoming_workouts %>
-        <%= render "workout_collapse", id: :past, workouts: @past_workouts %>
       <% else %>
         No workouts yet!
         <%= link_to 'Start New Session', messages_path(new_session: true), class: "btn btn-primary"  %>
       <% end %>
-      </div>
+      <%= render "workout_collapse", id: :past, workouts: @past_workouts %>
     </div>
   </div>
+</div>
+<div>
   <h2 class="row justify-content-center">Goals</h2>
 </div>
 <%# <div> %>

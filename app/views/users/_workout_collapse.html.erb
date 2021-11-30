@@ -7,14 +7,16 @@
         <h5>Upcoming Workouts</h5>
       <% else id == :past  %>
         <h5>Past Workouts</h5>
+        <%= render "users/workout_history_display" %>
       <% end %>
       <a class="fas fa-eye text-decoration-none" data-toggle="collapse" href="#Collapse-<%= id %>" role="button" aria-expanded="false" aria-controls="Collapse-<%= id %>"></a>
     </div>
     <div class="collapse multi-collapse" id="Collapse-<%= id %>">
       <% workouts.each do |workout| %>
+        <% if id != :past  %>
           <%= render "users/workout_display", locals: {workout: workout} %>
         <% end %>
+      <% end %>
     </div>
   </div>
 </div>
-<%# Workout.all.order(day: :DESC) %>
