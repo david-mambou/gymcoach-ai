@@ -10,6 +10,12 @@
     <%= render 'chats/message_submit', locals: locals %>
   <% elsif locals[:category] == 'card_workout' && locals[:workout] %>
     <%= render 'chats/message_card_workout', locals: locals %>
+    <%# this card is failing when ther eis no comment, card is being rendered before workout exists %>
+    <%# IMPORTANT %>
+    <%# IMPORTANT %>
+    <%# IMPORTANT %>
+    <%# IMPORTANT %>
+    <%# IMPORTANT %>
   <% elsif locals[:category] == 'card_workout_set' %>
     <%# TODO: category 'card-workout-set' will render a card for a single set %>
   <% elsif locals[:category] == 'card_chart' %>

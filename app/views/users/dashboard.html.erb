@@ -1,34 +1,24 @@
 <div class="container-fluid">
   <div class="row justify-content-center">
-    <div class="col-md-8 col-xl-6">
-      <div class="py-5">
-              <% if current_user.workouts.present? %>
-        <h2>Today's Workouts</h2>
-          <% if @today_workouts.empty? %>
-           You have no workouts scheduled for today
-          <% else %>
-
-            <% @today_workouts.each do |workout| %>
-             <%= render "users/workout_display", locals: {workout: workout} %>
-            <% end %>
-
-          <% end %>
-          
-        <h2>Upcoming Workouts</h2>
-        
-        <% @upcoming_workouts.each do |workout| %>
-          <%= render "users/workout_display", locals: {workout: workout} %>
+    <div class="col-md-8 col-xl-6 chat">
+      <% if current_user.workouts.present? %>
+        <h2 class="row justify-content-center">Workouts</h2>
+        <% if @today_workouts.empty? %>
+          You have no workouts scheduled for today.
+          <%= link_to 'Start New Session', messages_path(new_session: true), class: "btn btn-primary"  %>
+        <% else %>
+          <%= render "workout_collapse", id: :today, workouts: @today_workouts %>
         <% end %>
-        
-        <h2>Workout History</h2>
-         <% @past_workouts.each do |workout| %>
-          <%= render "users/workout_display", locals: {workout: workout} %>
-        <% end %>
-
+        <%= render "workout_collapse", id: :upcoming, workouts: @upcoming_workouts %>
+        <%= render "workout_collapse", id: :past, workouts: @past_workouts %>
       <% else %>
-        user has not done any workouts yet.
+        No workouts yet!
+        <%= link_to 'Start New Session', messages_path(new_session: true), class: "btn btn-primary"  %>
       <% end %>
       </div>
     </div>
   </div>
 </div>
+<%# <div> %>
+<%# <%= workout.day %>
+<%# </div> %>

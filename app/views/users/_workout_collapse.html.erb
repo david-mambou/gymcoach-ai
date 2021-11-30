@@ -1,0 +1,24 @@
+<div class="card-body">
+  <div class="card-header border-top">
+    <div class="row justify-content-between">
+      <% if id == :today %>
+        <h5> Today (<%= Date.today.strftime("%Y - %m - %d") %>)</h5>
+      <% elsif id == :upcoming  %>
+        <h5>Upcoming Workouts</h5>
+      <% else id == :past  %>
+        <h5>Past Workouts</h5>
+      <% end %>
+      <a class="fas fa-eye" data-toggle="collapse" href="#Collapse-<%= id %>" role="button" aria-expanded="false" aria-controls="Collapse-<%= id %>"></a>
+    </div>
+    <div class="collapse multi-collapse" id="Collapse-<%= id %>">
+      <% workouts.each do |workout| %>
+        <% if id == :past %>
+          <%= render "users/workout_history_display", workout: workout, id: id %>
+        <% else %>
+          <%= render "users/workout_display", locals: {workout: workout} %>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+</div>
+<%# Workout.all.order(day: :DESC) %>
