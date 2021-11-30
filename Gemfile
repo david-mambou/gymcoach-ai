@@ -33,6 +33,7 @@ gem 'devise'
 gem 'autoprefixer-rails', '10.2.5'
 gem 'font-awesome-sass'
 gem 'simple_form'
+# gem 'simple_form_extension'
 gem 'pundit'
 gem 'acts-as-taggable-on', '~> 8.1.0'
 gem 'amoeba'
@@ -73,3 +74,4 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 # Image hosting
 gem 'cloudinary', '~> 1.16.0'
+gem 'redactor-rails', github: 'glyph-fr/redactor-rails'
