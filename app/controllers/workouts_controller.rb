@@ -7,7 +7,7 @@ class WorkoutsController < ApplicationController
     @message = Message.new
 
     # AI Kick off user query with a generic message if start of chat
-    if Message.count == 0 
+    if Message.count == 0
       Message.create!({
         user: current_user,
         category: "receive",

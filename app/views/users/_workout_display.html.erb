@@ -5,6 +5,7 @@
     <% end %>
     <% unique_exercises = retrieve_unique_exercises(workout) %>
     <% unique_exercises.each do |exercise| %>
+      <i class="fas fa-dumbbell" style="font-size: 11px; color: gray;"></i>
       <%= exercise.name.capitalize %>
       <div class="d-flex">
         <% workout.workout_sets.each do |workout_set| %>
@@ -22,8 +23,15 @@
       </div>
     <% end %>
     <div>
-      Status: <%= locals[:workout].status %> <br>
-      Notes: <%= locals[:workout].mental_state %>
+      <br>
+      <div class="border-top d-flex justify-content-around">
+        Status<% if locals[:workout].status == "finished"%>
+          <%= image_tag ["Ryu-finished.gif", "Ken-finished.gif", "Ken-thumbs.gif"].sample, class: "gif-size" %>
+        <% else %>
+          <%=  image_tag ["Ryu-working.gif"].sample, class: "gif-size"%>
+        <% end %>
+        Notes<%= locals[:workout].mental_state %>
+      </div>
     </div>
   </div>
 </div>
