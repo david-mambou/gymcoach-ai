@@ -39,8 +39,34 @@ class WorkoutsController < ApplicationController
     @workout = Workout.where(status: 'active').last
     authorize Workout
 
-    if @workout.present?
-    end
+    @chart_data_weekly = {
+      labels: [6.days.ago.strftime("%a, %d"), 5.days.ago.strftime("%a, %d"), 4.days.ago.strftime("%a, %d"), 3.days.ago.strftime("%a, %d"), 2.days.ago.strftime("%a, %d"), 1.days.ago.strftime("%a, %d")],
+      datasets: [{
+        label: 'Your Progress',
+        backgroundColor: 'transparent',
+        borderColor: '#3B82F6',
+        data: current_user.weight_history
+      }]
+    }
+    @chart_data_monthly = {
+      labels: [29.days.ago.strftime("%b, %d"), 21.days.ago.strftime("%b, %d"), 14.days.ago.strftime("%b, %d"), 7.days.ago.strftime("%b, %d")],
+      datasets: [{
+        label: 'Your Progress',
+        backgroundColor: '#E5E5E5',
+        borderColor: '#3B82F6',
+        data: current_user.weight_history,
+        fill: true
+      }]
+    }
+    @chart_options = {
+      scales: {
+        yAxes: [{
+          ticks: {
+            beginAtZero: true
+          }
+        }]
+      }
+    }
   end
 
   def update
