@@ -1,3 +1,11 @@
+GIT
+  remote: https://github.com/glyph-fr/redactor-rails.git
+  revision: 6f6655fd71199700f2e5d7bc1f7f3c19f37dde50
+  specs:
+    redactor-rails (0.6.0)
+      mime-types
+      orm_adapter
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -273,6 +281,7 @@ GEM
       sprockets (> 3.0)
       sprockets-rails
       tilt
+    selectize-rails (0.12.6)
     selenium-webdriver (4.0.3)
       childprocess (>= 0.5, < 5.0)
       rexml (~> 3.2, >= 3.2.5)
@@ -281,6 +290,11 @@ GEM
     simple_form (5.1.0)
       actionpack (>= 5.2)
       activemodel (>= 5.2)
+    simple_form_extension (1.4.18)
+      rails (>= 3.1)
+      redactor-rails
+      selectize-rails
+      simple_form
     spring (3.0.0)
     sprockets (4.0.2)
       concurrent-ruby (~> 1.0)
@@ -355,11 +369,13 @@ DEPENDENCIES
   rack-mini-profiler (~> 2.0)
   rails (~> 6.1.4, >= 6.1.4.1)
   rails_admin (~> 2.0)
+  redactor-rails!
   redis (~> 4.0)
   ruby-openai
   sass-rails (>= 6)
   selenium-webdriver
   simple_form
+  simple_form_extension
   spring
   turbolinks (~> 5)
   turbolinks_render
