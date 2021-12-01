@@ -53,7 +53,7 @@ const renderCalendar = () => {
         }
 
         // ______________________USE THIS TO PLOT GRAPH_______________________________
-        
+
 
         for (let day = 1; day <= lastDay; day++) {
           if (
@@ -69,6 +69,15 @@ const renderCalendar = () => {
           // ______________________USE THIS TO PLOT GRAPH_______________________________
           // pass an array of dates to javascript (data attributes (maps -markers))
           // follow logic above - if the from calendar included in array of workouts, add class
+
+
+          // ______________________USE THIS TO PLOT GRAPH_______________________________
+
+
+          const workout_array = [<%= Workout.all.pluck(:day).to_json %>];
+          console.log(workout_array)
+
+          // ______________________USE THIS TO PLOT GRAPH_______________________________
 
           for (let nextDay = 1; nextDay <= nextDays; nextDay++) {
             days += `<div class="next-date">${nextDay}</div>`;
