@@ -32,10 +32,12 @@ module AiIntentHelper
         # CREATE A WORKOUT FOR MACHINE
         ["I want to workout with dumbbells", b],
         ["I want to use dumbbells", b],
-        ["I want to use I want to use the rope machine", b],
+        [" want to use the rope machine", b],
         ["I want to use the bench for my workout today", b],
         ["bench today please", b],
         ["i want to record my runs", b],
+        ["i want to do bench press", b],
+        ["can i do lat pulldown?", b],
         
         # CREATE A WORKOUT FOR ROUTINE
         ["let's workout", c],
@@ -84,32 +86,33 @@ module AiIntentHelper
 
     intent = JSON.parse(response.to_s)['label']
 
-    # debugging only will remove
+    # todo: debugging only, will remove
     Message.create!({
       category: "receive",
       user: current_user,
       content: intent
       })
-
     case intent
-      when "create_workout_for_muscle"
-        ai_create_workout_for_muscle(user_query)
-      when "create_workout_for_machine"
-        ai_create_workout_for_machine(user_query)
-      when "create_workout_for_routine"
-        ai_create_workout_for_routine(user_query)
-      when "edit_change_exercise"
-        ai_edit_change_exercise(user_query)
-      when "show_exercise"
-        ai_show_exercise(user_query)
-      when "help_motivate"
-        ai_help_motivate(user_query)
-      when "help_reward"
-        ai_help_reward(user_query)
-      when "help_question"
-        ai_help_question(user_query)
-      else
-        ai_help_question(user_query)
+
+    when "Create_workout_for_muscle"
+      ai_create_workout_for_muscle(user_query)
+    when "Create_workout_for_machine"
+      ai_create_workout_for_machine(user_query)
+    when "Create_workout_for_routine"
+      ai_create_workout_for_routine(user_query)
+    when "Edit_change_exercise"
+      ai_edit_change_exercise(user_query)
+    when "Show_exercise"
+      ai_show_exercise(user_query)
+    when "Help_motivate"
+      ai_help_motivate(user_query)
+    when "Help_reward"
+      ai_help_reward(user_query)
+    when "Help_question"
+      raise
+      ai_help_question(user_query)
+    else
+      ai_help_question(user_query)
     end
   end
 end
