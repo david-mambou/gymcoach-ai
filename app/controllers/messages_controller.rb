@@ -34,7 +34,7 @@ class MessagesController < ApplicationController
     user_submission.user = @user
     authorize user_submission
 
-    # prevent user from sending blank messages 
+    # prevent user from sending blank messages
     if user_submission.content.present?
       if user_submission.save!
         # determine user intent and respond with AI
