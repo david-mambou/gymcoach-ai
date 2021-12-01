@@ -14,11 +14,18 @@
 }
 
 #rep-number {
-  width: fit-content;
+  width: 30px;
 }
 
 #difficulty {
   width: fit-content;
+}
+
+.items-row {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 5px;
+  margin: 5px;
 }
 
 // _________________________________Overwrites :/____________________________________
