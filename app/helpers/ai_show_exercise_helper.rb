@@ -10,9 +10,8 @@ module AiShowExerciseHelper
       identified_exercise = ai_classify_exercise(user_message_content)
       matching_exercise = ai_match_exercise(identified_exercise)
       exercise_intent = ai_determine_intent_of_question(user_message_content)
-      matching_exercise.update(description: ai_exercise_describe("What is #{matching_exercise}", matching_exercise)) if matching_exercise.description == nil
-      matching_exercise.update(instruction: ai_exercise_instruct("How do I do #{matching_exercise}", matching_exercise)) if matching_exercise.instruction == nil
-
+      matching_exercise.update(description: ai_exercise_describe("What is #{matching_exercise.name}")) if matching_exercise.description == nil
+      matching_exercise.update(instruction: ai_exercise_instruct("How do I do #{matching_exercise.name}")) if matching_exercise.instruction == nil
       case exercise_intent
       when "Exercise_how"
         convert_to_receive_message(matching_exercise.instruction)
@@ -66,10 +65,10 @@ module AiShowExerciseHelper
     )
     results = JSON.parse(response.to_s)
     sorted_results = results['data'].sort_by {|hash| -hash['score'].to_i}
-    if sorted_results.first["score"] < 300
+    if sorted_results.first["score"] > 450
       Exercise.find_by(name: exercises[sorted_results.first['document']])
     else
-      # debugging
+      # debugging, possibly take out before pitch
       convert_to_receive_message("Not in our database, so we added some basic information about it.")
       Exercise.create(name: identified_exercise, station_id: Station.find_by(name:"empty").id)
     end
@@ -92,7 +91,9 @@ module AiShowExerciseHelper
         ["Could you show me what you have on pull-ups?", c],
         ["I want to look at what I did with squats.", c],
         ["I want to see the dead lift page.", c],
-        ["Could you tell me about goblet squats?", b]
+        ["Could you tell me about goblet squats?", b],
+        ["Could you tell me about the kettlebell snatch?", b],
+        ["Can you show me some detailed information on Burpees?", c ]
       ],
       temperature: 0.3,
     })
@@ -100,11 +101,12 @@ module AiShowExerciseHelper
   end
 
 
-  def ai_exercise_instruct(user_message_content, exercise)
+  def ai_exercise_instruct(user_message_content)
     client = OpenAI::Client.new
+    exercises = Exercise.all.map {|exercise| "#{exercise.name}"}
     #  client.files.upload(parameters: { file: 'db/data.jsonl', purpose: 'search' })
     response = client.answers(parameters: {
-      documents: [exercise.name],
+      documents: exercises,
       question: user_message_content,
       model: "davinci",
       examples_context: "Teach user about exercises",
@@ -123,11 +125,12 @@ module AiShowExerciseHelper
 
 
 
-  def ai_exercise_describe(user_message_content, exercise)
+  def ai_exercise_describe(user_message_content)
     client = OpenAI::Client.new
+    exercises = Exercise.all.map {|exercise| "#{exercise.name}"}
     #  client.files.upload(parameters: { file: 'db/data.jsonl', purpose: 'search' })
     response = client.answers(parameters: {
-       documents: [exercise.name],
+       documents: exercises,
        question: user_message_content,
        model: "davinci",
        examples_context: "Teach user about exercises",
