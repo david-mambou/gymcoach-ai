@@ -18,6 +18,8 @@
     <%# IMPORTANT %>
   <% elsif locals[:category] == 'emoji' %>
     <%= render 'chats/message_emoji', locals: locals %>
+  <% elsif locals[:category] == 'exercise_info' %>
+    <%= render 'chats/message_exercise_info', locals: locals %>
   <% elsif locals[:category] == 'link' %>
     <%= render 'chats/message_link', locals: locals %>
   <% elsif locals[:category] == 'card_workout_set' %>

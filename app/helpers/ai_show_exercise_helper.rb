@@ -2,11 +2,6 @@ module AiShowExerciseHelper
 
   def ai_show_exercise(user_message_content)
     if user_message_content.present?
-      Message.create!({
-        category: "receive",
-        user: current_user,
-        content: "Give me a moment."
-      })
       identified_exercise = ai_classify_exercise(user_message_content)
       matching_exercise = ai_match_exercise(identified_exercise)
       exercise_intent = ai_determine_intent_of_question(user_message_content)
@@ -65,11 +60,10 @@ module AiShowExerciseHelper
     )
     results = JSON.parse(response.to_s)
     sorted_results = results['data'].sort_by {|hash| -hash['score'].to_i}
-    if sorted_results.first["score"] > 450
+    if sorted_results.first["score"] > 250
       Exercise.find_by(name: exercises[sorted_results.first['document']])
     else
       # debugging, possibly take out before pitch
-      convert_to_receive_message("Not in our database, so we added some basic information about it.")
       Exercise.create(name: identified_exercise, station_id: Station.find_by(name:"empty").id)
     end
   end
@@ -93,7 +87,7 @@ module AiShowExerciseHelper
         ["I want to see the dead lift page.", c],
         ["Could you tell me about goblet squats?", b],
         ["Could you tell me about the kettlebell snatch?", b],
-        ["Can you show me some detailed information on Burpees?", c ]
+        ["Can you show some detailed information on burpees?", c ]
       ],
       temperature: 0.3,
     })
@@ -136,9 +130,11 @@ module AiShowExerciseHelper
        examples_context: "Teach user about exercises",
        examples: [
         ["What is an incline bench press?", "The incline bench press is a variation of the well known flat bench press. Like all variations of bench pressing the workout is done for strength training, gaining muscle mass, and for sports."],
-        ["What is a rear delt fly?", "The rear delt fly, also known as the rear delt raise or the bent-over dumbbell reverse fly, is a weight training exercise that targets your upper back muscles and shoulder muscles, particularly the posterior deltoids, or rear deltoids, on the backside of your shoulders."]
+        ["What is a rear delt fly?", "The rear delt fly, also known as the rear delt raise or the bent-over dumbbell reverse fly, is a weight training exercise that targets your upper back muscles and shoulder muscles, particularly the posterior deltoids, or rear deltoids, on the backside of your shoulders."],
+        ["What is the barbell benchpress?", "The barbell bench press requires the person working out to lie flat on a bench which allows for improved muscle stability and the ability to lift a heavy amount of weight. ... The barbell bench press exercise is a great for people looking to build strength, increase body size, and power."],
+        ["What is a lateral raise?", "lateral raise is a strength training shoulder exercise characterized by lifting a pair of dumbbells away from your body in an external rotation. Lateral raises work the trapezius muscle in your upper back as well as the deltoid muscle group in your shoulders—particularly the anterior and lateral deltoids"]
       ],
-       max_tokens: 70,
+       max_tokens: 90,
        stop: ['\n', '===', '---']
     })
     parsed_response = JSON.parse response.to_s
@@ -148,7 +144,7 @@ module AiShowExerciseHelper
 
   def convert_to_receive_message(response)
     Message.create!({
-        category: "receive",
+        category: "exercise_info",
         user: current_user,
         content: response
     })

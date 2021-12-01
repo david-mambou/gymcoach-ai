@@ -3,7 +3,7 @@ class Message < ApplicationRecord
   belongs_to :workout, optional: true
   belongs_to :workout_set, optional: true
   belongs_to :user
-  enum category: [:submit, :receive, :card_workout, :card_chart, :emoji, :link], _default: "submit"
+  enum category: [:submit, :receive, :card_workout, :card_chart, :emoji, :link, :exercise_info], _default: "submit"
 
   # user will receive a message from the AI in the chat interface
   def self.receive(user, content)

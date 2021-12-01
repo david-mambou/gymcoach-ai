@@ -100,13 +100,13 @@ module AiIntentHelper
       })
 
     case intent
-      when "create_workout_for_muscle"
+      when "Create_workout_for_muscle"
         ai_create_workout_for_muscle(user_query)
-      when "create_workout_for_machine"
+      when "Create_workout_for_machine"
         ai_create_workout_for_machine(user_query)
-      when "create_workout_for_routine"
+      when "Create_workout_for_routine"
         ai_create_workout_for_routine(user_query)
-      when "edit_change_exercise"
+      when "Edit_change_exercise"
         ai_edit_change_exercise(user_query)
       when "Show_exercise"
         ai_show_exercise(user_query)
