@@ -55,6 +55,7 @@ module AiIntentHelper
         ["what is my history for squats?", e],
         ["what was my seat level on this exercise from before?", e],
         ["tell me how to do squats", e],
+        ["Could you tell me about a double kettlebell snatch", e],
 
 
         # HELP MOTIVATE
