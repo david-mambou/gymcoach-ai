@@ -2,7 +2,7 @@ class MessagesController < ApplicationController
 
   # existing session, just show messages, wait for user action
   def index
-    @messages = policy_scope(Message)
+    @messages = policy_scope(Message).order(:created_at)
     @message = Message.new # so that we can use the input form anytime
 
     if params[:new_session]
@@ -28,7 +28,6 @@ class MessagesController < ApplicationController
   # send user message to AI
   def create
     set_existing_messages_as_read
-    # send user message to AI
     @user = current_user
     user_submission = Message.new(message_params)
     user_submission.user = @user
