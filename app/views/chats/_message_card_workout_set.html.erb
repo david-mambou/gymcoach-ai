@@ -1,8 +1,8 @@
 <div class="message-card mb-4">
   <div class="message-card-body">
-    <% if @workout %>
-      <% current_set = @workout.workout_sets.where(!completed?).first %>
-      <%= render "workouts/workout_set", workout: @workout, workout_set: current_set %>
+    <% if locals[:workout] %>
+      <% current_set = locals[:workout].workout_sets.order(:order_index).where(completed: false).first %>
+      <%= render "workouts/workout_set", workout: locals[:workout], workout_set: current_set %>
     <% end %>
     <span class="msg_time"><%= time_ago_in_words(locals[:created_at]) %> ago</span>
   </div>

@@ -19,12 +19,19 @@ class WorkoutsController < ApplicationController
   def create
     @workout = Workout.find(params[:template_workout])
     @workout.status = 'active'
+    # @workout.workout_sets.each { |set| set.completed = false }
+    @workout.workout_sets.each_with_index do |set, index|
+      set.order_index = index + 1
+      set.save
+    end
+
     authorize @workout
     return unless @workout.save!
 
-    Message.create(category: "card_workout_set",
-                   user: current_user,
-                   workout: @workout)
+    Message.create!(category: "card_workout_set",
+                    workout: @workout,
+                    workout_set: @workout.workout_sets.first,
+                    user: current_user)
     redirect_to messages_path
     # assign a new variable with the instance (makes a copy)
       # new_workout = @workout.amoeba_dup

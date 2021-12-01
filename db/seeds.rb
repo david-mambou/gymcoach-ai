@@ -33,25 +33,25 @@ p "database cleared.."
 # workout templates
 p 'generating workout templates..'
 WorkoutTemplate.create!(
-  name: "German Volume Training", 
+  name: "German Volume Training",
   progression_curve: "40x10,40x10,40x10,40x10,40x10,40x10,40x10,40x10,40x10,40x10",
   good_for: "Improving endurance, Fewer Gym Workouts Per Week, High Volume",
   bad_for: "Sore Body Common, Not good for strength, fewer exercises per gym session")
 
 WorkoutTemplate.create!(
-  name: "Pyramid 12/10/8/15", 
+  name: "Pyramid 12/10/8/15",
   progression_curve: "60x12,70x10,80x8,50x15",
   good_for: "Covers 8-12 hypertrophy range",
   bad_for: "Requires 4 or more sets with same muscles for best results.")
-  
+
 WorkoutTemplate.create!(
-  name: "3/7 Method", 
+  name: "3/7 Method",
   progression_curve: "60x12,70x10,80x8,50x15",
   good_for: "Great for short gym sessions",
   bad_for: "")
 
 WorkoutTemplate.create!(
-  name: "1 Rep Max Test (Beginner)", 
+  name: "1 Rep Max Test (Beginner)",
   progression_curve: "0x10,0x8,0x6,0x5,0x5,0x5",
   good_for: "Ideal for Beginners, First time test",
   bad_for: "getting actual workout done")
@@ -87,7 +87,7 @@ MENTAL_STATE = ['tired','hungry', 'hungover','Long Rest Before', 'Good sleep', '
 
 def gen_random_workout_set(workout, exercise)
   p "creating workout set.."
-  new_set = WorkoutSet.new(order_index: 1, nb_of_reps: rand(5..12), weight: rand(5..20), difficulty: rand(1..2))
+  new_set = WorkoutSet.new(order_index: 1, nb_of_reps: rand(5..12), weight: rand(5..20), difficulty: rand(1..2), completed: false)
   new_set.exercise = exercise
   new_set.workout = workout
   new_set.save!
