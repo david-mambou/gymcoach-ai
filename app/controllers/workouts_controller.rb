@@ -22,6 +22,7 @@ class WorkoutsController < ApplicationController
     # @workout.workout_sets.each { |set| set.completed = false }
     @workout.workout_sets.each_with_index do |set, index|
       set.order_index = index + 1
+      set.completed = false
       set.save
     end
 

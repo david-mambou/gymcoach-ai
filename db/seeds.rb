@@ -87,7 +87,7 @@ MENTAL_STATE = ['tired','hungry', 'hungover','Long Rest Before', 'Good sleep', '
 
 def gen_random_workout_set(workout, exercise)
   p "creating workout set.."
-  new_set = WorkoutSet.new(order_index: 1, nb_of_reps: rand(5..12), weight: rand(5..20), difficulty: rand(1..2), completed: false)
+  new_set = WorkoutSet.new(order_index: 1, nb_of_reps: rand(5..12), weight: rand(5..20), difficulty: rand(1..2))
   new_set.exercise = exercise
   new_set.workout = workout
   new_set.save!
