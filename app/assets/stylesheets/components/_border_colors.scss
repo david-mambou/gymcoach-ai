@@ -1,7 +1,12 @@
 .border-top {
-border-top: 1px solid $blue !important;
+  border-top: 1px solid $blue !important;
 }
 
 .border-bottom {
-border-bottom: 2px solid $blue !important;
+  border-bottom: 2px solid $blue !important;
+}
+
+.items-row.justify-content-around.border-bottom {
+  border-bottom: 1px solid white !important;
+  border-radius: 0px 0px 10px 10px;
 }
