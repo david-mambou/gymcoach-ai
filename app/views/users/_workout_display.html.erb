@@ -7,7 +7,7 @@
     <% unique_exercises = retrieve_unique_exercises(workout) %>
     <% unique_exercises.each do |exercise| %>
       <div class="border rounded p-2 m-2" data-toggle="collapse" href="#exerciseListCollapse<%= exercise.id %>" role="button" aria-expanded="false" aria-controls="exerciseListCollapse<%= exercise.id %>">
-        <%= exercise.name.capitalize %>
+        <%= exercise.name.titleize %>
         <div class="collapse flex-column" id="exerciseListCollapse<%= exercise.id %>">
           <div>
             <div class="items-row justify-content-around border-bottom">
@@ -18,17 +18,18 @@
             <% workout.workout_sets.each do |workout_set| %>
               <% if exercise.id == workout_set.exercise_id %>
                 <div class="items-row justify-content-around">
-                  <div class="badge badge-light" id="dumbbell">
+                  <div class="badge badge-light position-relative" id="dumbbell">
                     <%="#{workout_set.weight}kg" %>
                   </div>
-                  <div class="badge badge-light" id="rep-number">
+                  <div class="badge badge-light position-relative" id="rep-number">
                     <%=workout_set.nb_of_reps%>
                   </div>
-                  <div class="badge badge-light" id="difficulty">
+                  <div class="badge badge-light position-relative" id="difficulty">
                     <% if workout_set.difficulty == nil %>
                       Difficulty
                     <% else %>
                       <%=workout_set.difficulty%>
+                      <span class="pulse-button"><span></span></span>
                     <% end %>
                     <%# TODO: Change badge color depending on difficulty, easy, mid, hard (taffic light)%>
                   </div>
@@ -41,6 +42,7 @@
     <% end %>
     <div>
       <br>
+      <span class="pulse-button"></span>
       <div class="border-top d-flex">
         <% if locals[:workout].mental_state == nil %>
           <p style="opacity: 0.3;">Add Note..</p>
