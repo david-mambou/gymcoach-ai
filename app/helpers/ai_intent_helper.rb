@@ -28,7 +28,7 @@ module AiIntentHelper
         ["can you give a chest workout", a],
         ["can you give me a chest exercise", a],
         ["lets do bench", a],
-        
+
         # CREATE A WORKOUT FOR MACHINE
         ["I want to workout with dumbbells", b],
         ["I want to use dumbbells", b],
@@ -36,12 +36,12 @@ module AiIntentHelper
         ["I want to use the bench for my workout today", b],
         ["bench today please", b],
         ["i want to record my runs", b],
-        
+
         # CREATE A WORKOUT FOR ROUTINE
         ["let's workout", c],
         ["what is my plan for today?", c],
         ["what was i supposed t odo", c],
-                
+
         # EDIT CHANGE EXERCISE
         ["Someone has taken the bench, can you recommend a rope exercise instead?", d],
         ["Can you change my benchpress for another exercise?", d],
@@ -72,7 +72,7 @@ module AiIntentHelper
         ["finished my workout", g],
         ["just finished", g],
         ["just finished!", g],
-        
+
         # HELP QUESTIONS
         ["Hey what time is it?", h],
         ["who created this?", h],
@@ -106,7 +106,7 @@ module AiIntentHelper
         ai_help_motivate(user_query)
       when "help_reward"
         ai_help_reward(user_query)
-      when "help_question"
+      when "Help_question"
         ai_help_question(user_query)
       else
         ai_help_question(user_query)
