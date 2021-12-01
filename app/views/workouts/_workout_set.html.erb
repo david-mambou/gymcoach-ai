@@ -5,7 +5,7 @@
     <div class="row">
       <div class="col text-center">
         <%# if index == 1 %>Set<br><%# end %>
-        <h2><%= workout_set.order_index %>/<%= workout_set.workout.workout_sets.where(exercise: workout_set.exercise).count %></h2>
+        <h2><%= workout_set.workout.workout_sets.where(exercise: workout_set.exercise).find_index(workout_set) + 1 %>/<%= workout_set.workout.workout_sets.where(exercise: workout_set.exercise).count %></h2>
       </div>
       <% form_class << ' set-completed' if workout_set.completed? %>
       <%= simple_form_for [workout, workout_set], remote: true, namespace: "set-#{workout_set.id}", html: { novalidate: true, class: form_class, data: {edit_set_target: "form"} } do |f| %>
