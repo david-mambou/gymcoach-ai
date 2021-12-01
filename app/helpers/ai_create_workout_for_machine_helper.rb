@@ -16,13 +16,15 @@ module AiCreateWorkoutForMachineHelper
 
     # get recommendation based on used goal
     reason = client.completions(engine: "curie", parameters: {
-      prompt: "The fitness coach is very kind and professional, explaining to a beginner how this exercise will help the goal:\n\n
+      prompt: "The fitness coach is very kind and professional, explaining what muscles an exercise uses for their goal:\n\n
+          User: will do bench press and their goal is to get a bigger chest.\n
+          AI: This will work the pectoralis major and pectoralis minor muscles intensly, perfect for your goal for a bigger chest.\n\n
           User: will do bench press and their goal is to get in shape for a summer pool party.\n
-          AI: This will work your rectus abdominis muscle, the most critical body part for a beach party.\n\n
+          AI: This will work your rectus abdominis muscle, the most critical body part for a beach party. \n\n
           User: will do squat and their goal is to run faster.\n
           AI: It is important to keep lower legs balanced, this works all the major muscle groups, the gluteus maximus, hip flexors, and quadriceps.\n\n
           User: will do pullups and their goal is to get a v-taper.\n
-          AI: Pullups target the latissimus dorsi muscles, giving you a nice v-taper that you want.\n\n
+          AI: Pullups target the latissimus dorsi muscles, perfect for keeping your body well rounded.\n\n
           User: will do bicep curls and their goal is to have larger biceps\n
           AI: This exercise will target both the long head and short head of the bicep, helping you get larger arms.\n\n
           User: will do #{exercise_name} and their goal is to #{current_user.goal}\n
@@ -35,15 +37,37 @@ module AiCreateWorkoutForMachineHelper
       stop: ["\n"]
     })
 
+    fluff_ending = client.completions(engine: "curie", parameters: {
+      prompt: "The fitness coach is very motivational, motivating user to do the workout:\n\n
+          AI: I chose an intensity based on how you did on your previous workout. I think you can do this!\n
+          AI: I think we will be able to do this exercise today, the difficulty is based on your past performance for this exercise.\n
+          AI: You did a good job last time you did this exercise, lets try to beat it!\n
+          AI: You did great last time, good luck for this one!\n
+          AI:",
+      temperature: 0.2,
+      max_tokens: 34,
+      n: 1,
+      frequency_penalty: 0,
+      presence_penalty: 1,
+      stop: ["\n"]
+    })
+
+    # find latest set for exercise to populate the sets and reps
+    existing_exercise = Exercise.find_by(name: exercise_name)
+    latest_set1 = existing_exercise.workout_sets[-1].dup
+    latest_set2= existing_exercise.workout_sets[-2].dup
+
     # create workout and store
     workout = Workout.new(
       name:  exercise_name,
-
       day: Date.today,
       user: current_user,
-      pros_and_cons: reason["choices"][0]["text"],
+      pros_and_cons: "#{reason["choices"][0]["text"]} \n\n#{fluff_ending["choices"][0]["text"]}",
       workout_template: WorkoutTemplate.all.sample
     )
+
+    workout.workout_sets << latest_set1
+    workout.workout_sets << latest_set2
 
     Message.create!({
       category: "card_workout",

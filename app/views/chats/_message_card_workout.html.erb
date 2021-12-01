@@ -3,18 +3,25 @@
 <div class="message-card mb-4">
   <div class="message-card-body">
     <% workout = locals[:workout] %>
-    <h5>Exercise: <%= workout.name %></h5>
+    <h5><%= workout.name %></h5>
     <!-- <h5> <%= workout.routine_tags.capitalize if workout.routine_tags.present? %> Routine (45min)</h5> -->
     <!-- <span class="badge badge-pill badge-primary"><%= workout.workout_template.name %></span><br> -->
 
     <%# get unique exercises from the workout for looping %>
 
       <% if workout.exercises.first && workout.exercises.first.photo.attached? %>
-    <%= cl_image_tag(workout.exercises.first.photo.key,width: 150, height: 150, crop: :thumb)  %>
+        <%= cl_image_tag(workout.exercises.first.photo.key,width: 150, height: 150, crop: :thumb)  %>
       <% end %>
-    Recommended Because:<br>
     <p><%= workout.pros_and_cons %></p>
-
+    <hr>
+    
+    <% workout.workout_sets.each_with_index do |workout_set, index| %>
+    <span class="badge badge-pill badge-primary">Set <%= "#{index+ 1}" %></span>
+    <%= "#{workout_set.weight} kg x #{workout_set.nb_of_reps}" %>
+      <br>
+    <% end %>
+    
+  <hr>
     <%= button_to "Start Workout", workouts_path(template_workout: workout), method: :post, class: 'btn btn-primary' %>
     <span class="msg_time"><%= time_ago_in_words(locals[:created_at]) %> ago</span>
   </div>
