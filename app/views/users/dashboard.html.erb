@@ -10,7 +10,6 @@
           <%= link_to 'Start New Session', messages_path(new_session: true), class: "btn btn-primary d-flex justify-content-center mb-3"%>
         <% else %>
           <% if @current_workout.present? %>
-            <span class='pulse-button'></span>
             <%= render "users/workout_display", workouts: @today_workouts, locals: { workout: @current_workout } %>
           <% end %>
         <% end %>
