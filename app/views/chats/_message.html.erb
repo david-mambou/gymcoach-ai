@@ -16,6 +16,8 @@
     <%# IMPORTANT %>
     <%# IMPORTANT %>
     <%# IMPORTANT %>
+  <% elsif locals[:category] == 'emoji' %>
+    <%= render 'chats/message_emoji', locals: locals %>
   <% elsif locals[:category] == 'card_workout_set' %>
     <%# TODO: category 'card-workout-set' will render a card for a single set %>
   <% elsif locals[:category] == 'card_chart' %>

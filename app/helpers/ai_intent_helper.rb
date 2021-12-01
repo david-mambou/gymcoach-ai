@@ -72,12 +72,15 @@ module AiIntentHelper
         ["finished my workout", g],
         ["just finished", g],
         ["just finished!", g],
+        ["That was intense", g],
 
         # HELP QUESTIONS
         ["Hey what time is it?", h],
         ["who created this?", h],
         ["can you help me?", h],
-        ["What is your name?", h]
+        ["What is your name?", h],
+        ["Can you tell me what you can do?", h],
+        ["What else can you do?", h]
       ],
       temperature: 0.3,
     })
@@ -102,9 +105,9 @@ module AiIntentHelper
         ai_edit_change_exercise(user_query)
       when "show_exercise"
         ai_show_exercise(user_query)
-      when "help_motivate"
+      when "elp_motivate"
         ai_help_motivate(user_query)
-      when "help_reward"
+      when "Help_reward"
         ai_help_reward(user_query)
       when "Help_question"
         ai_help_question(user_query)
