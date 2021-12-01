@@ -26,10 +26,11 @@
                   </div>
                   <div class="badge badge-light position-relative" id="difficulty">
                     <% if workout_set.difficulty == nil %>
+                      <span class="pulse-button"><span></span></span>
                       Difficulty
                     <% else %>
                       <%=workout_set.difficulty%>
-                      <span class="pulse-button"><span></span></span>
+                      <span class="pulse-button-finished"><span></span></span>
                     <% end %>
                     <%# TODO: Change badge color depending on difficulty, easy, mid, hard (taffic light)%>
                   </div>
