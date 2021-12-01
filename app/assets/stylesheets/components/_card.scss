@@ -25,11 +25,18 @@
   display: flex;
   flex-wrap: wrap;
   padding: 5px;
-  margin: 5px;
   &.green {
     background-color: rgba(47, 255, 0, 0.1);
   }
 }
+
+.row {
+  &.green {
+    background-color: rgba(47, 255, 0, 0.1);
+    margin: 0px !important;
+  }
+}
+// its overflowing, fix late
 
 
 // _________________________________Overwrites :/____________________________________
