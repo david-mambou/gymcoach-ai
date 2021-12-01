@@ -33,6 +33,8 @@ module AiIntentHelper
         ["lets work back", a],
         
         # CREATE A WORKOUT FOR MACHINE
+        ["lets workout with dumbbells for chest", b],
+        ["sure, can i workout legs?", b],
         ["I want to use dumbbells", b],
         [" want to use the rope machine", b],
         ["I want to use the bench for my workout today", b],
@@ -99,7 +101,7 @@ module AiIntentHelper
     when "Create_workout_for_muscle"
       ai_create_workout_for_muscle(user_query)
     when "Create_workout_for_machine"
-      ai_create_workout_for_muscle(user_query)
+      ai_create_workout_for_machine(user_query)
     when "Create_workout_for_routine"
       ai_create_workout_for_routine(user_query)
     when "Edit_change_exercise"

@@ -19,6 +19,8 @@ module AiCreateWorkoutForMachineHelper
       prompt: "The fitness coach is very kind and professional, explaining what muscles an exercise uses for their goal:\n\n
           User: will do bench press and their goal is to get a bigger chest.\n
           AI: This will work the pectoralis major and pectoralis minor muscles intensly, perfect for your goal for a bigger chest.\n\n
+          User: will do bench press and their goal is to get a bigger chest.\n
+          AI: This will work the pectoralis major and pectoralis minor muscles intensly, perfect for your goal for a bigger chest.\n\n
           User: will do bench press and their goal is to get in shape for a summer pool party.\n
           AI: This will work your rectus abdominis muscle, the most critical body part for a beach party. \n\n
           User: will do squat and their goal is to run faster.\n

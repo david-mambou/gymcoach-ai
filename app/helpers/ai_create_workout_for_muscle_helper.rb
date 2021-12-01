@@ -5,7 +5,7 @@ module AiCreateWorkoutForMuscleHelper
 
     # sort documents by highest score
     exercises = Exercise.all.map { |exercise| "#{exercise.name}" }
-    recommend_exercise = client.search(engine: "davinci", parameters: {
+    recommend_exercise = client.search(engine: "curie", parameters: {
       documents: exercises,
       query: user_query,
       examples_context: "find the best exercise that matches the query '#{user_query}'",
@@ -31,6 +31,8 @@ module AiCreateWorkoutForMuscleHelper
           AI: This exercise will target your calves, and help keep body balanced while focosing on goal to increase chest size.\n\n
           User: will do lats for back day and wants to to increase chest as their main goal.\n
           AI: Lat Pulldowns target your latissimus dorsi muscles, which compliments well with your goal to grow your chest.\n\n
+          User: Can I use chest for machine?\n
+          AI: Sure, this exercise will target your pectoralis major and pectoralis minor muscles intensely.\n\n
           User: will do #{exercise_name} and their goal is to #{current_user.goal}\n
           AI:",
       temperature: 0.4,
@@ -48,7 +50,7 @@ module AiCreateWorkoutForMuscleHelper
           AI: You did a good job last time you did this exercise, lets try to beat it!\n
           AI: You did great last time, good luck for this one!\n
           AI:",
-      temperature: 0.2,
+      temperature: 0.6,
       max_tokens: 34,
       n: 1,
       frequency_penalty: 0,
