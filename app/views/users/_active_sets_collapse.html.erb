@@ -3,7 +3,6 @@
   <%= exercise.name.capitalize %>
   <div class="d-flex">
     <% workout.workout_sets.each do |workout_set| %>
-    
       <% if exercise.id == workout_set.exercise_id %>
         <div class="p-1" style="display: inline-grid !important;">
           <div class="badge badge-light" style="border-radius: 20px 20px 0px 0px;">

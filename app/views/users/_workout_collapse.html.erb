@@ -8,7 +8,7 @@
       <% end %>
       <a class="fas fa-eye text-decoration-none" data-toggle="collapse" href="#Collapse-<%= id %>" role="button" aria-expanded="false" aria-controls="Collapse-<%= id %>"></a>
     </div>
-    <div class="collapse multi-collapse" id="Collapse-<%= id %>">
+    <div class="collapse" id="Collapse-<%= id %>">
       <% workouts.each do |workout| %>
         <% if id == :past %>
           <%= render "users/workout_history_display", workout: workout, id: id %>

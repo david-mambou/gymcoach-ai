@@ -5,24 +5,27 @@
     <% end %>
     <% unique_exercises = retrieve_unique_exercises(workout) %>
     <% unique_exercises.each do |exercise| %>
-      <i class="fas fa-dumbbell" style="font-size: 11px; color: gray;"></i>
-      <%= exercise.name.capitalize %>
-      <div class="flex-column">
-        <% workout.workout_sets.each do |workout_set| %>
-          <% if exercise.id == workout_set.exercise_id %>
-            <div>
-              <div class="badge badge-light">
-                <%="#{workout_set.weight}kg" %>
+      <div class="border rounded p-2 m-2" data-toggle="collapse" href="#exerciseListCollapse<%= exercise.id %>" role="button" aria-expanded="false" aria-controls="exerciseListCollapse<%= exercise.id %>">
+        <%= exercise.name.capitalize %>
+        <div class="collapse flex-column" id="exerciseListCollapse<%= exercise.id %>">
+          <i class="fas fa-dumbbell" style="font-size: 11px; color: gray;"></i>
+          <% workout.workout_sets.each do |workout_set| %>
+            <% if exercise.id == workout_set.exercise_id %>
+              <div>
+                <div class="badge badge-light">
+                  <%="#{workout_set.weight}kg" %>
+                </div>
+                <div class="badge badge-light">
+                  <%=workout_set.nb_of_reps%>
+                </div>
+                <div class="badge badge-light">
+                  <%# TODO: Change badge color depending on difficulty, easy, mid, hard (taffic light)%>
+                  <%=workout_set.difficulty%>
+                </div>
               </div>
-              <div class="badge badge-light">
-                <%=workout_set.nb_of_reps%>
-              </div>
-              <div class="badge badge-light">
-                <%=workout_set.difficulty%>
-              </div>
-            </div>
+            <% end %>
           <% end %>
-        <% end %>
+        </div>
       </div>
     <% end %>
     <div>
