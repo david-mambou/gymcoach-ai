@@ -52,16 +52,19 @@ const renderCalendar = () => {
     days += `<div class="prev-date">${prevLastDay - x + 1}</div>`;
   }
 
-  for (let i = 1; i <= lastDay; i++) {
+  for (let day = 1; day <= lastDay; day++) {
     if (
-      i === new Date().getDate() &&
+      day === new Date().getDate() &&
       date.getMonth() === new Date().getMonth()
     ) {
-      days += `<div class="today">${i}</div>`;
+      days += `<div class="today">${day}</div>`;
     } else {
-      days += `<div>${i}</div>`;
+      days += `<div>${day}</div>`;
     }
   }
+
+  // pass an array of dates to javascript (data attributes (maps -markers))
+  // follow logic above - if the from calendar included in araray of workouts, add class
 
   for (let j = 1; j <= nextDays; j++) {
     days += `<div class="next-date">${j}</div>`;
