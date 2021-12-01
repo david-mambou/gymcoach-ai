@@ -31,7 +31,7 @@ module AiCreateWorkoutForMachineHelper
       max_tokens: 64,
       n: 1,
       frequency_penalty: 0,
-      presence_penalty: -2,
+      presence_penalty: 1,
       stop: ["\n"]
     })
 
