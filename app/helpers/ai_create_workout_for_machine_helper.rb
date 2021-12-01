@@ -5,10 +5,10 @@ module AiCreateWorkoutForMachineHelper
 
     # sort documents by highest score
     exercises = Exercise.all.map { |exercise| "#{exercise.name}" }
-    recommend_exercise = client.search(engine: "babbage", parameters: {
+    recommend_exercise = client.search(engine: "davinci", parameters: {
       documents: exercises,
       query: user_query,
-      examples_context: "find the best exercise that will satisfy user goal : #{current_user.goal}",
+      examples_context: "find an exercise for the muscle group in body with the machine requested",
     })
     reply = JSON.parse recommend_exercise.to_s
     sorted_data = reply['data'].sort_by { |hash| -hash['score'].to_i}
@@ -17,18 +17,12 @@ module AiCreateWorkoutForMachineHelper
     # get recommendation based on used goal
     reason = client.completions(engine: "davinci", parameters: {
       prompt: "The fitness coach is very kind and professional, explaining what muscles an exercise uses for their goal:\n\n
-          User: will do bench press and their goal is to get a bigger chest.\n
-          AI: This will work the pectoralis major and pectoralis minor muscles intensly, perfect for your goal for a bigger chest.\n\n
-          User: will do bench press and their goal is to get a bigger chest.\n
-          AI: This will work the pectoralis major and pectoralis minor muscles intensly, perfect for your goal for a bigger chest.\n\n
-          User: will do bench press and their goal is to get in shape for a summer pool party.\n
-          AI: This will work your rectus abdominis muscle, the most critical body part for a beach party. \n\n
-          User: will do squat and their goal is to run faster.\n
-          AI: It is important to keep lower legs balanced, this works all the major muscle groups, the gluteus maximus, hip flexors, and quadriceps.\n\n
-          User: will do pullups and their goal is to get a v-taper.\n
-          AI: Pullups target the latissimus dorsi muscles, perfect for keeping your body well rounded.\n\n
-          User: will do bicep curls and their goal is to have larger biceps\n
-          AI: This exercise will target both the long head and short head of the bicep, helping you get larger arms.\n\n
+          User: please do chest with dumbbells.\n
+          AI: Sure, how about this chest workout? It uses dumbbells.\n\n
+          User: do a squat.\n
+          AI: Sure, how about this barbell squat? You will need access to a barbell.\n\n
+          User: lets do lateral raises.\n
+          AI: This is perfect for a great shoulder exercise. You will just need to use dumbbells for this one.\n\n
           User: will do #{exercise_name} and their goal is to #{current_user.goal}\n
           AI:",
       temperature: 0.6,

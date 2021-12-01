@@ -20,8 +20,8 @@ module AiEditChangeExerciseHelper
     
     recommend_exercise = client.search(engine: "davinci", parameters: {
       documents: exercises,
-      query: user_query,
-      examples_context: "find a different exercise that is not #{active_workout.exercises.last.name if active_workout.present?}",
+      query: "change to different exercise than #{Workout.find_by(status: 'active')} but same muscle group",
+      examples_context: "find an exercise that is different but similar",
     })
 
     reply = JSON.parse recommend_exercise.to_s
