@@ -17,7 +17,7 @@
             </div>
             <% workout.workout_sets.each do |workout_set| %>
               <% if exercise.id == workout_set.exercise_id %>
-                <div class="items-row justify-content-around">
+                <div class="items-row justify-content-around <%= "green" if workout_set.difficulty%>">
                   <div class="badge badge-light position-relative" id="dumbbell">
                     <%="#{workout_set.weight}kg" %>
                   </div>
@@ -29,8 +29,7 @@
                       <span class="pulse-button"><span></span></span>
                       Difficulty
                     <% else %>
-                      <%=workout_set.difficulty%>
-                      <span class="pulse-button-finished"><span></span></span>
+                      <%= workout_set.difficulty %>
                     <% end %>
                     <%# TODO: Change badge color depending on difficulty, easy, mid, hard (taffic light)%>
                   </div>
