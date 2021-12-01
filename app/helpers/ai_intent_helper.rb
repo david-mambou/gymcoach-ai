@@ -17,6 +17,8 @@ module AiIntentHelper
       examples: [
         # CREATE A WORKOUT FOR MUSCLE
         ["Give me a good chest exercise", a],
+        ["Give me a good chest exercise", a],
+        ["I want to work my shoulders", a],
         ["I want to work my abs", a],
         ["What's good for improving my legs", a],
         ["I want to work on my six pack", a],
@@ -28,9 +30,9 @@ module AiIntentHelper
         ["can you give a chest workout", a],
         ["can you give me a chest exercise", a],
         ["lets do bench", a],
+        ["lets work back", a],
         
         # CREATE A WORKOUT FOR MACHINE
-        ["I want to workout with dumbbells", b],
         ["I want to use dumbbells", b],
         [" want to use the rope machine", b],
         ["I want to use the bench for my workout today", b],
@@ -97,7 +99,7 @@ module AiIntentHelper
     when "Create_workout_for_muscle"
       ai_create_workout_for_muscle(user_query)
     when "Create_workout_for_machine"
-      ai_create_workout_for_machine(user_query)
+      ai_create_workout_for_muscle(user_query)
     when "Create_workout_for_routine"
       ai_create_workout_for_routine(user_query)
     when "Edit_change_exercise"

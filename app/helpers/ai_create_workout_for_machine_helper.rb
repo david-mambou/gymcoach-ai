@@ -1,6 +1,6 @@
 module AiCreateWorkoutForMachineHelper
    # request AI to generate a new workout card based on user requests
-   def ai_create_workout_for_machine(user_query)
+  def ai_create_workout_for_machine(user_query)
     client = OpenAI::Client.new
 
     # sort documents by highest score
@@ -15,7 +15,7 @@ module AiCreateWorkoutForMachineHelper
     exercise_name = exercises[sorted_data.first['document']]
 
     # get recommendation based on used goal
-    reason = client.completions(engine: "curie", parameters: {
+    reason = client.completions(engine: "davinci", parameters: {
       prompt: "The fitness coach is very kind and professional, explaining what muscles an exercise uses for their goal:\n\n
           User: will do bench press and their goal is to get a bigger chest.\n
           AI: This will work the pectoralis major and pectoralis minor muscles intensly, perfect for your goal for a bigger chest.\n\n
@@ -52,12 +52,12 @@ module AiCreateWorkoutForMachineHelper
       stop: ["\n"]
     })
 
-    # find latest set for exercise to populate the sets and reps
+    # find latest set for exercise to populate new sets and reps
     existing_exercise = Exercise.find_by(name: exercise_name)
     latest_set1 = existing_exercise.workout_sets[-1].dup
-    latest_set2= existing_exercise.workout_sets[-2].dup
+    latest_set2 = existing_exercise.workout_sets[-2].dup
 
-    # create workout and store
+    # create workout and store workout sets
     workout = Workout.new(
       name:  exercise_name,
       day: Date.today,
@@ -65,10 +65,10 @@ module AiCreateWorkoutForMachineHelper
       pros_and_cons: "#{reason["choices"][0]["text"]} \n\n#{fluff_ending["choices"][0]["text"]}",
       workout_template: WorkoutTemplate.all.sample
     )
-
     workout.workout_sets << latest_set1
     workout.workout_sets << latest_set2
 
+    # create workout card for the user
     Message.create!({
       category: "card_workout",
       user: current_user,
