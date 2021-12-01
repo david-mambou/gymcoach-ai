@@ -1,57 +1,55 @@
 module AiEditChangeExerciseHelper
    # request AI to generate a new workout card based on user requests
    def ai_edit_change_exercise(user_query)
-
-
-    # exercises = ['glute bridge','lying hip abduction','barbell hip thrust','rope cable crunch','wood chops','planks','lying leg curl','sumo deadlift','standard deadlift','romanian deadlift','sumo squat','deadlift rack pull','dumbbell lunges','leg extensions (single leg)','leg extensions (both legs)','standard barbell squat','ass to grass squats','front squat','bulgarian barbell squat','sumo squat','goblin squats','lateral side step squats','jump squats','sitting calf raise','standing calf raise','smith machine barbell row','weighted pullups','standard pullups','hammergrip pullups','chinups','wide grip pullups','pulldown machine - narrow grip attachment','pulldown machine - single bar','pulldown machine - dual static position','row machine- underhand grip','row machine - overhand grip','row machine - hammer grip','Rope machine lat pullover','dumbbell single arm row','dumbbell supinated bicep curls','alternating dumbbell hammerhead curls','incline bench dumbbell curls','EZ bar standing bicep curl','preacher curl machine','spider curl','barbell bentover curl','dumbbell wrist curls','chest fly machine','chest press machine','smith machine bench press','weighted dips','chest fly machine straight arm','standard rope chest flies','Rope machine kneeling chest abductions','rope bench press (long handles)','barbell bench press','barbell incline bench','incline dumbbell bench press','standard pushups','archer pushups','diamond pushups','dumbbell lateral raises','hanging dumbbell lateral raises','side-lying bench lateral raise','single arm dumbbell lateral raise','shoulder shrugs','dumbbell reverse fly','dumbbell front raises','dumbbell shoulder military press','handstand pushups','wide pushups','straight bar pushdown','tricep dumbbell kickbacks','EZ bar skull crusher','close grip bench']
-
     client = OpenAI::Client.new
-    response = client.answers(parameters: {
-      documents: Exercise.all.pluck(:name),
-      question: user_query,
-      model: "davinci",
-      examples_context: "find the 3 best exercises for the user to perform for their workout",
-      examples: [
-        ["I want to work my abs", "ab roller, rope crunches, leg lifts"],
-        ["What should I do for a bigger chest?", "bench press, cable flies, fly machine"],
-        ["What muscles are used in deadlift?", "hamstrings,glutes,erector spinae"],
-        ["I dont want to do dumbbell bench press.", "dumbbell flys,rope chest abduction,chest press machine"],
-        ["I want to work on chest. Can you suggest something that only uses dumbbells for today? I dont want to do dumbbell incline bench press", "dumbbell bench press, dumbbell flys, dumbbell supinated bench press"]
-      ],
-      max_tokens: 25,
-      temperature: 0,
-      stop: ['\n', '===', '---']
+    reason = client.completions(engine: "davinci", parameters: {
+      prompt: "The fitness coach is very kind and professional, explaining what muscles an exercise uses for their goal truthfully:\n\n
+          User: Someones taken the bench, can you recommend a rope exercise instead?\n\n
+          AI: Shoot! Well, no problem. I thought of another exercise then. How about this?",
+      temperature: 0.4,
+      max_tokens: 64,
+      n: 1,
+      frequency_penalty: 0,
+      presence_penalty: 1,
+      stop: ["\n"]
     })
 
-    reply = JSON.parse response.to_s
-    reply = reply["answers"]&.first
+    # find a similar workout as current active workout
+    active_workout = Workout.find_by(status: 'active')
+    exercises = Exercise.all.map { |exercise| "#{exercise.name}" }
+    
+    recommend_exercise = client.search(engine: "davinci", parameters: {
+      documents: exercises,
+      query: user_query,
+      examples_context: "find a different exercise that is not #{active_workout.exercises.last.name if active_workout.present?}",
+    })
 
-    workout = Workout.new(name: 'Workout Recommendation',
+    reply = JSON.parse recommend_exercise.to_s
+    sorted_data = reply['data'].sort_by { |hash| -hash['score'].to_i}
+    exercise_name = exercises[sorted_data.first['document']]
+
+    # find latest set for exercise to populate new sets and reps
+    existing_exercise = Exercise.find_by(name: exercise_name)
+    latest_set1 = existing_exercise.workout_sets[-1]
+    latest_set2 = existing_exercise.workout_sets[-2]
+
+    # create workout and store workout sets
+    workout = Workout.new(
+      name:  exercise_name,
       day: Date.today,
       user: current_user,
+      pros_and_cons: "How about doing this workout instead then?",
       workout_template: WorkoutTemplate.all.sample
     )
+    workout.workout_sets << latest_set1
+    workout.workout_sets << latest_set2
 
-    # each answer is an exercise name
-    reply&.split(',').take(3).each_with_index do |exercise_name, index|
-      # get existing exercise, else create new
-      exercise = Exercise.find_by(name: exercise_name)
-      if exercise.nil?
-        exercise = Exercise.new(name: exercise_name)
-        exercise.station = Station.all.sample
-      end
-      exercise.save!
-      workout.save!
-
-      3.times do
-        WorkoutSet.create!(nb_of_reps: rand(5..12),
-                            order_index: index,
-                            exercise: exercise,
-                            workout: workout,
-                            weight: rand(5..20)
-                          )
-      end
+    if active_workout.present?
+     active_workout.status = 'cancelled' 
+     active_workout.save
     end
+
+    # create workout card for the user
     Message.create!({
       category: "card_workout",
       user: current_user,
