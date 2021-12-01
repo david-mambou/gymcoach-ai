@@ -20,8 +20,8 @@ module AiHelpQuestionHelper
         ["What time is it today?", "It is time to get in shape."],
 
         # Presentation
-        ["Could you tell me about yourself?", "I am an artificial intelligence coach, just for you."],
-        ["What do you do exactly?", "I can generate workouts tailormade for your personal needs"],
+        ["Could you tell me about yourself?", "I was designed to help users attain their ideal body."],
+        ["What do you do exactly?", "I can generate workouts tailormade for your personal needs."],
         ["What else can you do?", "I can keep track of your records and visualize them to help you see your progress."],
         ["How do I use you?", "Just tell me how you want to improve your body."],
 
@@ -31,13 +31,12 @@ module AiHelpQuestionHelper
 
          # distractions/redirecting questions back to workout
          ["Can we eat soon?", "Let's finish a workout first."],
-         ["Could you tell me what I should do with my life?", "I think you should use me to get in shape."],
+         ["Could you tell me what I should do with my life?", "I think you should ask me how to get in shape."],
          ["Should I become a programmer?", "I think you should get in shape first, #{current_user.name}."],
         ],
        max_tokens: 23,
        stop: ['\n', '===', '---']
      })
-     raise
        ai_hash = JSON.parse response.to_s
        ai_hash["answers"]&.each do |answer|
         # receive just a basic answer

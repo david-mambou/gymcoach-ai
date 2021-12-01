@@ -1,27 +1,27 @@
 module AiHelpMotivateHelper
-    # answers users generic questions, force always to the workout
+    # encourages the user to keep working out or tells the user to try again another day
   def ai_help_motivate(user_message_content)
     if user_message_content.present?
      client = OpenAI::Client.new
     #  client.files.upload(parameters: { file: 'db/data.jsonl', purpose: 'search' })
      response = client.answers(parameters: {
-       documents: ["The artificial inteligence coach is praising #{current_user.name} for successfully completing a hard workout."],
+       documents: ["#{current_user.name} is feeling down and needs emotional support."],
        question: user_message_content,
        model: "davinci",
-       examples_context: "Congratulate #{current_user.name} for completing progress",
+       examples_context: "Cheer #{current_user.name} up and encourage them.",
        examples: [
 
-        ["I just finished my workout", g],
-        ["done, but todays workout was tough", g],
-        ["I struggled alot but was able to finish", g],
-        ["that last set was really hard", g],
-        ["damn that was tough", g],
-        ["finished my workout", g],
-        ["just finished", g],
-        ["just finished!", g],
+        # Not related to workouts
+        ["I dont have much energy for today", "That's okay, there's always tomorrow."],
+        ["I drank alot last night", "You should relax for today. Might I suggest working out tomorrow instead?"],
+        ["just broke up with girlfriend, not feeling like doing a workout", "Love may betray you, but muscles won't."],
+        ["very busy today, hard to concentrate", "Maybe later in the week would be better"],
 
+        # Lack of progress
+        ["I'm not making any progress", "#{current_user.name}, you are making progress! It takes patience to become stronger! Hang in there!"],
+        ["I'm tired.", "Maybe I can suggest a different menu. What do you want to do?"]
 
-        ],
+      ],
        max_tokens: 20,
        stop: ['\n', '===', '---']
      })

@@ -32,7 +32,7 @@ module AiHelpRewardHelper
         Message.create!({
           category: "emoji",
           user: current_user,
-          content: ["💪💪💪", nil].sample
+          content: ["💪", "👊", nil].sample
         })
         end
       end

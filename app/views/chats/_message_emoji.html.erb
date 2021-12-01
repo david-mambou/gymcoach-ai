@@ -4,7 +4,7 @@
       <img src= <%= asset_path "ai_al.png"%> class="rounded-circle user_img_msg">
     </div>
 
-    <div class="msg_cotainer">
+    <div class="msg_cotainer" id="emoji-checker">
       <%= locals[:content] ? locals[:content] : image_tag("Ryu-finished.gif") %>
       <span class="msg_time"><%= time_ago_in_words(locals[:created_at]) %> ago</span>
     </div>

@@ -64,7 +64,7 @@ module AiCreateWorkoutForMachineHelper
       if true
        arr = []
        muscles = ['hamstrings', 'glutes', 'pecs', 'deltoids', 'quads', 'calves', 'biceps', 'erector spinae' 'triceps', 'forearms', 'shoulders', 'traps', 'abs', 'obliques', 'trapezius', 'lats', 'glutes']
-  
+
        client = OpenAI::Client.new
        response = client.answers(parameters: {
          documents: muscles,
@@ -81,10 +81,9 @@ module AiCreateWorkoutForMachineHelper
          temperature: 0,
          stop: ['\n', '===', '---']
        })
-  
+
        reply = JSON.parse response.to_s
        reply = reply["answers"][0]
-       raise
        return reply
       end
     end

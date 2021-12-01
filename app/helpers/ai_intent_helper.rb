@@ -62,6 +62,8 @@ module AiIntentHelper
         ["I drank alot last night", f],
         ["just broke up with girlfriend, not feeling like doing a workout", f],
         ["very busy today, hard to concentrate", f],
+        ["I don't feel like I am making any progress", f],
+        ["I feel too weak", f],
 
          # HELP REWARD
         ["I just finished my workout", g],
@@ -80,7 +82,9 @@ module AiIntentHelper
         ["can you help me?", h],
         ["What is your name?", h],
         ["Can you tell me what you can do?", h],
-        ["What else can you do?", h]
+        ["What else can you do?", h],
+
+
       ],
       temperature: 0.3,
     })
@@ -103,9 +107,9 @@ module AiIntentHelper
         ai_create_workout_for_routine(user_query)
       when "edit_change_exercise"
         ai_edit_change_exercise(user_query)
-      when "show_exercise"
+      when "Show_exercise"
         ai_show_exercise(user_query)
-      when "elp_motivate"
+      when "Help_motivate"
         ai_help_motivate(user_query)
       when "Help_reward"
         ai_help_reward(user_query)
