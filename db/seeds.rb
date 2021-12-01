@@ -14,9 +14,9 @@ psw = "pass123"
 goal1 = "Increase chest size"
 rtn = 'legs,chest,push'
 jesse = User.create!(email: 'jesse@lewagon.com', name: 'Jesse', password: psw, password_confirmation: psw, admin: true, goal: goal1, age: 30, routine: rtn)
-david = User.create!(email: 'david@lewagon.com', name: 'david', password: psw, password_confirmation: psw, admin: true, goal: goal1, age: 30, routine: rtn)
-michael = User.create!(email: 'michael@lewagon.com', name: 'michael', password: psw, password_confirmation: psw, admin: true, goal: goal1, age: 30, routine: rtn)
-renato = User.create!(email: 'renato@lewagon.com', name: 'renato', password: psw, password_confirmation: psw, admin: true, goal: goal1, age: 30, routine: rtn)
+david = User.create!(email: 'david@lewagon.com', name: 'David', password: psw, password_confirmation: psw, admin: true, goal: goal1, age: 30, routine: rtn)
+michael = User.create!(email: 'michael@lewagon.com', name: 'Michael', password: psw, password_confirmation: psw, admin: true, goal: goal1, age: 30, routine: rtn)
+renato = User.create!(email: 'renato@lewagon.com', name: 'Renato', password: psw, password_confirmation: psw, admin: true, goal: goal1, age: 30, routine: rtn)
 
 ###############################################################################################
 # clear database
