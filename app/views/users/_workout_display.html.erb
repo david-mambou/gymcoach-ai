@@ -8,36 +8,40 @@
       <div class="border rounded p-2 m-2" data-toggle="collapse" href="#exerciseListCollapse<%= exercise.id %>" role="button" aria-expanded="false" aria-controls="exerciseListCollapse<%= exercise.id %>">
         <%= exercise.name.capitalize %>
         <div class="collapse flex-column" id="exerciseListCollapse<%= exercise.id %>">
-          <i class="fas fa-dumbbell" style="font-size: 11px; color: gray;"></i>
-          <% workout.workout_sets.each do |workout_set| %>
-            <% if exercise.id == workout_set.exercise_id %>
-              <div>
-                <div class="badge badge-light">
-                  <%="#{workout_set.weight}kg" %>
+          <div>
+            <i class="fas fa-dumbbell" id="dumbbell" style="font-size: 15px; color: white;"></i>
+            <i class="fas fa-hashtag" id="rep-number" style="font-size: 15px; color: white;"></i>
+            <i class="far fa-grin-alt" id="difficulty" style="font-size: 15px; color: white;"></i>
+            <% workout.workout_sets.each do |workout_set| %>
+              <% if exercise.id == workout_set.exercise_id %>
+                <div>
+                  <div class="badge badge-light" id="dumbbell">
+                    <%="#{workout_set.weight}kg" %>
+                  </div>
+                  <div class="badge badge-light" id="rep-number">
+                    <%=workout_set.nb_of_reps%>
+                  </div>
+                  <div class="badge badge-light" id="difficulty">
+                    <% if workout_set.difficulty == nil %>
+                      Difficulty
+                    <% else %>
+                      <%=workout_set.difficulty%>
+                    <% end %>
+                    <%# TODO: Change badge color depending on difficulty, easy, mid, hard (taffic light)%>
+                  </div>
                 </div>
-                <div class="badge badge-light">
-                  <%=workout_set.nb_of_reps%>
-                </div>
-                <div class="badge badge-light">
-                  <%# TODO: Change badge color depending on difficulty, easy, mid, hard (taffic light)%>
-                  <%=workout_set.difficulty%>
-                </div>
-              </div>
+              <% end %>
             <% end %>
-          <% end %>
+          </div>
         </div>
       </div>
     <% end %>
     <div>
       <br>
-      <div class="border-top d-flex justify-content-around">
-        Status<% if locals[:workout].status == "finished"%>
-          <%= image_tag ["Ryu-finished.gif", "Ken-finished.gif", "Ken-thumbs.gif"].sample, class: "gif-size" %>
-        <% else %>
-          <%=  image_tag ["Ryu-working.gif"].sample, class: "gif-size"%>
-        <% end %>
+      <div class="border-top d-flex">
         <% if locals[:workout].mental_state == nil %>
           <p style="opacity: 0.3;">Add Note..</p>
+           <%#TODO: create a link button to add note here%>
         <% else %>
           Notes: <%= locals[:workout].mental_state %>
         <% end %>
