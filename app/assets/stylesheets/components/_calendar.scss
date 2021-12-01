@@ -85,6 +85,8 @@
       transition: background-color .2s;
   }
 
+  // When clicked This code turn calendar today div black. could be usefull later
+
   // .days div:hover:not(.today) {
   //     background-color: #262626;
   //     border: 0.2rem solid #777;
@@ -92,13 +94,12 @@
   //     border-radius: 45%;
   // }
 
-.prev-date,
-.next-date {
 
+.prev-date, .next-date {
     opacity: 0.3;
 }
 
 .today {
-    background-color: teal;
+    background-color: rgba(0, 128, 128, 0.675);
     border-radius: 45%;
 }

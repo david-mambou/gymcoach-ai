@@ -57,14 +57,14 @@ const renderCalendar = () => {
       day === new Date().getDate() &&
       date.getMonth() === new Date().getMonth()
     ) {
-      days += `<div class="today">${day}</div>`;
+      days += `<div class="worked-out">${day}</div>`;
     } else {
       days += `<div>${day}</div>`;
     }
   }
-  
+
   // pass an array of dates to javascript (data attributes (maps -markers))
-  // follow logic above - if the from calendar included in araray of workouts, add class
+  // follow logic above - if the from calendar included in array of workouts, add class
 
   for (let nextDay = 1; nextDay <= nextDays; nextDay++) {
     days += `<div class="next-date">${nextDay}</div>`;
