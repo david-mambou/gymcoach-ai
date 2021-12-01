@@ -9,34 +9,43 @@
       <div class="border rounded p-2 m-2" data-toggle="collapse" href="#exerciseListCollapse<%= exercise.id %>" role="button" aria-expanded="false" aria-controls="exerciseListCollapse<%= exercise.id %>">
         <%= exercise.name.titleize %>
         <div class="collapse flex-column" id="exerciseListCollapse<%= exercise.id %>">
-          <div>
-            <div class="items-row justify-content-around border-bottom">
-              <i class="fas fa-dumbbell" id="dumbbell" style="font-size: 15px; color: white;"></i>
-              <i class="fas fa-hashtag" id="rep-number" style="font-size: 15px; color: white;"></i>
-              <i class="far fa-grin-alt" id="difficulty" style="font-size: 15px; color: white;"></i>
-            </div>
-            <% workout.workout_sets.each do |workout_set| %>
-              <% if exercise.id == workout_set.exercise_id %>
-                <div class="items-row justify-content-around <%= "green" if workout_set.difficulty%>">
-                  <div class="badge badge-light position-relative" id="dumbbell">
-                    <%="#{workout_set.weight}kg" %>
-                  </div>
-                  <div class="badge badge-light position-relative" id="rep-number">
-                    <%=workout_set.nb_of_reps%>
-                  </div>
-                  <div class="badge badge-light position-relative" id="difficulty">
-                    <% if workout_set.difficulty == nil %>
-                      <span class="pulse-button"><span></span></span>
-                      Difficulty
-                    <% else %>
-                      <%= workout_set.difficulty %>
-                    <% end %>
-                    <%# TODO: Change badge color depending on difficulty, easy, mid, hard (taffic light)%>
+          <div class="items-row justify-content-around border-bottom">
+            <i class="fas fa-dumbbell" id="dumbbell" style="font-size: 15px; color: white; margin-left: -2px;"></i>
+            <i class="fas fa-hashtag" id="rep-number" style="font-size: 15px; color: white; margin-left: 6px;"></i>
+            <i class="far fa-grin-alt" id="difficulty" style="font-size: 15px; color: white; margin-left: -9px;"></i>
+          </div>
+          <% workout.workout_sets.each do |workout_set| %>
+            <% if exercise.id == workout_set.exercise_id %>
+              <div class="row <%= "green" if workout_set.difficulty%>" style= "margin: 0;">
+                <div class="col-4">
+                  <div class="items-row justify-content-around">
+                    <div class="badge badge-light position-relative" id="dumbbell">
+                      <%="#{workout_set.weight}kg" %>
+                    </div>
                   </div>
                 </div>
-              <% end %>
+                <div class="col-4">
+                  <div class="items-row justify-content-around">
+                    <div class="badge badge-light position-relative" id="rep-number">
+                      <%=workout_set.nb_of_reps%>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-4">
+                  <div class="items-row justify-content-around">
+                    <div class="badge badge-light position-relative" id="difficulty">
+                      <% if workout_set.difficulty == nil %>
+                        <span class="pulse-button"><span></span></span>
+                        Difficulty
+                      <% else %>
+                        <%= workout_set.difficulty %>
+                      <% end %>
+                    </div>
+                  </div>
+                </div>
+              </div>
             <% end %>
-          </div>
+          <% end %>
         </div>
       </div>
     <% end %>
