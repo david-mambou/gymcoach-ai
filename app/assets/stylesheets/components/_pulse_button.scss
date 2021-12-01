@@ -1,6 +1,6 @@
 .pulse-button {
   position: absolute;
-  right: -2em;
+  right: -1em;
   top: 50%;
   transform: translateY(-50%);
 }
@@ -8,8 +8,8 @@
 .pulse-button span{
   display: block;
   border-radius: 50%;
-  width: 15px;
-  height: 15px;
+  width: 10px;
+  height: 10px;
   background: #A1F568;
   -webkit-animation: pulse 1.5s infinite;
   box-shadow: 0 0 0 0 rgba(#02a141, .5);
@@ -17,30 +17,30 @@
 
 @-webkit-keyframes pulse {
   0% {
-    transform:(scale(.9));
+    transform:(scale(.3));
   }
   70% {
-    transform:(scale(1));
-    box-shadow: 0 0 0 30px rgba(#02a141, 0);
+    transform:(scale(.6));
+    box-shadow: 0 0 0 10px rgba(#02a141, 0);
   }
   100% {
-    transform:(scale(.9));
+    transform:(scale(.3));
     box-shadow: 0 0 0 0 rgba(#02a141, 0);
   }
 }
 
-.pulse-button-finished {
-  position: absolute;
-  right: -2em;
-  top: 50%;
-  transform: translateY(-50%);
-}
+// .pulse-button-finished {
+//   position: absolute;
+//   right: -2em;
+//   top: 50%;
+//   transform: translateY(-50%);
+// }
 
-.pulse-button-finished span{
-  display: block;
-  border-radius: 50%;
-  width: 10px;
-  height: 10px;
-  background: #A1F568;
-  box-shadow: 0 0 0 0 rgba(#A1F568, .5);
-}
+// .pulse-button-finished span{
+//   display: block;
+//   border-radius: 50%;
+//   width: 10px;
+//   height: 10px;
+//   background: #A1F568;
+//   box-shadow: 0 0 0 0 rgba(#A1F568, .5);
+// }
