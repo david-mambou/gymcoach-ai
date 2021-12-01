@@ -1,7 +1,7 @@
 <% workout = locals[:workout] %>
-<span class="pulse-button"></span>
-<div class = "border border-dark my-1 p-2 rounded-lg workout-card">
-  <div class="container">
+<div class="container">
+  <p>Current Workout</p>
+  <div class = "border border-dark my-1 p-2 rounded-lg workout-card">
     <% workout.workout_sets.each do |workout_set| %>
     <% end %>
     <% unique_exercises = retrieve_unique_exercises(workout) %>
