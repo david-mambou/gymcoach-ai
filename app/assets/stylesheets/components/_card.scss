@@ -47,3 +47,11 @@
 .card-body {
   padding: 10px !important;
 }
+
+.col-md-8.col-xl-6.chat {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center;
+  margin: 30px;
+  font-size: 25px;
+}
