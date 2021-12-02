@@ -17,4 +17,8 @@ class Workout < ApplicationRecord
   def self.latest_workout_for_routine(next_routine)
     return Workout.where("routine_tags = ?", next_routine).first
   end
+
+  def current_set
+    workout_sets.order(:order_index).where(completed: false).first
+  end
 end

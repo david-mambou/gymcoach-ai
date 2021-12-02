@@ -20,7 +20,7 @@
     <span class="badge badge-pill badge-success">Avoids barbell rack</span>
     <br>
     Est. Duration: 45 min
-    <%= button_to "Start Workout", workouts_path(template_workout: workout), method: :post, class: 'btn btn-primary' %>
+    <%= button_to "Start Workout", workouts_path(template_workout: workout), method: :post, class: 'btn btn-primary start-workout' %>
     <span class="msg_time"><%= time_ago_in_words(locals[:created_at]) %> ago</span>
   </div>
 </div>
