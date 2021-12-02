@@ -52,50 +52,60 @@ const renderCalendar = () => {
           days += `<div class="prev-date">${prevLastDay - prevDay + 1}</div>`;
         }
 
-        // ______________________USE THIS TO PLOT GRAPH_______________________________
 
-
-        for (let day = 1; day <= lastDay; day++) {
+        const finished_workouts = document.querySelector(".calendar-container");
+        finished_workouts.getAttribute('data-workouts')
+        let dates = JSON.parse(finished_workouts.getAttribute('data-workouts'))
+        dates = dates.map(date => new Date(date))
+        dates = dates.filter((workout)  => {
           if (
-            day === new Date().getDate() &&
-            date.getMonth() === new Date().getMonth()
-            ) {
-              days += `<div class="today">${day}</div>`;
-            } else {
-              days += `<div>${day}</div>`;
+            date.getMonth() == workout.getMonth() &&
+            date.getYear() == workout.getYear()) {
+              return workout
             }
-          }
+          })
           // ______________________USE THIS TO PLOT GRAPH_______________________________
-          // pass an array of dates to javascript (data attributes (maps -markers))
-          // follow logic above - if the form calendar included in array of workouts, add class
-          // ___________________________________________________________________
-
-          const finished_workouts = document.querySelector(".calendar-container");
-          finished_workouts.getAttribute('data-workouts')
-          const dates = JSON.parse(finished_workouts.getAttribute('data-workouts'))
 
 
-          console.log(dates)
+          for (let day = 1; day <= lastDay; day++) {
+            if (
+              day === new Date().getDate() &&
+              date.getMonth() === new Date().getMonth()
+              ) {
+                days += `<div class="today">${day}</div>`;
+              } else if (){
+              } else {
+                days += `<div>${day}</div>`;
+              }
+            }
+            // ______________________USE THIS TO PLOT GRAPH_______________________________
+            // pass an array of dates to javascript (data attributes (maps -markers))
+            // follow logic above - if the form calendar included in array of workouts, add class
+            // ___________________________________________________________________
 
 
-          // ___________________________________________________________________
 
-          for (let nextDay = 1; nextDay <= nextDays; nextDay++) {
-            days += `<div class="next-date">${nextDay}</div>`;
-          }
-          monthDays.innerHTML = days;
-        };
+            console.log(dates)
 
-        document.querySelector(".prev").addEventListener("click", () => {
-          date.setMonth(date.getMonth() - 1);
+
+            // ___________________________________________________________________
+
+            for (let nextDay = 1; nextDay <= nextDays; nextDay++) {
+              days += `<div class="next-date">${nextDay}</div>`;
+            }
+            monthDays.innerHTML = days;
+          };
+
+          document.querySelector(".prev").addEventListener("click", () => {
+            date.setMonth(date.getMonth() - 1);
+            renderCalendar();
+          });
+
+          document.querySelector(".next").addEventListener("click", () => {
+            date.setMonth(date.getMonth() + 1);
+            renderCalendar();
+          });
+
           renderCalendar();
-        });
 
-        document.querySelector(".next").addEventListener("click", () => {
-          date.setMonth(date.getMonth() + 1);
-          renderCalendar();
-        });
-
-        renderCalendar();
-
-        export { renderCalendar };
+          export { renderCalendar };
