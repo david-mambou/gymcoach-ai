@@ -6,8 +6,17 @@ export default class extends Controller {
 
   connect() { 
     // update message 
-    console.log(this.formTarget);
-    console.log(this.chatsTarget);
-    console.log(this.inputTarget);
+  
+  }
+
+  update(event) {
+    // event.preventDefault();
+
+    this.formTarget.insertAdjacentHTML('beforeend', this.inputTarget.value);
+
+  }
+
+  createSuccess() {
+    
   }
 };
