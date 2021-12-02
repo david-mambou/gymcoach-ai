@@ -1,0 +1,13 @@
+<div class="message-card mb-4">
+  <div class="message-card-body">
+    <% if locals[:workout] %>
+      <% current_workout_set = locals[:workout].current_set %>
+      <% if current_workout_set %>
+        <%= render "workouts/workout_set", workout: locals[:workout], workout_set: current_workout_set %>
+      <% else %>
+        <p>Congrats for completing this workout!</p>
+      <% end %>
+    <% end %>
+    <span class="msg_time"><%= time_ago_in_words(locals[:created_at]) %> ago</span>
+  </div>
+</div>
