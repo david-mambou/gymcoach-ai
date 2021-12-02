@@ -17,6 +17,8 @@ module AiIntentHelper
       examples: [
         # CREATE A WORKOUT FOR MUSCLE
         ["Give me a good chest exercise", a],
+        ["Give me a good chest exercise", a],
+        ["I want to work my shoulders", a],
         ["I want to work my abs", a],
         ["What's good for improving my legs", a],
         ["I want to work on my six pack", a],
@@ -28,19 +30,23 @@ module AiIntentHelper
         ["can you give a chest workout", a],
         ["can you give me a chest exercise", a],
         ["lets do bench", a],
-
+        ["lets work back", a],
+        
         # CREATE A WORKOUT FOR MACHINE
-        ["I want to workout with dumbbells", b],
+        ["lets workout with dumbbells for chest", b],
+        ["sure, can i workout legs?", b],
         ["I want to use dumbbells", b],
-        ["I want to use I want to use the rope machine", b],
+        [" want to use the rope machine", b],
         ["I want to use the bench for my workout today", b],
         ["bench today please", b],
         ["i want to record my runs", b],
-
+        ["i want to do bench press", b],
+        ["can i do lat pulldown?", b],
+        
         # CREATE A WORKOUT FOR ROUTINE
-        ["let's workout", c],
-        ["what is my plan for today?", c],
-        ["what was i supposed t odo", c],
+        # ["let's workout", c],
+        # ["what is my plan for today?", c],
+        # ["what was i supposed t odo", c],
 
         # EDIT CHANGE EXERCISE
         ["Someone has taken the bench, can you recommend a rope exercise instead?", d],
@@ -50,12 +56,12 @@ module AiIntentHelper
         ["change my shoulder exercise", d],
 
         # SHOW EXERCISE
-        ["how can I do squats?", e],
-        ["I dont know how to do bench press", e],
-        ["what is my history for squats?", e],
-        ["what was my seat level on this exercise from before?", e],
-        ["tell me how to do squats", e],
-        ["Could you tell me about a double kettlebell snatch", e],
+        # ["how can I do squats?", e],
+        # ["I dont know how to do bench press", e],
+        # ["what is my history for squats?", e],
+        # ["what was my seat level on this exercise from before?", e],
+        # ["tell me how to do squats", e],
+        # ["Could you tell me about a double kettlebell snatch", e],
 
 
         # HELP MOTIVATE
@@ -84,40 +90,38 @@ module AiIntentHelper
         ["What is your name?", h],
         ["Can you tell me what you can do?", h],
         ["What else can you do?", h],
-
-
       ],
       temperature: 0.3,
     })
 
     intent = JSON.parse(response.to_s)['label']
 
-    # debugging only will remove
-    Message.create!({
-      category: "receive",
-      user: current_user,
-      content: intent
-      })
-
+    # todo: debugging only, will remove
+    # Message.create!({
+    #   category: "receive",
+    #   user: current_user,
+    #   content: intent
+    #   })
     case intent
-      when "Create_workout_for_muscle"
-        ai_create_workout_for_muscle(user_query)
-      when "Create_workout_for_machine"
-        ai_create_workout_for_machine(user_query)
-      when "Create_workout_for_routine"
-        ai_create_workout_for_routine(user_query)
-      when "Edit_change_exercise"
-        ai_edit_change_exercise(user_query)
-      when "Show_exercise"
-        ai_show_exercise(user_query)
-      when "Help_motivate"
-        ai_help_motivate(user_query)
-      when "Help_reward"
-        ai_help_reward(user_query)
-      when "Help_question"
-        ai_help_question(user_query)
-      else
-        ai_help_question(user_query)
+
+    when "Create_workout_for_muscle"
+      ai_create_workout_for_muscle(user_query)
+    when "Create_workout_for_machine"
+      ai_create_workout_for_machine(user_query)
+    # when "Create_workout_for_routine"
+    #   ai_create_workout_for_routine(user_query)
+    when "Edit_change_exercise"
+      ai_edit_change_exercise(user_query)
+    # when "Show_exercise"
+    #   ai_show_exercise(user_query)
+    when "Help_motivate"
+      ai_help_motivate(user_query)
+    when "Help_reward"
+      ai_help_reward(user_query)
+    when "Help_question"
+      ai_help_question(user_query)
+    else
+      ai_help_question(user_query)
     end
   end
 end
