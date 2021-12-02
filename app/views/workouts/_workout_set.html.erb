@@ -22,13 +22,13 @@
         <%# as: :slider, min: 0, max: 5, step: 1 %>
         <div class="col">
           <% if index == 0 %>Difficulty<br><% end %>
-          <%#= f.input :difficulty, label: false, type: :range, collection: WorkoutSet.difficulties.keys, input_html: {class: "workout-select-input", data: {action: "change->edit-set#update"}} %>
+          <%= f.input :difficulty, label: false, as: :range, collection: WorkoutSet.difficulties.keys,  input_html: { min: 0, max: 4, step: 1, value: WorkoutSet.difficulties[workout_set.difficulty], class: "workout-select-input", data: {action: "change->edit-set#update" }} %>
         </div>
 
-        <div class="range-slider">
+        <%# <div class="range-slider">
           <input class="range-slider__range" name="difficulty" type="range" value="1" min="0" max="4">
           <span class="range-slider__value">0</span>
-        </div>
+        </div> %>
       <% end %>
 
     </div>
