@@ -41,7 +41,7 @@ module AiShowExerciseHelper
         ["How do you do this a hammer curl?", "hammer curl"],
         ["What is my history for deadlifts?", "dead lift"]
       ],
-        temperature: 0.3,
+        temperature: 0.2,
         stop: ['\n', '===', '---']
       })
       JSON.parse(response.to_s)['answers'].first
@@ -51,7 +51,7 @@ module AiShowExerciseHelper
   def ai_match_exercise(identified_exercise)
     exercises = Exercise.all.map {|exercise| "#{exercise.name}"}
     client = OpenAI::Client.new
-    response = client.search(engine:"ada",
+    response = client.search(engine:"davinci",
       parameters: {
         documents: exercises,
         query: identified_exercise,
