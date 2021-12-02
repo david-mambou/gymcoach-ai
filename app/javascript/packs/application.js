@@ -25,7 +25,7 @@ import "bootstrap";
 // Internal imports, e.g:
 // import { initSelect2 } from '../components/init_select2';
 import { initExerciseModal } from '../plugins/exercise-modal';
-import { calendar } from '../components/calendar';
+import { renderCalendar } from '../components/calendar';
 
 
 // import { slideCard } from "../components/drawer_card" //Custom JS imported by Renato 23/11

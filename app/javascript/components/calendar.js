@@ -65,26 +65,20 @@ const renderCalendar = () => {
               days += `<div>${day}</div>`;
             }
           }
-
           // ______________________USE THIS TO PLOT GRAPH_______________________________
-
           // pass an array of dates to javascript (data attributes (maps -markers))
           // follow logic above - if the form calendar included in array of workouts, add class
+          // ___________________________________________________________________
+
+          const finished_workouts = document.querySelector(".calendar-container");
+          finished_workouts.getAttribute('data-workouts')
+          const dates = JSON.parse(finished_workouts.getAttribute('data-workouts'))
 
 
-          // ______________________Use This to PLOT Finished Workouts_____________ ______
-
-          const workouts = [<%= Workout.all.pluck(:day).to_json %>];
-          // console.log(workouts)
-
-          const addCompletedWorkouts = (day, workouts) => {
-            workouts.forEach((workout) => {
-              const mark_done = day
-            })
-          }
+          console.log(dates)
 
 
-          // ______________________Use This to PLOT Finished Workouts_______________________________
+          // ___________________________________________________________________
 
           for (let nextDay = 1; nextDay <= nextDays; nextDay++) {
             days += `<div class="next-date">${nextDay}</div>`;

@@ -1,4 +1,4 @@
-<section class="calendar-container">
+<section class="calendar-container" data-workouts='<%= past_workouts.map(&:day).to_json %>'>
   <div class="calendar">
     <div class="month">
       <i class="fas fa-angle-left prev"></i>
