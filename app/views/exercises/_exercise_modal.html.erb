@@ -24,8 +24,6 @@
           <p class="d-flex" style="font-size: 10px; position: absolute; top:74px; left:21px; color: #b7b7b7;">(kg)</p>
           <canvas
             data-controller="chart"
-            <%= p "Chart data weekly:" %>
-            <%= p @chart_data_weekly %>
             data-chart-data-value="<%= @chart_data_weekly.to_json %>"
             data-chart-options-value="<%= @chart_options.to_json %>"
             ></canvas>

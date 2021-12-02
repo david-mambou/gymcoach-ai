@@ -32,9 +32,6 @@ class WorkoutsController < ApplicationController
                     workout: @workout,
                     workout_set: @workout.workout_sets.first,
                     user: current_user)
-    # make_charts
-    p "Chart data weekly in workouts controller:"
-    p @chart_data_weekly
     redirect_to messages_path
     # assign a new variable with the instance (makes a copy)
       # new_workout = @workout.amoeba_dup
