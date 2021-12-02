@@ -26,6 +26,7 @@ import "bootstrap";
 // import { initSelect2 } from '../components/init_select2';
 import { initExerciseModal } from '../plugins/exercise-modal';
 import { rangeSlider } from '../components/slider';
+import { renderCalendar } from '../components/calendar';
 
 
 // import { slideCard } from "../components/drawer_card" //Custom JS imported by Renato 23/11
@@ -34,8 +35,11 @@ document.addEventListener('turbolinks:load', () => {
   // Call your functions here, e.g:
   // initSelect2();
   initExerciseModal();
-  rangeSlider;
+  rangeSlider();
 
+  if (document.querySelector(".date")) {
+    renderCalendar();
+  };
   // slideCard();
 });
 

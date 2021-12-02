@@ -14,10 +14,11 @@
           <% end %>
         <% end %>
         <%= render "workout_collapse", id: :upcoming, workouts: @upcoming_workouts %>
-        <%= render "workout_collapse", id: :past, workouts: @past_workouts %>
       <% else %>
         No workouts yet!
         <%= link_to 'Start New Session', messages_path(new_session: true), class: "btn btn-primary"  %>
       <% end %>
+      <%= render "calendar", past_workouts: @past_workouts %>
     </div>
   </div>
+</div>
