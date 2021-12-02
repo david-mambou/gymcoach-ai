@@ -9,6 +9,9 @@ export default class extends Controller {
 
   recognize(event) {
     event.preventDefault;
+    this.inputTarget.value = "peanuts";
+    console.log("this is before speech recognition")
+    var input = this.inputTarget;
     var SpeechRecognition = SpeechRecognition || webkitSpeechRecognition;
     var SpeechGrammarList = SpeechGrammarList || webkitSpeechGrammarList;
     var SpeechRecognitionEvent = SpeechRecognitionEvent || webkitSpeechRecognitionEvent;
@@ -19,15 +22,15 @@ export default class extends Controller {
     recognition.start();
     console.log('Ready to accept speech input');
     recognition.onresult = function(event) {
-      var transcription = event.results[0][0].transcript
-      console.log(transcription)
-    }
+      const transcription = event.results[0][0].transcript
+      console.log(transcription);
+      console.log(input);
+      console.log("this is during speech recognition");
+      input.value = transcription;
+      console.log(input.value);
+    };
     recognition.onspeechend = function() {
       recognition.stop();
-    }
-
-    recognition.onnomatch = function(speakingevent) {
-      console.log("Did not understand");
     }
   }
 }
