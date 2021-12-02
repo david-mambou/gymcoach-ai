@@ -1,19 +1,15 @@
-var rangeSlider = function () {
-  var slider = $('.range-slider'),
-    range = $('.range-slider__range'),
-    value = $('.range-slider__value');
-
-  slider.each(function () {
-
-    value.each(function () {
-      var value = $(this).prev().attr('value');
-      $(this).html(value);
+const updateSliderLabel = () => {
+  const sliderLabels = document.querySelectorAll('.difficulty-label');
+  const sliders = document.querySelectorAll('.difficulty-slider');
+  const values = ['easy', 'moderate', 'hard', 'very hard', 'failed']
+  if (sliderLabels) {
+    sliders.forEach((slider) => {
+      slider.addEventListener('mouseup', (event) => {
+        const label = document.querySelector(`.difficulty-label-${slider.dataset.workoutid}`);
+        label.innerHTML = values[slider.value];
+      });
     });
-
-    range.on('input', function () {
-      $(this).next(value).html(this.value);
-    });
-  });
+  };
 };
 
-export { rangeSlider };
+export { updateSliderLabel };
