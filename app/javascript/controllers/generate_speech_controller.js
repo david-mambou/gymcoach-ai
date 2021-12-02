@@ -8,20 +8,24 @@ export default class extends Controller {
   }
 
   speak() {
-    const synth = window.speechSynthesis;
     if (this.element.dataset.spoken === "false") {
-      const textString = this.speechTarget.textContent;
-      const convertedTextString = new SpeechSynthesisUtterance(textString);
-      convertedTextString.lang = "en-US";
-      console.log(speechSynthesis.getVoices());
-      const femaleVoices = ["Google UK English Female", "Google US English", "Google UK English Male", "en-AU"]
-      const foundVoice = speechSynthesis.getVoices().find(({ name }) => femaleVoices.includes(name));
-      convertedTextString.volume = 1;
-      if (foundVoice) {
-        convertedTextString.voice = foundVoice;
+      {
+        let textString = this.speechTarget.innerText;
+        window.speechSynthesis.cancel();
+        var variableText = "test";
+        console.log(textString);
+        window.speechSynthesis.speak(new SpeechSynthesisUtterance(textString));
+        this.element.dataset.spoken = "true";
       }
-      synth.speak(convertedTextString);
-      this.element.dataset.spoken = "true";
+      // window.speechSynthesis.cancel();
+      // console.log(convertedTextString);
+      // convertedTextString.lang = "en-US";
+      // window.speechSynthesis.cancel();
+      // window.speechSynthesis.speak(convertedTextString);
+      // console.log("This is the end of the process")
+      // window.speechSynthesis.cancel();
+      // console.log(convertedTextString);
+      //
     }
   }
 }
