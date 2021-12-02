@@ -34,7 +34,10 @@ document.addEventListener('turbolinks:load', () => {
   // Call your functions here, e.g:
   // initSelect2();
   initExerciseModal();
-  renderCalendar();
+  if (document.querySelector(".date")) {
+    console.log('The calendar!')
+    renderCalendar();
+  };
   // slideCard();
 });
 
