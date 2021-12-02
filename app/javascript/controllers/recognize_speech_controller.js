@@ -9,8 +9,6 @@ export default class extends Controller {
 
   recognize(event) {
     event.preventDefault;
-    this.inputTarget.value = "peanuts";
-    console.log("this is before speech recognition")
     var input = this.inputTarget;
     var SpeechRecognition = SpeechRecognition || webkitSpeechRecognition;
     var SpeechGrammarList = SpeechGrammarList || webkitSpeechGrammarList;
@@ -25,7 +23,6 @@ export default class extends Controller {
       const transcription = event.results[0][0].transcript
       console.log(transcription);
       console.log(input);
-      console.log("this is during speech recognition");
       input.value = transcription;
       console.log(input.value);
     };
