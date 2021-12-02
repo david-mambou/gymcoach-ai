@@ -34,7 +34,7 @@ module AiShowExerciseHelper
       examples: [
         ["Tell me about bench presses.", "bench press"],
         ["Tell me how to do squats.", "squat"],
-        ["How do I do a front lat pulldown?" , "front lat pulldown"],
+        ["How do I do a front lat pulldown?", "front lat pulldown"],
         ["Could you show me some information on glute extensions?", "glute extension"],
         ["I want to know more about the incline bench", "incline bench"],
         ["What is a chin up?", "chin up"],
@@ -45,6 +45,7 @@ module AiShowExerciseHelper
         stop: ['\n', '===', '---']
       })
       JSON.parse(response.to_s)['answers'].first
+      # raise
   end
 
 
@@ -60,6 +61,7 @@ module AiShowExerciseHelper
     )
     results = JSON.parse(response.to_s)
     sorted_results = results['data'].sort_by {|hash| -hash['score'].to_i}
+    raise
     if sorted_results.first["score"] > 250
       Exercise.find_by(name: exercises[sorted_results.first['document']])
     else
