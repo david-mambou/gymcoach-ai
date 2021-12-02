@@ -91,11 +91,11 @@ module AiIntentHelper
     intent = JSON.parse(response.to_s)['label']
 
     # todo: debugging only, will remove
-    Message.create!({
-      category: "receive",
-      user: current_user,
-      content: intent
-      })
+    # Message.create!({
+    #   category: "receive",
+    #   user: current_user,
+    #   content: intent
+    #   })
     case intent
 
     when "Create_workout_for_muscle"
@@ -113,7 +113,6 @@ module AiIntentHelper
     when "Help_reward"
       ai_help_reward(user_query)
     when "Help_question"
-      raise
       ai_help_question(user_query)
     else
       ai_help_question(user_query)
