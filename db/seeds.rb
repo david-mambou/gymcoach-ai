@@ -98,7 +98,7 @@ end
 p 'creating workouts'
 40.times do
   specific_workout = Workout.new(name: "Push Day", mental_state: MENTAL_STATE.sample, day: Date.today + rand(-150..15))
-  status = specific_workout.day <= Date.today ? 'finished' : 'active'
+  status = specific_workout.day <= Date.today ? 'finished' : 'upcoming'
   specific_workout.status = status
   specific_workout.user = User.first
   specific_workout.workout_template = WorkoutTemplate.all.sample

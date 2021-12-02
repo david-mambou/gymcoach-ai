@@ -4,7 +4,7 @@ class Workout < ApplicationRecord
   has_many :workout_sets, dependent: :destroy
   has_many :messages, dependent: :nullify
   has_many :exercises, through: :workout_sets
-  enum status: { recommended: 0, active: 1, finished: 2, cancelled: 3 }
+  enum status: { recommended: 0, upcoming: 1, active: 2, finished: 3, cancelled: 4 }
 
   amoeba do
     enable
