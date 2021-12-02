@@ -61,7 +61,6 @@ module AiShowExerciseHelper
     )
     results = JSON.parse(response.to_s)
     sorted_results = results['data'].sort_by {|hash| -hash['score'].to_i}
-    raise
     if sorted_results.first["score"] > 250
       Exercise.find_by(name: exercises[sorted_results.first['document']])
     else
