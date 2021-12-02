@@ -138,11 +138,12 @@ html, button, input, select, textarea {
   font-family: 'Montserrat', Helvetica, sans-serif;
   color: #92a4ad;
 }
-h1 {
+h1.four {
   text-align: center;
   margin: 30px 15px;
   font-size: 100px;
 }
+
 .zoom-area {
   width: 100%;
   font-size: 50px;
