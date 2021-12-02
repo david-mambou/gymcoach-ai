@@ -15,19 +15,27 @@ class MessagesController < ApplicationController
   def create
     set_existing_messages_as_read
     @user = current_user
-    user_submission = Message.new(message_params)
-    user_submission.user = @user
-    authorize user_submission
-
+    @message = Message.new(message_params)
+    @message.user = @user
+    authorize @message
     # prevent user from sending blank messages
-    if user_submission.content.present?
-      if user_submission.save!
+    if @message.content.present?
+      if @message.save!
+        helpers.ai_direct_query(@message.content)
+        respond_to do |format|
+          format.html # Follow regular flow of Rails
+          format.js
+        end
         # determine user intent and respond with AI
-        helpers.ai_direct_query(user_submission.content)
+      else
+        respond_to do |format|
+          format.html { render 'messages/index' } # Follow regular flow of Rails
+          format.js { render 'messages/index' }
+        end
       end
     end
 
-    redirect_to messages_path
+    # redirect_to messages_path
   end
 
   private
@@ -37,6 +45,6 @@ class MessagesController < ApplicationController
   end
 
   def set_existing_messages_as_read
-      Message.where(read: false).update_all(read: true)
+    Message.where(read: false).update_all(read: true)
   end
 end
