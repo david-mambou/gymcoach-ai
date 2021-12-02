@@ -1,5 +1,4 @@
 const renderCalendar = (date = new Date()) => {
-  // const date = new Date();
   date.setDate(1);
 
   const monthDays = document.querySelector(".days");
@@ -111,8 +110,5 @@ const renderCalendar = (date = new Date()) => {
   });
 
 };
-
-
-// renderCalendar();
 
 export { renderCalendar };
