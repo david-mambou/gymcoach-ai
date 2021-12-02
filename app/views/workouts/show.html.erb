@@ -3,7 +3,7 @@
     <div class="col-md-8 col-xl-6 chat">
       <div class="py-5">
         <div class="msg_card_body">
-        
+
         <%# show if there is active workout %>
         <% if @workout.id %>
 
@@ -29,7 +29,7 @@
                       <span aria-hidden="true">&times;</span>
                     </button>
                   </div>
-                  <%= render 'exercises/show', exercise: exercise %>
+                  <%= render 'exercises/exercise_modal', exercise: exercise %>
                 </div>
               </div>
             </div>
@@ -46,10 +46,7 @@
               Talk to your <%= link_to 'coach', messages_path %> to start a workout!</div>
             </div>
         <% end %>
-
-
         </div>
       </div>
     </div>
   </div>
-
