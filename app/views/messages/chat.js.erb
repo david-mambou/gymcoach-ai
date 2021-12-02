@@ -1,5 +1,7 @@
 const messages = document.querySelector(".msg_card_body");
 
+const startWorkout = document.querySelectorAll(".start-workout");
+
 messages.insertAdjacentHTML('beforeend', "<%= render 'chats/message', locals: {
   category: message.category,
   content: (message.content if message.content.present ?),
@@ -7,3 +9,4 @@ messages.insertAdjacentHTML('beforeend', "<%= render 'chats/message', locals: {
   workout_set: (message.workout_set if message.workout_set.present ?),
   created_at: (message.created_at if message.created_at.present ?)
 } %>");
+

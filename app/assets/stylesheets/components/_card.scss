@@ -8,6 +8,36 @@
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   font-weight: lighter;
 }
+
+#dumbbell {
+  width: fit-content;
+}
+
+#rep-number {
+  width: 30px;
+}
+
+#difficulty {
+  width: fit-content;
+}
+
+.items-row {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 5px;
+  &.green {
+    background-color: rgba(47, 255, 0, 0.1);
+  }
+}
+
+.row {
+  &.green {
+    background-color: rgba(47, 255, 0, 0.1);
+    margin: 0px !important;
+  }
+}
+
+
 // _________________________________Overwrites :/____________________________________
 
 .container-fluid {

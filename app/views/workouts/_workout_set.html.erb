@@ -1,29 +1,53 @@
-  <div class="" data-controller="edit-set">
-      <% form_class = 'no-bs-validation form-inline workout-set' %>
+<div class="" data-controller="edit-set">
+  <% form_class = 'no-bs-validation form-inline workout-set' %>
+  <% if workout_set %>
+    <div class="row">
+      <div class="col">
+        <h2 class=''><%= workout_set.exercise.name %></h2>
+      </div>
+      <div class="col text-right">
+        <%= link_to '', exercise_path(workout_set.exercise), class: "fas fa-info-circle ml-2 m-3 exercise-button", data: { exerciseid: workout_set.exercise.id }, style: "text-decoration: none;"%>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col text-center">
+        <%# if index == 1 %>Set<br><%# end %>
+        <h2><%= workout_set.workout.workout_sets.where(exercise: workout_set.exercise).find_index(workout_set) + 1 %>/<%= workout_set.workout.workout_sets.where(exercise: workout_set.exercise).count %></h2>
+      </div>
       <% form_class << ' set-completed' if workout_set.completed? %>
       <%= simple_form_for [workout, workout_set], remote: true, namespace: "set-#{workout_set.id}", html: { novalidate: true, class: form_class, data: {edit_set_target: "form"} } do |f| %>
-        <%= hidden_field_tag :index, index %>
+        <%#= hidden_field_tag :index, index %>
+        <% index = workout_set.order_index %>
+        <%# raise %>
         <div class="col">
-          <% if index == 0 %>Set<br><% end %>
-            <%= f.input :order_index, disabled: true,label: false, input_html: { value: index + 1 }  %>
+          <%# if index == 1 %>Reps<br><%# end %>
+          <%= f.input :nb_of_reps, placeholder: workout_set.nb_of_reps, label: false, input_html: { min:"0", max:"30", data: {action: "change->edit-set#update"}} %>
         </div>
-
         <div class="col">
-          <% if index == 0 %>Reps<br><% end %>
-           <%= f.input :nb_of_reps, placeholder: workout_set.nb_of_reps, label: false, input_html: { min:"0", max:"30", data: {action: "change->edit-set#update"}} %>
-        </div>
-
-        <div class="col">
-          <% if index == 0 %>kg<br><% end %>
+          <%# if index == 1 %>kg<br><%# end %>
           <%= f.input :weight, placeholder: workout_set.weight, label: false, input_html: { min:"0", max:"200", step: "#{workout_set.exercise.station.base_incremental_weight}", data: {action: "change->edit-set#update"} } %>
         </div>
-
-        <%# Install simple_form_extension gem to use this %>
-        <%# as: :slider, min: 0, max: 5, step: 1 %>
         <div class="col">
-          <% if index == 0 %>Difficulty<br><% end %>
+          <%# if index == 1 %>Difficulty<br><%# end %>
           <%= f.input :difficulty, label: false, collection: WorkoutSet.difficulties.keys, input_html: {class: "workout-select-input", data: {action: "change->edit-set#update"}} %>
         </div>
       <% end %>
-
+      <div class="modal fade" id="instructions-<%= workout_set.exercise.id %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+          <div class="modal-content modal-dark">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLongTitle"><strong><%= workout_set.exercise.name %></strong></h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <%# Goes to the page instead of the partial (modal) if the set changed but the page has not been reloaded %>
+            <%= render 'exercises/show', exercise: workout_set.exercise %>
+          </div>
+        </div>
+      </div>
     </div>
+  <% else %>
+    <p>Congrats for completing this workout!</p>
+  <% end %>
+</div>
