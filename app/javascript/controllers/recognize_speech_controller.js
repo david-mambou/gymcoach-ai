@@ -8,7 +8,7 @@ export default class extends Controller {
   }
 
   recognize(event) {
-    event.preventDefault;
+    event.preventDefault();
     {
       let input = this.inputTarget;
       let SpeechRecognition = SpeechRecognition || webkitSpeechRecognition;
