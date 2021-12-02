@@ -64,6 +64,9 @@ const renderCalendar = () => {
               return workout
             }
           })
+          dates = dates.map((date) => {
+            return  date.getDate()
+          })
           // ______________________USE THIS TO PLOT GRAPH_______________________________
 
 
@@ -73,7 +76,8 @@ const renderCalendar = () => {
               date.getMonth() === new Date().getMonth()
               ) {
                 days += `<div class="today">${day}</div>`;
-              } else if (){
+              } else if (dates.includes(day)){
+                days += `<div class="worked-out-day">${day}</div>`;
               } else {
                 days += `<div>${day}</div>`;
               }
