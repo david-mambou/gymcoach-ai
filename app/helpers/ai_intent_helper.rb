@@ -28,7 +28,7 @@ module AiIntentHelper
         ["can you give a chest workout", a],
         ["can you give me a chest exercise", a],
         ["lets do bench", a],
-        
+
         # CREATE A WORKOUT FOR MACHINE
         ["I want to workout with dumbbells", b],
         ["I want to use dumbbells", b],
@@ -36,12 +36,12 @@ module AiIntentHelper
         ["I want to use the bench for my workout today", b],
         ["bench today please", b],
         ["i want to record my runs", b],
-        
+
         # CREATE A WORKOUT FOR ROUTINE
         ["let's workout", c],
         ["what is my plan for today?", c],
         ["what was i supposed t odo", c],
-                
+
         # EDIT CHANGE EXERCISE
         ["Someone has taken the bench, can you recommend a rope exercise instead?", d],
         ["Can you change my benchpress for another exercise?", d],
@@ -55,6 +55,7 @@ module AiIntentHelper
         ["what is my history for squats?", e],
         ["what was my seat level on this exercise from before?", e],
         ["tell me how to do squats", e],
+        ["Could you tell me about a double kettlebell snatch", e],
 
 
         # HELP MOTIVATE
@@ -62,6 +63,8 @@ module AiIntentHelper
         ["I drank alot last night", f],
         ["just broke up with girlfriend, not feeling like doing a workout", f],
         ["very busy today, hard to concentrate", f],
+        ["I don't feel like I am making any progress", f],
+        ["I feel too weak", f],
 
          # HELP REWARD
         ["I just finished my workout", g],
@@ -72,12 +75,17 @@ module AiIntentHelper
         ["finished my workout", g],
         ["just finished", g],
         ["just finished!", g],
-        
+        ["That was intense", g],
+
         # HELP QUESTIONS
         ["Hey what time is it?", h],
         ["who created this?", h],
         ["can you help me?", h],
-        ["What is your name?", h]
+        ["What is your name?", h],
+        ["Can you tell me what you can do?", h],
+        ["What else can you do?", h],
+
+
       ],
       temperature: 0.3,
     })
@@ -92,21 +100,21 @@ module AiIntentHelper
       })
 
     case intent
-      when "create_workout_for_muscle"
+      when "Create_workout_for_muscle"
         ai_create_workout_for_muscle(user_query)
-      when "create_workout_for_machine"
+      when "Create_workout_for_machine"
         ai_create_workout_for_machine(user_query)
-      when "create_workout_for_routine"
+      when "Create_workout_for_routine"
         ai_create_workout_for_routine(user_query)
-      when "edit_change_exercise"
+      when "Edit_change_exercise"
         ai_edit_change_exercise(user_query)
-      when "show_exercise"
+      when "Show_exercise"
         ai_show_exercise(user_query)
-      when "help_motivate"
+      when "Help_motivate"
         ai_help_motivate(user_query)
-      when "help_reward"
+      when "Help_reward"
         ai_help_reward(user_query)
-      when "help_question"
+      when "Help_question"
         ai_help_question(user_query)
       else
         ai_help_question(user_query)

@@ -10,7 +10,12 @@
     <%= render 'chats/message_submit', locals: locals %>
   <% elsif locals[:category] == 'card_workout' && locals[:workout] %>
     <%= render 'chats/message_card_workout', locals: locals %>
-
+  <% elsif locals[:category] == 'emoji' %>
+    <%= render 'chats/message_emoji', locals: locals %>
+  <% elsif locals[:category] == 'exercise_info' %>
+    <%= render 'chats/message_exercise_info', locals: locals %>
+  <% elsif locals[:category] == 'link' %>
+    <%= render 'chats/message_link', locals: locals %>
   <% elsif locals[:category] == 'card_workout_set' %>
     <%= render 'chats/message_card_workout_set', locals: locals %>
   <% elsif locals[:category] == 'card_chart' %>
