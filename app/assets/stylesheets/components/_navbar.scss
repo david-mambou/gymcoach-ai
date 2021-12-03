@@ -1,9 +1,10 @@
-$nav-bg-color: #34383f;
+$nav-bg-color: #2a2e34;
 
 .navbar-custom {
   justify-content: space-between;
   background-color: $nav-bg-color;
   color: #f6f6f9;
+  box-shadow: 0 2px 4px 0 rgba(0,0,0,0.1);
 
 
 
