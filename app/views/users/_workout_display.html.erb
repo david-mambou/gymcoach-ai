@@ -53,6 +53,7 @@
       <span class="pulse-button"></span>
       <div class="border-top d-flex">
         <% if locals[:workout].mental_state == nil %>
+          <p>Date: <%= workout.day %></p><hr>
           <p style="opacity: 0.3;">Add Note..</p>
           <%#TODO: create a link button to add note here%>
         <% else %>
