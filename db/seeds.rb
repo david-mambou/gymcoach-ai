@@ -15,6 +15,8 @@ goal1 = "Increase chest size"
 rtn = 'legs,chest,push'
 jesse = User.create!(email: 'jesse@lewagon.com', name: 'Jesse', password: psw, password_confirmation: psw, admin: true, goal: goal1, age: 30, routine: rtn)
 david = User.create!(email: 'david@lewagon.com', name: 'David', password: psw, password_confirmation: psw, admin: true, goal: goal1, age: 30, routine: rtn)
+file = File.open("app/assets/images/david_profile.png")
+david.profile_pic.attach(io: file, filename: 'david_profile.png', content_type: 'image/png')
 michael = User.create!(email: 'michael@lewagon.com', name: 'Michael', password: psw, password_confirmation: psw, admin: true, goal: goal1, age: 30, routine: rtn)
 renato = User.create!(email: 'renato@lewagon.com', name: 'Renato', password: psw, password_confirmation: psw, admin: true, goal: goal1, age: 30, routine: rtn)
 
@@ -83,7 +85,7 @@ p "created #{Exercise.count} exercises"
 
 ###############################################################################################
 # prep workout set generation
-MENTAL_STATE = ['tired','hungry', 'hungover','Long Rest Before', 'Good sleep', 'headache', 'knee pain', 'elbow pain', 'good energy', 'low energy'].freeze
+MENTAL_STATE = ['felt slightly tired','felt hungry', 'hungover','Long Rest Before', 'Good sleep', 'headache', 'knee pain', 'elbow pain', 'good energy', 'low energy'].freeze
 
 def gen_random_workout_set(workout, exercise)
   p "creating workout set.."
@@ -98,9 +100,9 @@ end
 p 'creating workouts'
 40.times do
   specific_workout = Workout.new(name: "Push Day", mental_state: MENTAL_STATE.sample, day: Date.today + rand(-150..15))
-  status = specific_workout.day <= Date.today ? 'finished' : 'active'
+  status = specific_workout.day <= Date.today ? 'finished' : 'upcoming'
   specific_workout.status = status
-  specific_workout.user = User.first
+  specific_workout.user = david
   specific_workout.workout_template = WorkoutTemplate.all.sample
   specific_workout.routine_tags = ['legs','chest','push'].sample
   specific_workout.save!

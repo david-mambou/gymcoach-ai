@@ -12,7 +12,7 @@
     <div class="row">
       <div class="col text-center">
         <%# if index == 1 %>Set<br><%# end %>
-        <h2><%= workout_set.workout.workout_sets.where(exercise: workout_set.exercise).find_index(workout_set) + 1 %>/<%= workout_set.workout.workout_sets.where(exercise: workout_set.exercise).count %></h2>
+        <h2><%= workout_set.workout.workout_sets.where(exercise: workout_set.exercise).order(:order_index).find_index(workout_set) + 1 %>/<%= workout_set.workout.workout_sets.where(exercise: workout_set.exercise).count %></h2>
       </div>
       <% form_class << ' set-completed' if workout_set.completed? %>
       <%= simple_form_for [workout, workout_set], remote: true, namespace: "set-#{workout_set.id}", html: { novalidate: true, class: form_class, data: {edit_set_target: "form"} } do |f| %>
@@ -29,21 +29,30 @@
         </div>
         <div class="col">
           <%# if index == 1 %>Difficulty<br><%# end %>
-          <%= f.input :difficulty, label: false, collection: WorkoutSet.difficulties.keys, input_html: {class: "workout-select-input", data: {action: "change->edit-set#update"}} %>
-        </div>
-      <% end %>
-      <div class="modal fade" id="instructions-<%= workout_set.exercise.id %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-          <div class="modal-content modal-dark">
-            <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLongTitle"><strong><%= workout_set.exercise.name %></strong></h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <%# Goes to the page instead of the partial (modal) if the set changed but the page has not been reloaded %>
-            <%= render 'exercises/show', exercise: workout_set.exercise %>
+          <%= f.input :difficulty, label: false, as: :range, collection: WorkoutSet.difficulties.keys,  input_html: { min: 0, max: 4, step: 1, value: WorkoutSet.difficulties[workout_set.difficulty] || 0, class: "workout-select-input difficulty-slider", id: "difficulty-slider-#{workout_set.workout.id}", data: { action: "change->edit-set#update", workoutid: workout_set.workout.id, difficulty: workout_set.difficulty }} %>
+        <% end %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col"></div>
+      <div class="col"></div>
+      <div class="col"></div>
+      <div class="col text-center difficulty-label-<%= workout_set.workout.id %>">
+        <%= workout_set.difficulty %>
+      </div>
+    </div>
+    <div class="modal fade" id="instructions-<%= workout_set.exercise.id %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content modal-dark">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLongTitle"><strong><%= workout_set.exercise.name %></strong></h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
           </div>
+          <%= render partial: 'exercises/exercise_modal', locals: {exercise: workout_set.exercise} %>
+          <%# Goes to the page instead of the partial (modal) if the set changed but the page has not been reloaded %>
+          <%#= render 'exercises/show', exercise: workout_set.exercise %>
         </div>
       </div>
     </div>
