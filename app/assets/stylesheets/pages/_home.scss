@@ -5,11 +5,19 @@ body,html{
 }
 
 .home-page {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-around;
-  height: 85vh;
   text-align: center;
-  margin: 0 45px;
+
+  background-image: linear-gradient(
+    rgba(0,0,0,0.2),
+    rgba(0,0,0,0.8),
+    url('./home.png'));
 }

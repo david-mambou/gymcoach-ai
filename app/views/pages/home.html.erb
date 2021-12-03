@@ -2,6 +2,5 @@
       <h1>Welcome</h1>
       <p>Ready to workout?</p>
       <p><%= current_user.goal if current_user.present? %></p>
-
       <%= link_to 'Start New Session', messages_path(new_session: true), class: "btn btn-primary"  %>
       </div> 
