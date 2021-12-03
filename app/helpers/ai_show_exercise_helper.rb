@@ -34,7 +34,7 @@ module AiShowExerciseHelper
       examples: [
         ["Tell me about bench presses.", "bench press"],
         ["Tell me how to do squats.", "squat"],
-        ["How do I do a front lat pulldown?" , "front lat pulldown"],
+        ["How do I do a front lat pulldown?", "front lat pulldown"],
         ["Could you show me some information on glute extensions?", "glute extension"],
         ["I want to know more about the incline bench", "incline bench"],
         ["What is a chin up?", "chin up"],
@@ -45,6 +45,7 @@ module AiShowExerciseHelper
         stop: ['\n', '===', '---']
       })
       JSON.parse(response.to_s)['answers'].first
+      # raise
   end
 
 

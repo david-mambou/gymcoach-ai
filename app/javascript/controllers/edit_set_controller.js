@@ -1,5 +1,6 @@
 import { Controller } from "stimulus";
 import { initExerciseModal } from '../plugins/exercise-modal';
+import { updateSliderLabel } from '../components/slider';
 
 export default class extends Controller {
   static targets = ['form'];
@@ -19,6 +20,7 @@ export default class extends Controller {
       .then((data) => {
         this.element.outerHTML = data;
         initExerciseModal();
+        updateSliderLabel();
       })
 
   }
