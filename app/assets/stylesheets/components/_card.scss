@@ -61,3 +61,13 @@
   padding: 10px !important;
 }
 
+// _________________________________workout card presentation to user____________________________________
+.workout-card-presentation {
+  position: relative !important;
+
+  & > img {
+    position: absolute !important;
+    top: 0;
+    left: 0;
+  }
+}
