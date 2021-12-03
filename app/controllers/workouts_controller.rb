@@ -54,7 +54,7 @@ class WorkoutsController < ApplicationController
   # For now, marks finished
   def update
     @workout = Workout.find(params[:id])
-    @workout.status = 2
+    @workout.status = 'finished'
     authorize @workout
     if @workout.save
       redirect_to dashboard_path
