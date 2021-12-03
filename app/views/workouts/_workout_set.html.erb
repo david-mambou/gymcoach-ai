@@ -50,8 +50,9 @@
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
+          <%= render partial: 'exercises/exercise_modal', locals: {exercise: workout_set.exercise} %>
           <%# Goes to the page instead of the partial (modal) if the set changed but the page has not been reloaded %>
-          <%= render 'exercises/show', exercise: workout_set.exercise %>
+          <%#= render 'exercises/show', exercise: workout_set.exercise %>
         </div>
       </div>
     </div>

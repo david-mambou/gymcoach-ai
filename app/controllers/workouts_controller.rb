@@ -19,7 +19,6 @@ class WorkoutsController < ApplicationController
   def create
     @workout = Workout.find(params[:template_workout])
     @workout.status = 'active'
-    # @workout.workout_sets.each { |set| set.completed = false }
     @workout.workout_sets.each_with_index do |set, index|
       set.order_index = index + 1
       set.completed = false
@@ -33,7 +32,6 @@ class WorkoutsController < ApplicationController
                     workout: @workout,
                     workout_set: @workout.workout_sets.first,
                     user: current_user)
-    make_charts
     redirect_to messages_path
     # assign a new variable with the instance (makes a copy)
       # new_workout = @workout.amoeba_dup
@@ -113,6 +111,7 @@ class WorkoutsController < ApplicationController
   #     workout_groups.push(workout_set) if
 
   # end
+
   # def sanitized_params
   #   #todo
   #   params.require(:workout).permit(:name, :pros_and_con_list)

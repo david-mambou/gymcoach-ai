@@ -85,7 +85,7 @@ p "created #{Exercise.count} exercises"
 
 ###############################################################################################
 # prep workout set generation
-MENTAL_STATE = ['tired','hungry', 'hungover','Long Rest Before', 'Good sleep', 'headache', 'knee pain', 'elbow pain', 'good energy', 'low energy'].freeze
+MENTAL_STATE = ['felt slightly tired','felt hungry', 'hungover','Long Rest Before', 'Good sleep', 'headache', 'knee pain', 'elbow pain', 'good energy', 'low energy'].freeze
 
 def gen_random_workout_set(workout, exercise)
   p "creating workout set.."
@@ -102,7 +102,7 @@ p 'creating workouts'
   specific_workout = Workout.new(name: "Push Day", mental_state: MENTAL_STATE.sample, day: Date.today + rand(-150..15))
   status = specific_workout.day <= Date.today ? 'finished' : 'active'
   specific_workout.status = status
-  specific_workout.user = User.first
+  specific_workout.user = david
   specific_workout.workout_template = WorkoutTemplate.all.sample
   specific_workout.routine_tags = ['legs','chest','push'].sample
   specific_workout.save!
