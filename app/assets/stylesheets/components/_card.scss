@@ -61,3 +61,12 @@
   padding: 10px !important;
 }
 
+.row-no-wrap {
+    display: flex;
+    margin-right: -15px;
+    justify-content: space-between;
+    margin-left: -15px;
+}
+ .card-title {
+   font-size: 25px;
+ }
