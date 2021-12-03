@@ -12,12 +12,12 @@ module AiShowExerciseHelper
         convert_to_receive_message(matching_exercise.instruction)
       when "Exercise_what"
         convert_to_receive_message(matching_exercise.description)
-      when "Exercise_show"
-        Message.create!({
-          category: "link",
-          user: current_user,
-          content:  matching_exercise.id
-        })
+      # when "Exercise_show"
+      #   Message.create!({
+      #     category: "link",
+      #     user: current_user,
+      #     content:  matching_exercise.id
+      #   })
       end
 
     end
@@ -83,12 +83,12 @@ module AiShowExerciseHelper
         ["What is a dive bomber pushup?", b],
         ["Tell me about a dumbbell snatch", b],
         ["Could you give me instructions on how to do a floor seated lat pull?", a],
-        ["Could you show me what you have on pull-ups?", c],
-        ["I want to look at what I did with squats.", c],
-        ["I want to see the dead lift page.", c],
+        # ["Could you show me what you have on pull-ups?", c],
+        # ["I want to look at what I did with squats.", c],
+        # ["I want to see the dead lift page.", c],
         ["Could you tell me about goblet squats?", b],
         ["Could you tell me about the kettlebell snatch?", b],
-        ["Can you show some detailed information on burpees?", c ]
+        # ["Can you show some detailed information on burpees?", c ]
       ],
       temperature: 0.3,
     })
