@@ -1,7 +1,7 @@
 const updateSliderLabel = () => {
   const sliderLabels = document.querySelectorAll('.difficulty-label');
   const sliders = document.querySelectorAll('.difficulty-slider');
-  const values = ['easy', 'moderate', 'hard', 'very hard', 'failed']
+  const values = ['Easy', 'Okay', 'Hard', 'Very Hard', 'Failed']
   if (sliderLabels) {
     sliders.forEach((slider) => {
       slider.addEventListener('mouseup', (event) => {
