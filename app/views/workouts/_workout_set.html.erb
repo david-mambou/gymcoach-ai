@@ -3,7 +3,7 @@
   <% if workout_set %>
     <div class="row-no-wrap justify-content-apart">
       <h2 class='card-title'><%= workout_set.exercise.name %></h2>
-        <%= link_to '', exercise_path(workout_set.exercise), class: "fas fa-info-circle ml-2 m-3 exercise-button", data: { exerciseid: workout_set.exercise.id }, style: "text-decoration: none;"%>
+        <%= link_to '', exercise_path(workout_set.exercise), class: "fas fa-info-circle m-1 exercise-button", data: { exerciseid: workout_set.exercise.id }, style: "text-decoration: none;"%>
     </div>
     <div class="row">
       <div class="col text-center">
@@ -33,7 +33,7 @@
       <div class="col"></div>
       <div class="col"></div>
       <div class="col"></div>
-      <div class="col text-center difficulty-label-<%= workout_set.workout.id %>">
+      <div class="col text-center difficulty-label-<%= workout_set.workout.id %>" style=" display: flex; position: relative; top: -22px;left: -12px;">
         <%= workout_set.difficulty %>
       </div>
     </div>

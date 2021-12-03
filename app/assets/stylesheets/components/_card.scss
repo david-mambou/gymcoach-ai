@@ -62,11 +62,14 @@
 }
 
 .row-no-wrap {
-    display: flex;
-    margin-right: -15px;
-    justify-content: space-between;
-    margin-left: -15px;
+  display: flex;
+  margin-right: -15px;
+  justify-content: space-between;
+  margin-left: -15px;
+  top: -15px;
+  position: relative;
 }
- .card-title {
-   font-size: 25px;
- }
+
+.card-title {
+  font-size: 25px;
+}
