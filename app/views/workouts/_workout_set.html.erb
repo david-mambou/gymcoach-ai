@@ -1,16 +1,12 @@
 <div class="" data-controller="edit-set">
   <% form_class = 'no-bs-validation form-inline workout-set' %>
   <% if workout_set %>
-    <div class="row">
-      <div class="col">
-        <h2 class=''><%= workout_set.exercise.name %></h2>
-      </div>
-      <div class="col text-right">
-        <%= link_to '', exercise_path(workout_set.exercise), class: "fas fa-info-circle ml-2 m-3 exercise-button", data: { exerciseid: workout_set.exercise.id }, style: "text-decoration: none;"%>
-      </div>
+    <div class="row-no-wrap justify-content-apart">
+      <h2 class='card-title'><%= workout_set.exercise.name %></h2>
+        <%= link_to '', exercise_path(workout_set.exercise), class: "fas fa-info-circle m-1 exercise-button", data: { exerciseid: workout_set.exercise.id }, style: "text-decoration: none;"%>
     </div>
     <div class="row">
-      <div class="col text-center">
+      <div class="col-3 text-center" style="border: 2px solid; border-radius: 50%; margin: auto;">
         <%# if index == 1 %>Set<br><%# end %>
         <h2><%= workout_set.workout.workout_sets.where(exercise: workout_set.exercise).order(:order_index).find_index(workout_set) + 1 %>/<%= workout_set.workout.workout_sets.where(exercise: workout_set.exercise).count %></h2>
       </div>
@@ -37,7 +33,7 @@
       <div class="col"></div>
       <div class="col"></div>
       <div class="col"></div>
-      <div class="col text-center difficulty-label-<%= workout_set.workout.id %>">
+      <div class="col text-center difficulty-label-<%= workout_set.workout.id %>" style=" display: flex; position: relative; top: -22px;left: -12px;">
         <%= workout_set.difficulty %>
       </div>
     </div>

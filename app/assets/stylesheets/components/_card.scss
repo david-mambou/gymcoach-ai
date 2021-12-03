@@ -1,8 +1,6 @@
 // _________________________________Workout Card____________________________________
 
 .workout-card {
-  background-color: rgba(109, 248, 255, 0.1);
-  color: #f5da53;
   border-radius: 10px !important;
   margin: 3px !important;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
@@ -61,3 +59,29 @@
   padding: 10px !important;
 }
 
+// _________________________________workout card presentation to user____________________________________
+.workout-card-presentation {
+  background-size: cover;
+  position: relative !important;
+  background-color: #16181b !important; /* Black background with opacity */
+
+  background-blend-mode: overlay;
+  padding: 15px;
+  padding-bottom: 15px !important;
+}
+.row-no-wrap {
+  display: flex;
+  margin-right: -15px;
+  justify-content: space-between;
+  top: -10px;
+  position: relative;
+}
+
+.card-title {
+  font-size: 25px;
+}
+
+
+.congrats-message {
+  width: 100%;
+}

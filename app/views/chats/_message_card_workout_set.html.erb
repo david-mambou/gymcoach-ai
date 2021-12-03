@@ -6,6 +6,8 @@
         <%= render "workouts/workout_set", workout: locals[:workout], workout_set: current_workout_set %>
       <% else %>
         <p>Congrats for completing this workout!</p>
+        <%= image_tag 'gifs/fireworks.gif', class: 'congrats-message' %>
+
       <% end %>
     <% end %>
     <span class="msg_time"><%= time_ago_in_words(locals[:created_at]) %> ago</span>
