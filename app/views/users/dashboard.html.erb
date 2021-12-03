@@ -10,14 +10,16 @@
           <%= link_to 'Start New Session', messages_path(new_session: true), class: "btn btn-primary d-flex justify-content-center mb-3"%>
         <% else %>
           <% if @current_workout.present? %>
+            <p>Current Workout</p>
             <%= render "users/workout_display", workouts: @today_workouts, locals: { workout: @current_workout } %>
           <% end %>
         <% end %>
-        <%= render "workout_collapse", id: :upcoming, workouts: @upcoming_workouts %>
-        <%= render "workout_collapse", id: :past, workouts: @past_workouts %>
+        <%= render "workout_collapse", id: :upcoming, workouts: @upcoming_workouts, style: "padding: 0px !important;" %>
+        <%= render "calendar", past_workouts: @past_workouts %>
       <% else %>
-        No workouts yet!
+        <p>No workouts yet!</p>
         <%= link_to 'Start New Session', messages_path(new_session: true), class: "btn btn-primary"  %>
       <% end %>
     </div>
   </div>
+</div>
