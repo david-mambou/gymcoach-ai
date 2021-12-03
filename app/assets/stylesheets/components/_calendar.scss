@@ -8,7 +8,7 @@
   padding-top: 1rem;
   padding-bottom: 1rem;
   transform: scale(0.4);
-  margin: -70% auto;
+  margin: -60% auto;
 }
 
 .calendar {
@@ -19,6 +19,7 @@
 }
 
 .month {
+  border-radius: 10px 10px 0px 0px;
   width: 100%;
   height: 10rem;
   background-color: #34a0fa;
