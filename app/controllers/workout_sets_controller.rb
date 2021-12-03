@@ -25,6 +25,8 @@ class WorkoutSetsController < ApplicationController
   private
 
   def sanitized_params
-    params.require("workout_set").permit(:nb_of_reps, :weight, :difficulty, :completed)
+    sanitized_params = params.require("workout_set").permit(:nb_of_reps, :weight, :difficulty, :completed)
+    sanitized_params[:difficulty] = sanitized_params[:difficulty].to_i
+    sanitized_params
   end
 end

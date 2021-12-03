@@ -1,4 +1,5 @@
 import { Controller } from "stimulus";
+import { updateSliderLabel } from '../components/slider';
 
 export default class extends Controller {
   static targets = ['form'];
@@ -17,6 +18,7 @@ export default class extends Controller {
       .then(response => response.text())
       .then((data) => {
         this.element.outerHTML = data;
+        updateSliderLabel();
       })
 
   }
