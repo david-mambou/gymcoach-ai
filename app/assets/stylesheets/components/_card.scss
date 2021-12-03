@@ -63,11 +63,23 @@
 
 // _________________________________workout card presentation to user____________________________________
 .workout-card-presentation {
+  background-size: cover;
   position: relative !important;
+  background-color: #16181b !important; /* Black background with opacity */
 
-  & > img {
-    position: absolute !important;
-    top: 0;
-    left: 0;
-  }
+  background-blend-mode: overlay;
+  padding: 15px;
+  padding-bottom: 15px !important;
+}
+.row-no-wrap {
+  display: flex;
+  margin-right: -15px;
+  justify-content: space-between;
+  margin-left: -15px;
+  top: -15px;
+  position: relative;
+}
+
+.card-title {
+  font-size: 25px;
 }
