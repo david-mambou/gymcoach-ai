@@ -15,7 +15,7 @@ export default class extends Controller {
       setTimeout(() => {
         this.element.dataset.spoken = "true";
 
-      }, 2000);
+      }, 2600);
     }
   }
 

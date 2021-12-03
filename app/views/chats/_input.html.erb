@@ -1,5 +1,9 @@
 <div class="chatFooter">
-
+  <div class="col-3">
+    <%# <div data-action="click->recognize-speech#recognize" class="btn btn-icon btn-primary rounded"> %>
+      <i class="fas fa-microphone"></i>
+    <%# </div> %>
+  </div>
   <%= simple_form_for @message, remote: true, html: { class: "" } do |f| %>
 
     <div v class="form-group boxed">
