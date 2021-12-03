@@ -4,24 +4,36 @@ export default class extends Controller {
   static targets = ['speech'];
 
   connect() {
+    this.synth = window.speechSynthesis;
     this.speak();
   }
 
   speak() {
-    const synth = window.speechSynthesis;
+    console.log(typeof this.element.dataset.spoken)
     if (this.element.dataset.spoken === "false") {
-      const textString = this.speechTarget.textContent;
-      const convertedTextString = new SpeechSynthesisUtterance(textString);
-      convertedTextString.lang = "en-US";
-      console.log(speechSynthesis.getVoices());
-      const femaleVoices = ["Google UK English Female", "Google US English", "Google UK English Male", "en-AU"]
-      const foundVoice = speechSynthesis.getVoices().find(({ name }) => femaleVoices.includes(name));
-      convertedTextString.volume = 1;
-      if (foundVoice) {
-        convertedTextString.voice = foundVoice;
+      this.speechProcessing(this.speechTarget.innerText);
+      setTimeout(() => {
+        this.element.dataset.spoken = "true";
+
+      }, 2600);
+    }
+  }
+
+  speechProcessing(text) {
+    console.log(text)
+    if (this.synth.speaking) {
+      console.error('speechSynthesis.speaking');
+      return;
+    }
+    if (text !== '') {
+      const utterThis = new SpeechSynthesisUtterance(text);
+      utterThis.onend = function (event) {
+        console.log('SpeechSynthesisUtterance.onend', event);
       }
-      synth.speak(convertedTextString);
-      this.element.dataset.spoken = "true";
+      utterThis.onerror = function (event) {
+        console.error('SpeechSynthesisUtterance.onerror', event);
+      }
+      this.synth.speak(utterThis);
     }
   }
 }
