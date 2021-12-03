@@ -76,7 +76,7 @@ p "created #{Station.count} stations"
 
 p "creating exercises.."
 CSV.foreach(exercise_filepath, csv_options).each do |row|
-  new_exercise = Exercise.create!(name: row["Name"], muscle_list: row["Muscle group"], user_notes: row["user_notes"], good_for: row["Good for"], bad_for: row["Bad for"], station: Station.find_by(name: row["Station"]))
+  new_exercise = Exercise.create!(name: row["Name"], muscle_list: row["Muscle group"], user_notes: row["user_notes"], good_for: row["Good for"], bad_for: row["Bad for"], station: Station.find_by(name: row["Station"]), instruction: row["Instruction"], description: row["Description"])
   file = URI.open("#{row["Photos"]}")
   p 'attaching photo to exercise..'
   new_exercise.photo.attach(io: file, filename: 'filler.png', content_type: 'image/png')
@@ -87,9 +87,10 @@ p "created #{Exercise.count} exercises"
 # prep workout set generation
 MENTAL_STATE = ['felt slightly tired','felt hungry', 'hungover','Long Rest Before', 'Good sleep', 'headache', 'knee pain', 'elbow pain', 'good energy', 'low energy'].freeze
 
-def gen_random_workout_set(workout, exercise)
+def gen_random_workout_set(workout, exercise, status)
   p "creating workout set.."
-  new_set = WorkoutSet.new(order_index: 1, nb_of_reps: rand(5..12), weight: rand(5..20), difficulty: rand(1..2))
+  difficulty = status == 'finished' ? rand(1..2) : nil
+  new_set = WorkoutSet.new(order_index: 1, nb_of_reps: rand(5..12), weight: rand(5..20), difficulty: difficulty)
   new_set.exercise = exercise
   new_set.workout = workout
   new_set.save!
@@ -97,10 +98,10 @@ end
 
 ###############################################################################################
 # workouts
-p 'creating workouts'
-40.times do
-  specific_workout = Workout.new(name: "Push Day", mental_state: MENTAL_STATE.sample, day: Date.today + rand(-150..15))
-  status = specific_workout.day <= Date.today ? 'finished' : 'upcoming'
+p 'creating past workouts'
+30.times do |index|
+  specific_workout = Workout.new(name: "Push Day", mental_state: MENTAL_STATE.sample, day: Date.today - 2 * index)
+  status = 'finished'
   specific_workout.status = status
   specific_workout.user = david
   specific_workout.workout_template = WorkoutTemplate.all.sample
@@ -113,7 +114,28 @@ p 'creating workouts'
     # get one exercise for 4 sets
     specific_exercise = Exercise.all.sample
     4.times do
-      gen_random_workout_set(specific_workout, specific_exercise)
+      gen_random_workout_set(specific_workout, specific_exercise, status)
+    end
+  end
+end
+
+p 'creating upcoming workouts'
+3.times do |index|
+  specific_workout = Workout.new(name: "Push Day", day: Date.today + 2 + 2 * index)
+  status = 'upcoming'
+  specific_workout.status = status
+  specific_workout.user = david
+  specific_workout.workout_template = WorkoutTemplate.all.sample
+  specific_workout.routine_tags = ['legs','chest','push'].sample
+  specific_workout.save!
+  p "creating workout: #{specific_workout.name}"
+
+  # create workout sets
+  3.times do
+    # get one exercise for 4 sets
+    specific_exercise = Exercise.all.sample
+    4.times do
+      gen_random_workout_set(specific_workout, specific_exercise, status)
     end
   end
 end
