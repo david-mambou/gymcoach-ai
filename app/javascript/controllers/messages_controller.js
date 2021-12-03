@@ -17,6 +17,6 @@ export default class extends Controller {
     // // var textString = this.speechTargets.textContent;
     // var convertedTextString = new SpeechSynthesisUtterance(textString);
     // synth.speak(convertedTextString)
-  };
-
+    return null;
+  }
 };

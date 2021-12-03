@@ -76,7 +76,7 @@ p "created #{Station.count} stations"
 
 p "creating exercises.."
 CSV.foreach(exercise_filepath, csv_options).each do |row|
-  new_exercise = Exercise.create!(name: row["Name"], muscle_list: row["Muscle group"], user_notes: row["user_notes"], good_for: row["Good for"], bad_for: row["Bad for"], station: Station.find_by(name: row["Station"]))
+  new_exercise = Exercise.create!(name: row["Name"], muscle_list: row["Muscle group"], user_notes: row["user_notes"], good_for: row["Good for"], bad_for: row["Bad for"], station: Station.find_by(name: row["Station"]), instruction: row["Instruction"], description: row["Description"])
   file = URI.open("#{row["Photos"]}")
   p 'attaching photo to exercise..'
   new_exercise.photo.attach(io: file, filename: 'filler.png', content_type: 'image/png')
