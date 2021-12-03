@@ -2,8 +2,6 @@ class WorkoutSetsController < ApplicationController
   def update
     @workout_set = WorkoutSet.find(params[:id])
     authorize @workout_set
-    # binding.pry
-    # params[:difficulty] = params[:difficulty].to_i if params[:difficulty]
     @workout_set.update(sanitized_params)
     @workout_set.completed = @workout_set.difficulty.present?
     @workout_set.save!
