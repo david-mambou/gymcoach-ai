@@ -1,6 +1,13 @@
      <div class="home-page">
-      <h1>Welcome</h1>
-      <p>Ready to workout?</p>
-      <p><%= current_user.goal if current_user.present? %></p>
-      <%= link_to 'Start New Session', messages_path(new_session: true), class: "btn btn-primary"  %>
+      <div class="x">
+          <%= image_tag 'logo4.svg', class: 'logo-img' %>
+          <h1 class="display-4">Welcome</h1>
+          <h4>Ready to workout?</h4>
+      </div>
+
+      <div class="cool-card">
+          <h4>Your Goal</h4>
+      <h5><%= current_user.goal if current_user.present? %></h5>
+      <%= link_to 'Start Workout', messages_path(new_session: true), class: "btn btn-outline-primary btn start-button"  %>
+      </div>
       </div> 

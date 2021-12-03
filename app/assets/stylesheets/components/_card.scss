@@ -37,6 +37,19 @@
   }
 }
 
+// _________________________________Cool Card________________________________________
+.cool-card {
+  background-color: #171717;
+  border-radius: 35px 35px 0 0;
+  bottom: 0;
+  position: absolute;
+  height: 30%;
+  padding: 10px;
+  width: 100%;
+}
+
+
+
 
 // _________________________________Overwrites :/____________________________________
 
@@ -47,3 +60,4 @@
 .card-body {
   padding: 10px !important;
 }
+
