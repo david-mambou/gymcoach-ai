@@ -1,15 +1,15 @@
 Exercise,Workout,Number of reps,Order index,Weight,Difficulty,Completed
-Bench Press,Hypertrophy Pyramid Routine,30,1,75,moderate,TRUE
-Bench Press,Hypertrophy Pyramid Routine,12,2,100,hard,TRUE
-Bench Press,Hypertrophy Pyramid Routine,10,3,115,hard,TRUE
-Bench Press,Hypertrophy Pyramid Routine,8,4,125,very hard,TRUE
-Bicep Curl,3/7 Routine,3,1,30,moderate,TRUE
-Bicep Curl,3/7 Routine,4,2,30,moderate,TRUE
-Bicep Curl,3/7 Routine,5,3,30,hard,TRUE
-Bicep Curl,3/7 Routine,6,4,30,hard,TRUE
-Bicep Curl,3/7 Routine,7,5,30,veryhard,TRUE
-Squat,Strength Training Routine,5,1,60,hard,TRUE
-Shoulder Press,Strength Training Routine,5,2,50,hard,TRUE
-Deadlift,Strength Training Routine,5,3,60,hard,TRUE
-Lateral Raise,Strength Training Routine,5,4,40,hard,TRUE
-Leg Press,Strength Training Routine,5,5,80,hard,TRUE
+Bench Press,Hypertrophy Pyramid Routine,30,1,75,Okay,TRUE
+Bench Press,Hypertrophy Pyramid Routine,12,2,100,Hard,TRUE
+Bench Press,Hypertrophy Pyramid Routine,10,3,115,Hard,TRUE
+Bench Press,Hypertrophy Pyramid Routine,8,4,125,Very Hard,TRUE
+Bicep Curl,3/7 Routine,3,1,30,Okay,TRUE
+Bicep Curl,3/7 Routine,4,2,30,Okay,TRUE
+Bicep Curl,3/7 Routine,5,3,30,Hard,TRUE
+Bicep Curl,3/7 Routine,6,4,30,Hard,TRUE
+Bicep Curl,3/7 Routine,7,5,30,Very Hard,TRUE
+Squat,Strength Training Routine,5,1,60,Hard,TRUE
+Shoulder Press,Strength Training Routine,5,2,50,Hard,TRUE
+Deadlift,Strength Training Routine,5,3,60,Hard,TRUE
+Lateral Raise,Strength Training Routine,5,4,40,Hard,TRUE
+Leg Press,Strength Training Routine,5,5,80,Hard,TRUE
