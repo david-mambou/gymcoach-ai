@@ -8,14 +8,18 @@ export default class extends Controller {
   }
 
   speak() {
+    console.log(typeof this.element.dataset.spoken)
     if (this.element.dataset.spoken === "false") {
       {
-        let textString = this.speechTarget.innerText;
-        window.speechSynthesis.cancel();
-        var variableText = "test";
+        var textString = this.speechTarget.innerText;
         console.log(textString);
+        console.log(typeof textString);
+        window.speechSynthesis.cancel();
         window.speechSynthesis.speak(new SpeechSynthesisUtterance(textString));
-        this.element.dataset.spoken = "true";
+        setTimeout(() => {
+          this.element.dataset.spoken = "true";
+
+        }, 1000);
       }
       // window.speechSynthesis.cancel();
       // console.log(convertedTextString);
