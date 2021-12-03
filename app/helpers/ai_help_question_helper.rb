@@ -17,7 +17,7 @@ module AiHelpQuestionHelper
 
         # Date
         ["What day is it today?", "It is #{Time.zone.today.strftime('%A, %B%e')}"],
-        ["What time is it today?", "It is time to get in shape."],
+        ["What time is it?", "It is time to get in shape."],
 
         # Presentation
         ["Could you tell me about yourself?", "I was designed to help users attain their ideal body."],
