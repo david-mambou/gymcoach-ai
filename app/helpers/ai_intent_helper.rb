@@ -31,7 +31,7 @@ module AiIntentHelper
         ["can you give me a chest exercise", a],
         ["lets do bench", a],
         ["lets work back", a],
-        
+
         # CREATE A WORKOUT FOR MACHINE
         ["lets workout with dumbbells for chest", b],
         ["sure, can i workout legs?", b],
@@ -42,7 +42,7 @@ module AiIntentHelper
         ["i want to record my runs", b],
         ["i want to do bench press", b],
         ["can i do lat pulldown?", b],
-        
+
         # CREATE A WORKOUT FOR ROUTINE
         # ["let's workout", c],
         # ["what is my plan for today?", c],
@@ -56,12 +56,12 @@ module AiIntentHelper
         ["change my shoulder exercise", d],
 
         # SHOW EXERCISE
-        # ["how can I do squats?", e],
-        # ["I dont know how to do bench press", e],
-        # ["what is my history for squats?", e],
-        # ["what was my seat level on this exercise from before?", e],
-        # ["tell me how to do squats", e],
-        # ["Could you tell me about a double kettlebell snatch", e],
+        ["how can I do squats?", e],
+        ["I dont know how to do bench press", e],
+        ["what is my history for squats?", e],
+        ["what was my seat level on this exercise from before?", e],
+        ["tell me how to do squats", e],
+        ["Could you tell me about a double kettlebell snatch", e],
 
 
         # HELP MOTIVATE
@@ -112,8 +112,8 @@ module AiIntentHelper
     #   ai_create_workout_for_routine(user_query)
     when "Edit_change_exercise"
       ai_edit_change_exercise(user_query)
-    # when "Show_exercise"
-    #   ai_show_exercise(user_query)
+    when "Show_exercise"
+      ai_show_exercise(user_query)
     when "Help_motivate"
       ai_help_motivate(user_query)
     when "Help_reward"
