@@ -6,7 +6,7 @@
         <%= link_to '', exercise_path(workout_set.exercise), class: "fas fa-info-circle m-1 exercise-button", data: { exerciseid: workout_set.exercise.id }, style: "text-decoration: none;"%>
     </div>
     <div class="row">
-      <div class="col text-center" style="border: 10px solid 50%">
+      <div class="col-3 text-center" style="border: 2px solid; border-radius: 50%; margin: auto;">
         <%# if index == 1 %>Set<br><%# end %>
         <h2><%= workout_set.workout.workout_sets.where(exercise: workout_set.exercise).order(:order_index).find_index(workout_set) + 1 %>/<%= workout_set.workout.workout_sets.where(exercise: workout_set.exercise).count %></h2>
       </div>
