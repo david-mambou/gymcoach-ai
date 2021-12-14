@@ -42,3 +42,4 @@ yarn-debug.log*
 
 # Test pull request
 .env*
+.admin-cheatsheet*
