@@ -45,6 +45,6 @@ RailsAdmin.config do |config|
     # history_index
     # history_show
 
-    @included_models = ["Exercise", "Message", "Station", "User", "Workout", "WorkoutSet", "WorkoutTemplate"]
+    config.included_models = ["Exercise", "Message", "Station", "User", "Workout", "WorkoutSet", "WorkoutTemplate"]
   end
 end
