@@ -61,7 +61,7 @@ $nav-bg-color: #2a2e34;
   background: $nav-bg-color;
   border-top-color: #1B283B;
 
-    
+
     .item {
       font-weight: var(--bs-body-font-weight);
       font-family: "Inter",sans-serif;
@@ -92,4 +92,10 @@ $nav-bg-color: #2a2e34;
         font-size: 20px;
       }
     }
+}
+
+// Dropdown
+
+.text-black {
+  color: #16181b !important;
 }

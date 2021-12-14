@@ -17,7 +17,10 @@
           <%= link_to "", dashboard_path, class: "fas fa-chart-pie m-2" %>
         </li>
         <li class="nav-item">
-          <%= link_to "", "#", class: "fas fa-cog m-2" %>
+          <i class="fas fa-cog m-2" id="navbarDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
+          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+              <%= link_to "Log out", destroy_user_session_path, method: :delete, class: "dropdown-item text-black" %>
+          </div>
         </li>
       <% else %>
         <li class="nav-item">
