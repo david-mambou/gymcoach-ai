@@ -44,5 +44,7 @@ RailsAdmin.config do |config|
     ## With an audit adapter, you can add:
     # history_index
     # history_show
+
+    @included_models = ["Exercise", "Message", "Station", "User", "Workout", "WorkoutSet", "WorkoutTemplate"]
   end
 end
