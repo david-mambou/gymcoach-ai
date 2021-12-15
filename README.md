@@ -4,8 +4,8 @@
 
 This Gym AI is a Rails web app created to simplify the workout life of all those who cannot afford a human coach, leveraging the power of GPT3 AI!
 
-Generated with [lewagon/rails-templates](https://github.com/lewagon/rails-templates), created by our [Le Wagon coding bootcamp](https://www.lewagon.com) 
-students team. Uses [OpenAI API](https://beta.openai.com/overview).
+Generated with [lewagon/rails-templates](https://github.com/lewagon/rails-templates), created by the [Le Wagon coding bootcamp](https://www.lewagon.com)
+team. Uses [OpenAI API](https://beta.openai.com/overview).
 
 ## Prerequisites
 
